@@ -7,12 +7,12 @@ This repository contains the data, processed data, and the code to replicate the
 ## Repository
 
 The following directories contain:
-- Python              #(includes scripts for the analysis)
-- R                   #(includes scripts for the analysis)
+- Python: **includes scripts for the analysis**
+- R: **includes scripts for the analysis**
   - functions
-    - meermo      #(measurement error modeling)
-    - lavaantwda  #(latent variable analysis of twin data)
-- SI                  #(includes supporting information)
+    - meermo: **measurement error modeling**
+    - lavaantwda: **latent variable analysis of twin data**
+- SI: **includes supporting information**
 - LICENSE
 - README.md
 - .gitignore
