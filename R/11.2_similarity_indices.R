@@ -1,0 +1,318 @@
+#Author: Giacomo Bignardi
+#Program: Similarity indicies------------------------------------------------------------------------------------------------------------------------------
+#clean working environment 
+rm(list = ls())
+library(tidyverse)
+library(reshape2)
+library(lavaan)
+
+# clear workspace
+rm(list = ls())
+
+# set Open Access working directories
+wdOA = getwd()
+wdOA_scripts = "02_scripts"
+wdNOA_ImageOutput = "05_Figures"
+
+# set not Open Access working directories
+wdNOA = getwd()
+wdNOA_Data = "/01_input"
+wdNOA_output = "/03_outputs/processedData"
+
+wdNOA_rawData = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("04_analysis_OA")-1
+),"/03_rawData/private")
+
+# load measurement error model
+source(sprintf("%s/%s/functions/meermo/SMEM.R", wdOA,wdOA_scripts))
+
+# Microstructural intensity
+MPmi_i  =  read_csv(sprintf("%s/t1t2w/HCP_S1200_MPC_400.csv",wdNOA_rawData)) %>% rename(Sub = "Var1")
+
+# Geodesic distances
+GD_i  =   read_csv(sprintf("%s/%s/01_GD.csv",wdNOA,wdNOA_output))
+
+# inclusion index (based on subject inclusion in Valk et al., 2022)
+Valk_sub = read_csv(sprintf("%s%s/subjects_for_giaco.csv",wdNOA,wdNOA_Data), col_names = F) %>% rename(Subject = X1)
+
+# Functional gradient
+FC_g1 =  read_csv(sprintf("%s/%s/03_FC_m_G.csv", wdNOA,wdNOA_output))
+
+# t1w/t2w
+# obtain average t1w/t2w values across participants
+MPmi =  MPmi_i%>%
+  filter(Sub %in% Valk_sub$Subject) %>% 
+  pivot_longer(names_to = "Parcel", values_to = "value", c(2:ncol(MPmi_i)))%>%
+  mutate(Parcel = substr(Parcel,6,nchar(Parcel)))%>%
+  mutate(Parcel = as.numeric(Parcel)) %>%
+  mutate(value = ifelse(value == 0, NA, value)) %>%
+  group_by(Parcel) %>%
+  summarise(`t1w/t2w_mi` = mean(value, na.rm = T))
+
+#GD
+# obtain average GD values across participants
+GD = GD_i %>% 
+  filter(Sub %in% Valk_sub$Subject) %>% 
+  group_by(Parcel) %>% 
+  mutate(value = ifelse(value == 0, NA, value)) %>%
+  summarise(GD = mean(value, na.rm = T)) 
+
+#FCG1
+# tidy FCG1 for ease of interpretation
+FC_g1 = FC_g1 %>%
+  rename(FC_G1 = `0`) %>% 
+  mutate(Parcel = c(1:400)) %>% 
+  select(Parcel, FC_G1)
+
+# put MP,GD and FCG1 all together
+SFs_list = list(MPmi, GD, FC_g1) #ADD classes and yeo_7###
+
+# merge all data frames in list
+SFs_group = SFs_list %>% 
+  reduce(full_join, by='Parcel')
+
+# Functional gradient
+FC_g1_i_d1 =  read_csv(sprintf("%s/%s/03_GFC_i_d1.csv", wdNOA,wdNOA_output))
+FC_g1_i_d2 =  read_csv(sprintf("%s/%s/03_GFC_i_d2.csv", wdNOA,wdNOA_output))
+
+# inclusion indexes
+notTwin_sub =  read_csv(sprintf("%s/%s/00_nottwin_ids.csv", wdNOA,wdNOA_output))
+Twin_sub =  read_csv(sprintf("%s/%s/00_twin_ids.csv", wdNOA,wdNOA_output))
+
+# cortical types and Yeo functional network annotations
+annotations = read_csv(sprintf("%s/%s/merged_YeoKongMesulamTypes.csv", wdNOA,wdNOA_Data))
+
+# inclusion index 
+Twin_sub =  read_csv(sprintf("%s/%s/00_twin_ids.csv", wdNOA,wdNOA_output))
+
+# load dataFrames
+HCP  = read_csv(sprintf("%s/HCP/unrestricted_giaco_6_25_2021_3_50_21.csv",wdNOA_rawData))
+HCP_restricited  = read_csv(sprintf("%s/HCP/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wdNOA_rawData))
+HCP_all = merge(HCP,HCP_restricited, by = "Subject", all = T)
+
+# FULL SAMPLE####
+# full sample (inclusion criteria Valk et al., 2022 Nat Comm and not twins)
+HCP_twin = HCP_all %>% 
+  select(Family_ID,Subject, Gender, Age_in_Yrs,ZygosityGT,FS_IntraCranial_Vol) %>% 
+  filter(Subject %in% Twin_sub$Subject)%>% 
+  mutate(Sib_ID = ifelse(duplicated(Family_ID),2,1), #create a twinship order
+         ZygosityGT = fct_recode(ZygosityGT, "1" = "MZ", "2" = "DZ"), #MZ 1; DZ 2
+         Gender =  recode(Gender, "F" = 0, "M" = 2))
+
+#INDIVIDUALS####
+#get individual values for mp
+MPmi_i = MPmi_i%>%
+  filter(Sub %in% Twin_sub$Subject) %>%
+  pivot_longer(names_to = "Parcel", values_to = "t1w/t2w_mi", c(2:ncol(MPmi_i)))%>%mutate(Parcel = substr(Parcel,6,nchar(Parcel)))%>%
+  rename(value = `t1w/t2w_mi`) %>%
+  mutate(Parcel = as.numeric(Parcel)) %>%
+  mutate(value = ifelse(value == 0, NA, value)) %>%
+  rename(MP = value)
+
+#get individual values for gd
+GD_i = GD_i %>%
+  filter(Sub %in% Twin_sub$Subject) %>%
+  group_by(Parcel) %>%
+  mutate(value = ifelse(value == 0, NA, value)) %>%
+  rename(GD = value)
+
+# bind dataframe to be able to fit a measurement error model later
+FC_gradients = rbind(FC_g1_i_d1, FC_g1_i_d2)
+FC_gradients = FC_gradients%>%
+  filter(Sub %in% Twin_sub$Subject) %>% #filter for twins
+  select(Sub,Parcel,`0`, Session)%>%
+  rename(value = `0`) %>% 
+  pivot_wider(names_from = Session, values_from = value) %>% 
+  rename(G1_d1 = `1.5`, G1_d2 = `2.5`)
+
+# put all of them togheter
+SFs_i_list = list(MPmi_i, GD_i,FC_gradients)
+
+# merge all data frames in list
+SFs_i = SFs_i_list %>% reduce(full_join, by=c("Sub",'Parcel'))
+
+# merge
+SFB_i_list = list(SFs_i,HCP_twin %>% rename(Sub = Subject))
+SF_ind_i_final = SFB_i_list %>% reduce(full_join, by=c('Sub'))
+
+# create a list of subject to run models on later
+subject_list = unique(SF_ind_i_final%>%select(Sub))
+
+# calculate similarity index
+SI = c()
+# compute silimarity indicies
+for (i in subject_list %>% pull(Sub)){
+  SI_i = c()
+  #Similarity index for microstructural mean intensity
+  SI_MP_i = cor(
+    SF_ind_i_final %>% filter(Sub == i) %>% pull(MP),
+    SFs_group %>% pull(`t1w/t2w_mi`), method = "spearman"
+  )
+  #Similarity index for geodesic distance
+  SI_GD_i = cor(
+    SF_ind_i_final %>% filter(Sub == i) %>% pull(GD),
+    SFs_group %>% pull(GD), method = "spearman"
+  )
+  #Similarity index for functional gradient loadings at day 1
+  SI_G1_d1_i = cor(
+    SF_ind_i_final %>% filter(Sub == i) %>% pull(G1_d1),
+    SFs_group %>% pull(FC_G1), method = "spearman"
+  )
+  #Similarity index for functional gradient loadings at day 1
+  SI_G1_d2_i = cor(
+    SF_ind_i_final %>% filter(Sub == i) %>% pull(G1_d2),
+    SFs_group %>% pull(FC_G1), method = "spearman"
+  )
+  SI_i = data.frame(
+    MP = SI_MP_i,
+    GD = SI_GD_i,
+    G1_d1 = SI_G1_d1_i,
+    G1_d2 = SI_G1_d2_i,
+    Sub = i)
+  SI = rbind(SI,SI_i)
+}
+
+# merge with SI 
+SF_twin_i_final_SI = merge(
+  SF_ind_i_final %>% 
+  select(Family_ID,Sub,Sib_ID, ZygosityGT, Gender, Age_in_Yrs,FS_IntraCranial_Vol) %>% 
+  distinct(Sub, .keep_all = T),
+  SI, 
+  by = c("Sub")) %>% 
+  as.data.frame()
+
+SF_twin_i_final_SI_res = umx::umx_residualize(c("G1_d1","G1_d2","MP","GD"), cov = c("Age_in_Yrs","Gender"), data = SF_twin_i_final_SI)
+
+
+# rename for sem function
+SFB_i_final = SF_twin_i_final_SI_res %>% 
+  select(-Sub) %>%
+  rename(ICV = FS_IntraCranial_Vol) %>% 
+  group_by(ZygosityGT) %>% 
+  ungroup() %>%
+  mutate(    MP = psych::fisherz(MP),
+             GD = psych::fisherz(GD),
+             G1_d1 = psych::fisherz(G1_d1),
+             G1_d2 = psych::fisherz(G1_d2)) %>% 
+  #prepare for twin modeling
+  pivot_wider(names_from = Sib_ID, values_from = Gender:G1_d2) %>% 
+  rename(P1_r1_T1=G1_d1_1,
+         P1_r1_T2=G1_d1_2,
+         P1_r2_T1=G1_d2_1,   
+         P1_r2_T2=G1_d2_2,   
+         P2_T1=MP_1,
+         P2_T2=MP_2,
+         P3_T1=GD_1,
+         P3_T2=GD_2
+  ) %>% 
+  as.data.frame() %>% 
+  mutate(age = Age_in_Yrs_1,#note that the age of the twin is the same
+         sex = Gender_1,
+         zyg = ZygosityGT) %>% #note that we only have same-sex twins
+  select(-c(Family_ID, Gender_1,Gender_2,Age_in_Yrs_1,Age_in_Yrs_2,ZygosityGT))
+
+# Similarity Index ####
+# source CTD model specification
+source(sprintf("%s/%s/functions/lavaantwda/CFM_CPMEM_AE_2g3p.R", wdOA,wdOA_scripts))
+
+# estimate h2 
+# correlated factor solution (multivariate via Direct Symmetric Approach)
+cfm_cpmem_AE_fit = sem(cfm_cpmem_AE_model,
+                       data = SFB_i_final,
+                       group = "zyg",
+                       missing = "ML",
+                       group.label= c(1,2),
+                       std.ov = T) #standardized obeserved variables only
+
+# extract summary statistics
+cfm_cpmem_AE_sumy = summary(cfm_cpmem_AE_fit, ci = T, fit.measures = T)
+fitmeasures = fitmeasures(cfm_cpmem_AE_fit)[c("cfi","rmsea")]
+
+# calculate standardized coefficients
+stand_AE = standardizedSolution(cfm_cpmem_AE_fit)
+
+# genetic correlations (sanity check these shold be the same)
+cfm_cpmem_AE_sumy$pe%>% filter(grepl("rA_P",label)) %>% distinct(label,.keep_all = T)
+stand_AE %>% filter(grepl("covA",label)) %>% distinct(label,.keep_all = T)
+
+# environemntal correlations
+cfm_cpmem_AE_sumy$pe%>% filter(grepl("rE_P",label)) %>% distinct(label,.keep_all = T)
+stand_AE %>% filter(grepl("covE",label)) %>% distinct(label,.keep_all = T)
+
+# h^2 (note that standardized and not should differ, as one include age and sex in the denominator, the other don't)
+cfm_cpmem_AE_sumy$pe%>% filter(grepl("h2",label)) %>% distinct(label,.keep_all = T)
+stand_AE %>% filter(grepl("=~",op) & grepl("A",lhs) ) %>% distinct(lhs,.keep_all = T) %>% mutate(h2 = est.std^2)
+
+# e^2
+stand_AE %>% filter(grepl("=~",op) & grepl("E",lhs) ) %>% distinct(lhs,.keep_all = T) %>% mutate(h2 = est.std^2)
+
+# mem
+stand_AE %>% filter(grepl("f1",label))
+stand_AE %>% filter(grepl("intra",label))
+
+# Similarity Index with ICV as additonal covariate ####
+SF_twin_i_final_SI_res_ICV = umx::umx_residualize(c("G1_d1","G1_d2","MP","GD"), cov = c("FS_IntraCranial_Vol"), data = SF_twin_i_final_SI_res)
+
+
+# rename for sem function
+SFB_i_final_res = SF_twin_i_final_SI_res_ICV %>% 
+  select(-Sub) %>%
+  group_by(ZygosityGT) %>% 
+  ungroup() %>%
+  mutate(    MP = psych::fisherz(MP),
+             GD = psych::fisherz(GD),
+             G1_d1 = psych::fisherz(G1_d1),
+             G1_d2 = psych::fisherz(G1_d2)) %>% 
+  #prepare for twin modeling
+  pivot_wider(names_from = Sib_ID, values_from = Gender:G1_d2) %>% 
+  rename(P1_r1_T1=G1_d1_1,
+         P1_r1_T2=G1_d1_2,
+         P1_r2_T1=G1_d2_1,   
+         P1_r2_T2=G1_d2_2,   
+         P2_T1=MP_1,
+         P2_T2=MP_2,
+         P3_T1=GD_1,
+         P3_T2=GD_2
+  ) %>% 
+  as.data.frame() %>% 
+  mutate(age = Age_in_Yrs_1,#note that the age of the twin is the same
+         sex = Gender_1,
+         zyg = ZygosityGT) %>% #note that we only have same-sex twins
+  select(-c(Family_ID, Gender_1,Gender_2,Age_in_Yrs_1,Age_in_Yrs_2,ZygosityGT))
+
+
+# estimate h2 
+# correlated factor solution (multivariate via Direct Symmetric Approach)
+cfm_cpmem_AE_fit_res = sem(cfm_cpmem_AE_model,
+                           data = SFB_i_final_res,
+                           group = "zyg",
+                           group.label= c(1,2),
+                           std.ov = T)
+
+# extract summary statistics
+cfm_cpmem_AE_sumy_res = summary(cfm_cpmem_AE_fit_res, ci = T, fit.measures = T)
+fitmeasures_res = fitmeasures(cfm_cpmem_AE_fit_res)[c("cfi","rmsea")]
+
+# calculate standardized coefficients
+stand_AE_res = standardizedSolution(cfm_cpmem_AE_fit_res)
+
+# genetic correlations (sanity check these shold be the same)
+cfm_cpmem_AE_sumy_res$pe%>% filter(grepl("rA_P",label)) %>% distinct(label,.keep_all = T)
+stand_AE_res %>% filter(grepl("covA",label)) %>% distinct(label,.keep_all = T)
+
+# environemntal correlations
+cfm_cpmem_AE_sumy_res$pe%>% filter(grepl("rE_P",label)) %>% distinct(label,.keep_all = T)
+stand_AE_res %>% filter(grepl("covE",label)) %>% distinct(label,.keep_all = T)
+
+# h^2 (note that standardized and not should differ, as one include age and sex in the denominator, the other don't)
+cfm_cpmem_AE_sumy_res$pe%>% filter(grepl("h2",label)) %>% distinct(label,.keep_all = T)
+stand_AE_res %>% filter(grepl("=~",op) & grepl("A",lhs) ) %>% distinct(lhs,.keep_all = T) %>% mutate(h2 = est.std^2)
+
+# e^2
+stand_AE_res %>% filter(grepl("=~",op) & grepl("E",lhs) ) %>% distinct(lhs,.keep_all = T) %>% mutate(e2 = est.std^2)
+
+# mem
+stand_AE_res %>% filter(grepl("f1",label))
+stand_AE_res %>% filter(grepl("intra",label))
