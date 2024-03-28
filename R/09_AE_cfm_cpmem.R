@@ -151,7 +151,28 @@ SFB_i_final = SF_twin_i_final %>%
          age_T2 = Age_in_Yrs_1,
          sex_T2 = Gender_1,
          zyg = ZygosityGT) %>% 
-  select(-c(Family_ID, Gender_1,Gender_2,Age_in_Yrs_1,Age_in_Yrs_2,ZygosityGT))
+  select(-c(Gender_1,Gender_2,Age_in_Yrs_1,Age_in_Yrs_2,ZygosityGT))
+
+#n of complete pairs for FGC1 
+SFB_i_final %>% 
+  filter(!is.na(P1_r1_T1) & !is.na(P1_r1_T2) & !is.na(P1_r2_T1) & !is.na(P1_r2_T2)) %>% 
+  group_by(zyg) %>% 
+  distinct(Family_ID) %>% 
+  reframe(table(zyg))
+
+#n of complete pairs for mp
+SFB_i_final %>% 
+  filter(!is.na(P2_T1) & !is.na(P2_T2)) %>% 
+  group_by(zyg) %>% 
+  distinct(Family_ID) %>% 
+  reframe(table(zyg))
+
+#n of complete pairs for gd
+SFB_i_final %>% 
+  filter(!is.na(P3_T1) & !is.na(P3_T2)) %>% 
+  group_by(zyg) %>% 
+  distinct(Family_ID) %>% 
+  reframe(table(zyg))
 
 # Twin multivariate model with measurement error ####
 # source CTD model specification
