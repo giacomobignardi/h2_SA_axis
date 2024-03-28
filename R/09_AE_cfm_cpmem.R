@@ -299,41 +299,11 @@ write_csv(est_AE_annot, sprintf("%s/%s/09_CPMEM_output.csv",wdNOA,wdNOA_output))
 # Heritability estimates
 library(ggtext)
 
-# Figure 3b ####
-box_plot = est_AE_annot %>% 
-  filter(grepl("h2",label)) %>% 
-  mutate(label = recode(label, 
-                        h2_P1 = "inter-FC<sub>G1</sub>",
-                        h2_P2 = "T1w/T2w<sub>mi</sub>",
-                        h2_P3 = "GD")) %>% 
-  mutate(label = factor(label, 
-                        levels = c("T1w/T2w<sub>mi</sub>","GD","inter-FC<sub>G1</sub>"))) %>% 
-  ggplot(aes(label_Yeo7_short,  est, fill = label_Yeo7_short))+
-  facet_grid(~label) +
-  geom_boxplot() +
- ylim(0,1) +
-  labs(y = "h<sup>2</sup><sub>twin</sub>",
-       x = "Yeo-Krienen 7 networks")+
-  theme_classic()+
-  scale_fill_manual(values = c('#9F53AA',
-                                        '#7A9ABD',
-                                        '#3d8043',
-                                        '#b584cf',
-                                        '#e8a633',
-                                        '#F4FEC8',
-                                        '#D8707A')) +
- theme(axis.text.x = element_text(angle = 90),
-       axis.title.y = element_markdown(),
-       strip.text.x = element_markdown(),
-       legend.position = "none")
-
 # average heritability
 est_AE_annot %>% 
   filter(grepl("h2",label)) %>% 
   group_by(lhs) %>% 
   reframe(mean(est), sd(est))
-
-
 
 # display percentage of significant genetic and environemntal correlations 
 # amongst all the possible FCg1 <-> t1t2w (that is twice the number of parcels)
@@ -401,7 +371,7 @@ est_AE_annot %>%
 
 
 # plot associations on the cortex
-#Figure 3C###
+#Figure 3B-C####
 # template surface 
 associations2cortex = est_AE_annot %>% 
   filter(label == "rA_P13" & p_adjust<.05) %>% 
