@@ -9,36 +9,39 @@ library(lavaan)
 # clear workspace
 rm(list = ls())
 
+
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-
-wdNOA_rawData = paste0(substr(
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
+
 
 # load measurement error model
-source(sprintf("%s/%s/functions/meermo/SMEM.R", wdOA,wdOA_scripts))
+source(sprintf("%s/R/functions/meermo/SMEM.R", wd_oa))
 
 # Microstructural intensity
-MPmi_i  =  read_csv(sprintf("%s/t1t2w/HCP_S1200_MPC_400.csv",wdNOA_rawData)) %>% rename(Sub = "Var1")
+MPmi_i  =  read_csv(sprintf("%s/HCP_S1200_MPC_400.csv",wd_noa_data)) %>% rename(Sub = "Var1")
 
 # Geodesic distances
-GD_i  =   read_csv(sprintf("%s/%s/01_GD.csv",wdNOA,wdNOA_output))
+GD_i  =   read_csv(sprintf("%s/01_GD.csv",wd_noa_output))
 
-# inclusion index (based on subject inclusion in Valk et al., 2022)
-Valk_sub = read_csv(sprintf("%s%s/subjects_for_giaco.csv",wdNOA,wdNOA_Data), col_names = F) %>% rename(Subject = X1)
+# inclusion index (based on subject inclusion in Valk et al., 2022 [Nat. Comms])
+Valk_sub = read_csv(sprintf("%s/subj_inclusion.csv",wd_noa_data), col_names = F) %>% rename(Subject = X1)
 
 # Functional gradient
-FC_g1 =  read_csv(sprintf("%s/%s/03_FC_m_G.csv", wdNOA,wdNOA_output))
+FC_g1 =  read_csv(sprintf("%s/03_FC_m_G.csv",wd_noa_output))
 
 # t1w/t2w
 # obtain average t1w/t2w values across participants
@@ -74,22 +77,22 @@ SFs_group = SFs_list %>%
   reduce(full_join, by='Parcel')
 
 # Functional gradient
-FC_g1_i_d1 =  read_csv(sprintf("%s/%s/03_GFC_i_d1.csv", wdNOA,wdNOA_output))
-FC_g1_i_d2 =  read_csv(sprintf("%s/%s/03_GFC_i_d2.csv", wdNOA,wdNOA_output))
+FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
+FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
 
 # inclusion indexes
-notTwin_sub =  read_csv(sprintf("%s/%s/00_nottwin_ids.csv", wdNOA,wdNOA_output))
-Twin_sub =  read_csv(sprintf("%s/%s/00_twin_ids.csv", wdNOA,wdNOA_output))
+notTwin_sub =  read_csv(sprintf("%s/00_nottwin_ids.csv",wd_noa_output))
+Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
 
 # cortical types and Yeo functional network annotations
-annotations = read_csv(sprintf("%s/%s/merged_YeoKongMesulamTypes.csv", wdNOA,wdNOA_Data))
+annotations = read_csv(sprintf("%s/cortical_types.csv", wd_noa_data))
 
 # inclusion index 
-Twin_sub =  read_csv(sprintf("%s/%s/00_twin_ids.csv", wdNOA,wdNOA_output))
+Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
 
 # load dataFrames
-HCP  = read_csv(sprintf("%s/HCP/unrestricted_giaco_6_25_2021_3_50_21.csv",wdNOA_rawData))
-HCP_restricited  = read_csv(sprintf("%s/HCP/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wdNOA_rawData))
+HCP  = read_csv(sprintf("%s/unrestricted_giaco_6_25_2021_3_50_21.csv",wd_noa_data))
+HCP_restricited  = read_csv(sprintf("%s/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wd_noa_data))
 HCP_all = merge(HCP,HCP_restricited, by = "Subject", all = T)
 
 # FULL SAMPLE####
@@ -215,7 +218,7 @@ SFB_i_final = SF_twin_i_final_SI_res %>%
 
 # Similarity Index ####
 # source CTD model specification
-source(sprintf("%s/%s/functions/lavaantwda/CFM_CPMEM_AE_2g3p.R", wdOA,wdOA_scripts))
+source(sprintf("%s/R/functions/lavaantwda/CFM_CPMEM_AE_2g3p.R", wd_oa))
 
 # estimate h2 
 # correlated factor solution (multivariate via Direct Symmetric Approach)

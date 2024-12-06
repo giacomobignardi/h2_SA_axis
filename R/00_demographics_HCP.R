@@ -8,28 +8,30 @@ library(readr)
 # clear workspace
 rm(list = ls())
 
-# the following code simplify directories access (apply to all scripts)
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
-# set not Open Access working directories (note that data are avaiable via HCP)
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-wdNOA_rawData = paste0(substr(
+# set not Open Access working directories
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
 
+# load
 # inclusion index (based on subject inclusion in Valk et al., 2022 [Nat. Comms])
-Valk_sub = read_csv(sprintf("%s%s/subjects_for_giaco.csv",wdNOA,wdNOA_Data), col_names = F) %>% rename(Subject = X1)
+Valk_sub = read_csv(sprintf("%s/subj_inclusion.csv",wd_noa_data), col_names = F) %>% rename(Subject = X1)
 
 # load data unrestricted and restricted HCP data
-HCP  = read_csv(sprintf("%s/HCP/unrestricted_giaco_6_25_2021_3_50_21.csv",wdNOA_rawData))
-HCP_restricited  = read_csv(sprintf("%s/HCP/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wdNOA_rawData))
+HCP  = read_csv(sprintf("%s/unrestricted_giaco_6_25_2021_3_50_21.csv",wd_noa_data))
+HCP_restricited  = read_csv(sprintf("%s/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wd_noa_data))
 HCP_all = merge(HCP,HCP_restricited, by = "Subject", all = T)
 
 # FULL SAMPLE####
@@ -65,7 +67,7 @@ HCP_not_twin %>% reframe(mean = mean(Age_in_Yrs),
                     max =  max(Age_in_Yrs))
 
 ## SAVE sample excluding twins####
-write_csv(HCP_not_twin%>% select(Subject), sprintf("%s/%s/00_nottwin_ids.csv",wdNOA,wdNOA_output))
+write_csv(HCP_not_twin%>% select(Subject), sprintf("%s/00_nottwin_ids.csv",wd_noa_output))
 
 ## twin sample
 # IDs of twins with mislabeled or unknown zygosity
@@ -90,4 +92,4 @@ HCP_twin %>% reframe(mean = mean(Age_in_Yrs),
                      max =  max(Age_in_Yrs))
 
 ## SAVE twin sample####
-write_csv(HCP_twin%>% select(Subject), sprintf("%s/%s/00_twin_ids.csv",wdNOA,wdNOA_output))
+write_csv(HCP_twin%>% select(Subject), sprintf("%s/00_twin_ids.csv",wd_noa_output))

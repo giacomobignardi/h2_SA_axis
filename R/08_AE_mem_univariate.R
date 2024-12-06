@@ -8,33 +8,36 @@ library(lavaan)
 
 # clear workspace
 rm(list = ls())
+set.seed(42)
 
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-wdNOA_rawData = paste0(substr(
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
 
 # load
 # Functional gradient
-FC_g1_i_d1 =  read_csv(sprintf("%s/%s/03_GFC_i_d1.csv", wdNOA,wdNOA_output))
-FC_g1_i_d2 =  read_csv(sprintf("%s/%s/03_GFC_i_d2.csv", wdNOA,wdNOA_output))
-FC_g1_i =  read_csv(sprintf("%s/%s/03_GFC_i.csv", wdNOA,wdNOA_output))
+FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
+FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
+FC_g1_i =  read_csv(sprintf("%s/03_GFC_i.csv",wd_noa_output))
 
 # inclusion index 
-Twin_sub =  read_csv(sprintf("%s/%s/00_twin_ids.csv", wdNOA,wdNOA_output))
+Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
 
 # cortical types and Yeo functional network annotations
-annotations = read_csv(sprintf("%s/%s/merged_YeoKongMesulamTypes.csv", wdNOA,wdNOA_Data))
+annotations = read_csv(sprintf("%s/cortical_types.csv", wd_noa_data))
 
 # tidy yeo 7 annotations 
 network_7_yeo = c()
@@ -49,8 +52,8 @@ annotations$label_Yeo7_short = network_7_yeo[,1]
 annotations = annotations %>% rename(Parcel = parcel_Yeo)
 
 # load dataFrames
-HCP  = read_csv(sprintf("%s/HCP/unrestricted_giaco_6_25_2021_3_50_21.csv",wdNOA_rawData))
-HCP_restricited  = read_csv(sprintf("%s/HCP/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wdNOA_rawData))
+HCP  = read_csv(sprintf("%s/unrestricted_giaco_6_25_2021_3_50_21.csv",wd_noa_data))
+HCP_restricited  = read_csv(sprintf("%s/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wd_noa_data))
 HCP_all = merge(HCP,HCP_restricited, by = "Subject", all = T)
 
 # FULL SAMPLE####
@@ -113,7 +116,7 @@ SFB_i_final = SF_twin_i_final %>%
 
 # Classical Twin Design ####
 # source CTD model specification
-source(sprintf("%s/%s/functions/lavaantwda/ADE_2g1p.R", wdOA,wdOA_scripts))
+source(sprintf("%s/R/functions/lavaantwda/ADE_2g1p.R", wd_oa))
 
 # estimate h2 across parcels
 AE_sumy = c()
@@ -175,7 +178,7 @@ box_plot_AE = AE_fltr_annot %>%
   geom_boxplot() +
   geom_hline(yintercept = mean(AE_fltr_annot$est), linetype = "dashed")+
   ylim(0,1) +
-  labs(y = "porportion of \nintra-individual variance",
+  labs(y = expression(h[twin]^2),
        x = "Yeo-Krienen 7 networks")+
   theme_classic()+
   scale_fill_manual(values = c('#9F53AA',
@@ -192,7 +195,7 @@ box_plot_AE = AE_fltr_annot %>%
 # source MEM model specification
 # Note that the model specification follows the model specification for a common pathway model
 # but with only two observed variables
-source(sprintf("%s/%s/functions/lavaantwda/CPMEM_2g1p.R", wdOA,wdOA_scripts))
+source(sprintf("%s/R/functions/lavaantwda/CPMEM_2g1p.R", wd_oa))
 
 # estimate h2 across parcels
 cpmem_AE_sumy = c()
@@ -256,7 +259,7 @@ box_plot_cpmem_AE = cpmem_AE_fltr_annot %>%
   geom_boxplot() +
   geom_hline(yintercept = mean(cpmem_AE_fltr_annot$est), linetype = "dashed")+
   ylim(0,1) +
-  labs(y = "porportion of \nintra-individual variance",
+  labs(y = expression(h[twin]^2),
        x = "Yeo-Krienen 7 networks")+
   theme_classic()+
   scale_fill_manual(values = c('#9F53AA',
@@ -279,7 +282,6 @@ sd(cpmem_AE_fltr_annot$est)
 sd(AE_fltr_annot$est)
 # visually
 library(patchwork)
-box_plot_AE|box_plot_cpmem_AE
 
 # point wise increase in heritability
 # merge parcel that display sufficient model fit in both models
@@ -300,13 +302,13 @@ scatter_plot = AE_comparison %>%
                                            
   xlim(0,1)+
   ylim(0,1)+
-  labs(x = "estimates CTD h2",
-       y = "estimates cpmem h2",
+  labs(x = "estimates CTD",
+       y = "estimates cpmem",
        fill = "Yeo-Krienen 7")+
   theme_classic()
 
-## save FIG. 2F####
-pdf(sprintf("%s/%s/08_figS2.pdf",wdOA,wdNOA_ImageOutput), 
+## save FIG. S3####
+pdf(sprintf("%s/Figures/08_Fig_S3.pdf",wd_oa), 
     width=9, 
     height=3)
 (box_plot_AE|box_plot_cpmem_AE|scatter_plot) + plot_layout(guides = "collect") + plot_annotation(tag_levels = "A")

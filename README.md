@@ -1,8 +1,8 @@
-## Genetic Effects on Structural and Functional Properties of Sensorimotor-Association Axis of Cortical Organization are Selectively Distinct
+## Distinct genetic underpinnings of inter-individual differences in the sensorimotor-association axis of cortical organisation 
 
 This repository contains the data, processed data, and the code to replicate the analysis made in:
 
-> G. Bignardi, M. G. Nivard, H. L. Schaare, B. C. Bernhardt, R.A.I. Bethlehem, S. E. Fisher, S. L. Valk. Genetic Effects on Structural and Functional Properties of Sensorimotor-Association Axis of Cortical Organization are Selectively Distinct (manuscript in preparation)
+> G. Bignardi, M. G. Nivard, H. L. Schaare, B. C. Bernhardt, R.A.I. Bethlehem, S. E. Fisher, S. L. Valk. Distinct genetic underpinnings of inter-individual differences in the sensorimotor-association axis of cortical organisation.
 
 ## Repository
 
@@ -13,6 +13,7 @@ The following directories contain:
     - meermo: **measurement error modeling**
     - lavaantwda: **latent variable analysis of twin data**
 - SI: **includes supporting information**
+- Figures: figures used to compile main Figures in text.
 - LICENSE
 - README.md
 - .gitignore
@@ -21,9 +22,9 @@ The following directories contain:
 
 Supporting Information Files names are adapted to manuscript
 
-- SFILE1 = 06_SF2C (Figure 2C)
-- SFILE2 = 07_SF3A (Figure 3A)
-- SFILE3 = 09_SF4A (Figure 4A)
-- SFILE4 = 09_SF4B (Figure 4B)
-- SFILE5 = 09_SF4C (Figure 4C)
+- SFILE1 = (Figure 2C-D)
+- SFILE2 = (Figure 3A-B)
+- SFILE3 = (Figure 4A)
+- SFILE4 = (Figure 4C)
+- SFILE5 = (Figure 4C)
 

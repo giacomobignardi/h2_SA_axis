@@ -14,37 +14,41 @@ library(ggridges)
 # clear workspace
 rm(list = ls())
 
+# clear workspace
+rm(list = ls())
+
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-
-wdNOA_rawData = paste0(substr(
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
 
 # load
 # Microstructural intensity
-MPmi_i  =  read_csv(sprintf("%s/t1t2w/HCP_S1200_MPC_400.csv",wdNOA_rawData)) %>% rename(Sub = "Var1")
+MPmi_i  =  read_csv(sprintf("%s/HCP_S1200_MPC_400.csv",wd_noa_data)) %>% rename(Sub = "Var1")
 
 # Geodesic distances
-GD_i  =   read_csv(sprintf("%s/%s/01_GD.csv",wdNOA,wdNOA_output))
+GD_i  =   read_csv(sprintf("%s/01_GD.csv",wd_noa_output))
 
 # Functional gradient
-FC_g1 =  read_csv(sprintf("%s/%s/03_FC_m_G.csv", wdNOA,wdNOA_output))
+FC_g1 =  read_csv(sprintf("%s/03_FC_m_G.csv",wd_noa_output))
 
 #inclusion index 
-notTwin_sub =  read_csv(sprintf("%s/%s/00_nottwin_ids.csv", wdNOA,wdNOA_output))
+notTwin_sub =  read_csv(sprintf("%s/00_nottwin_ids.csv",wd_noa_output))
 
 # cortical types and Yeo functional network annotations
-annotations = read_csv(sprintf("%s/%s/merged_YeoKongMesulamTypes.csv", wdNOA,wdNOA_Data))
+annotations = read_csv(sprintf("%s/cortical_types.csv", wd_noa_data))
 
 # tidy yeo 7 annotations 
 network_7_yeo = c()
@@ -149,6 +153,29 @@ t1wt2w_left_lateral =
   remove_axes()%>%
   pan_camera("left lateral")
 
+## A (2D): t1wt2w####
+# This automatise the process and makes making figures easier
+t1wt2w_left = t1t2w_template_graph %>%
+  rename(region = label_Yeo_7) %>% 
+  ggplot() +
+  geom_brain(atlas = schaefer7_400, 
+             hemi = "left",
+             position = position_brain(side  + hemi ~ .), #to stack them
+             aes(fill = `t1w/t2w_mi`),
+             color = "#414a4c",
+             size = .5,
+             hemisphere = "left") +
+  scale_fill_viridis_c(option = "plasma")+
+  labs(subtitle = expression(zT1w/T2w[mi]),
+       fill = "Association-Sensorimotor")+
+  theme_void(base_size = 14)+
+  theme(legend.position = "bottom",
+        legend.title.position = "top",
+        element_text(hjust = 0.5),
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.title = element_text(hjust = 0.5))
+
 ## B: GD####
 # template surface 
 GD_template_graph = SFs %>%
@@ -187,6 +214,76 @@ GD_left_lateral =
     hemisphere = "left")%>%
   remove_axes()%>%
   pan_camera("left lateral")
+
+## B (2D): t1wt2w####
+# This automatise the process and makes making figures easier
+
+GD_left = GD_template_graph %>%
+  rename(region = label_Yeo_7) %>% 
+  ggplot() +
+  geom_brain(atlas = schaefer7_400, 
+             hemi = "left",
+             position = position_brain(side  + hemi ~ .), #to stack them
+             aes(fill = GD),
+             color = "#414a4c",
+             size = .5,
+             hemisphere = "left") +
+  scico::scale_fill_scico(palette = "bilbao", direction = -1)+
+  labs(#title = "Geodesic distances",
+       subtitle = "zGD",
+       fill = "Association-Sensorimotor")+
+  theme_void(base_size = 14)+
+  theme(legend.position = "bottom",
+        legend.title.position = "top",
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.title = element_text(hjust = 0.5))
+
+
+## C (2D): FCG1####
+# template surface 
+G1_template_graph = SFs %>%
+  mutate(G1 = scale(FC_G1)) %>% #z score for consistenc 
+  select(Parcel, label_Yeo_7, G1)
+
+
+G1_left = G1_template_graph %>%
+  rename(region = label_Yeo_7) %>% 
+  ggplot() +
+  geom_brain(atlas = schaefer7_400, 
+             hemi = "left",
+             position = position_brain(side  + hemi ~ .), #to stack them
+             aes(fill = G1),
+             color = "#414a4c",
+             size = .5,
+             hemisphere = "left") +
+  scale_fill_viridis_c()+
+  labs(#title = "Functional gradient",
+       subtitle = expression(zFC[G1]),
+       fill = "Association-Sensorimotor")+
+  theme_void(base_size = 14)+
+  theme(legend.position = "bottom",
+        legend.title.position = "top",
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.title = element_text(hjust = 0.5))
+
+## save FIG. 1A####
+pdf(sprintf("%s/Figures/04_Fig_1AC.pdf",wd_oa),
+    width = 12,
+    height = 4 )
+(t1wt2w_left + plot_spacer() + GD_left + plot_spacer() + G1_left + plot_layout(widths = c(4, 1 ,4, 1, 4))) 
+dev.off()
+
+## save legend for FIG. 1####
+pdf(sprintf("%s/Figures/04_legend1.pdf",wd_oa),
+    width = 4,
+    height = 4 )
+plot(schaefer7_400, color = "gray",hemi = "left",position = position_brain(side  + hemi ~ .), size = .5,) + 
+  theme_void() +
+  theme(legend.position = "none", plot.title = element_blank())
+dev.off()
+
 
 # FIGURE 1D####
 # correlation between Microstructural intensity and Functional gradient
@@ -229,7 +326,7 @@ corplot_right =SFs %>% mutate(zGD = scale(GD), zFC_G1 = scale(FC_G1)) %>%
   ylim(c(-1.7, 1.9))
 
 ## save FIG. 1D####
-pdf(sprintf("%s/%s/04_fig1D.pdf",wdOA,wdNOA_ImageOutput),
+pdf(sprintf("%s/Figures/04_Fig_1D.pdf",wd_oa),
     width = 5,
     height =2 )
 (corplot_left|corplot_right) + plot_layout(guides = "collect")  & theme(legend.position = "none")
@@ -239,173 +336,3 @@ dev.off()
 cormat  = round(cor(SFs %>% select(`t1w/t2w_mi`,GD,FC_G1), method = "spearman"),2)
 cor_mp = cor.test(SFs$`t1w/t2w_mi`,SFs$FC_G1, method = "spearman")
 cor_gd = cor.test(SFs$`GD`,SFs$FC_G1, method = "spearman")
-
-# ##Plot correlation matrix####
-# get_lower_tri = function(cormat){
-#   cormat[upper.tri(cormat, diag = T)] <- NA
-#   return(cormat)
-# }
-# # melted_cormat =  melt(get_lower_tri(cormat), na.rm = TRUE)
-# # melted_cormat = melted_cormat %>% mutate(
-# #   Var1 = factor(Var1, levels = rev(c("t1w/t2w_mi", "MPC_g1", "GD", "FC_G1"))),
-# #   Var2 = factor(Var2, levels = c("t1w/t2w_mi", "MPC_g1", "GD", "FC_G1")))
-# 
-# melted_cormat =  melt(get_lower_tri(cormat), na.rm = TRUE)
-# melted_cormat = melted_cormat %>% mutate(
-#   Var1 = factor(Var1, levels = rev(c("t1w/t2w_mi", "GD", "FC_G1"))),
-#   Var2 = factor(Var2, levels = c("t1w/t2w_mi", "GD", "FC_G1")))
-# 
-# 
-# p_corplot = ggplot(data = melted_cormat, aes(Var1,Var2, fill = value))+
-#   geom_tile(color = "white")+
-#   scale_fill_viridis_c(option = "inferno", limits = c(-1, 1))+
-#   theme_classic()+ 
-#   coord_fixed()+
-#   labs(fill = "r",
-#        x = "",
-#        y = "")+
-#   geom_text(aes(Var1, Var2, label = value), color = "white", size = 3.5)
-# 
-
-# ####NEED TO RE-WRITE FOR CONSISTENCY####
-# ACE_Lavaan_mp_cov = read_csv(sprintf("%s/%s/02.2_ACE_Lavaan_mp_cov.csv", wdOA,wdOA_output)) %>% 
-#   select(parcel, classes_6_types, label_Yeo_7, label_Yeo7_short) %>% 
-#   rename(Parcel = parcel) %>% 
-#   mutate(classes_6_types  = factor(classes_6_types, levels =  rev(c("Agranular",
-#                                                                     "Disgranular",
-#                                                                     "Eulaminate-I",
-#                                                                     "Eulaminate-II",
-#                                                                     "Eulaminate-III",
-#                                                                     "Koniocortical",
-#                                                                     "mask",
-#                                                                     "Other")))) %>% 
-#   mutate(label_Yeo7_short  = factor(label_Yeo7_short, levels =  c("Vis",
-#                                                                     "SomMot",
-#                                                                     "DorsAttn",
-#                                                                     "SalVentAttn",
-#                                                                     "Cont",
-#                                                                     "Limbic",
-#                                                                     "Default")))
-# 
-# 
-# brain_cortical_types =  ggplot(ACE_Lavaan_mp_cov %>% 
-#                                  filter(classes_6_types != "mask") %>% 
-#                                  rename(region = label_Yeo_7)%>%
-#                                  select(region,  classes_6_types) %>%
-#                                  as.data.frame()) + geom_brain(atlas = ggsegSchaefer::schaefer7_400,
-#                                                                aes(fill = classes_6_types), size=.5,  position = position_brain())+
-#   scale_fill_manual(values = 
-#                       c(
-#                     "#7D8BAE",
-#                     "#83A7B0",
-#                     "#A6BA9F",
-#                     "#DDC592",
-#                     "#FFD0C5",
-#                     "#FFE2FD",
-#                     "#808080"))+
-#                       labs(fill = "cortical types")+
-#   theme_void() +
-#   theme(legend.position = "bottom")
-# 
-# 
-# brain_functional_networks =  ggplot(ACE_Lavaan_mp_cov %>% 
-#                                  rename(region = label_Yeo_7)%>%
-#                                  select(region,  label_Yeo7_short) %>%
-#                                  as.data.frame()) + geom_brain(atlas = ggsegSchaefer::schaefer7_400,
-#                                                                aes(fill = label_Yeo7_short), size=.5,  position = position_brain())+
-#   scale_fill_manual(values = c('#9F53AA',
-#                                         '#7A9ABD',
-#                                         '#3d8043',
-#                                         '#b584cf',
-#                                         '#e8a633',
-#                                         '#F4FEC8',
-#                                         '#D8707A'))+
-#                                           labs(fill = "Yeo-Krienen\n7 Networks")+
-#   theme_void() +
-#   theme(legend.position = "bottom")
-# 
-# 
-# 
-# (brain_functional_networks/brain_cortical_types) & theme(legend.position = "bottom")
-# 
-# 
-# 
-# pdf(sprintf("%s/05_images/image/17_S1_yeo_corticaltypes.pdf",wdNOA),
-#     width = 7,
-#     height =7 )
-# (brain_functional_networks/brain_cortical_types) & theme(legend.position = "bottom")
-# dev.off()
-# 
-# ggseg3d(atlas = schaefer7_400_3d, surface = "inflated", hemisphere = "left") %>% 
-#   remove_axes()%>%
-#   pan_camera("left medial")
-
-#FIGURE 1 A-C####
-##t1wt2w####
-#template surface 
-t1t2w_template_graph = SFs %>%
-  mutate(`t1w/t2w_mi` = scale(`t1w/t2w_mi`)) %>% #z score for consistency
-  mutate(`t1w/t2w_mi`  = ifelse(classes_6_types == "mask", NA, `t1w/t2w_mi` )) %>%  #remove mask from graph %>% 
-  select(Parcel, label_Yeo_7, `t1w/t2w_mi`)
-#adapt to plot
-schaefer7_400_t1wt2w = schaefer7_400_3d %>% #
-  filter(hemi == "left")%>%
-  mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
-                          full_join(t1t2w_template_graph%>%
-                                      filter(Parcel < 201) %>% 
-                                      rename(region = label_Yeo_7) %>% 
-                                      select(region,`t1w/t2w_mi`),
-                                    by = "region")))
-#plot, scheafer parcelations ggseg3d
-t1wt2w_left_medial = 
-  ggseg3d(
-    atlas = schaefer7_400_t1wt2w,
-    colour = "t1w/t2w_mi", text = "t1w/t2w_mi",
-    palette =  c( "#0D0887FF"= min(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T), "#CC4678FF"  = 0, "#F0F921FF" =max(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left medial")
-t1wt2w_left_lateral = 
-  ggseg3d(
-    atlas = schaefer7_400_t1wt2w,
-    colour = "t1w/t2w_mi", text = "t1w/t2w_mi",
-    palette =  c( "#0D0887FF"= min(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T), "#CC4678FF"  = 0, "#F0F921FF" =max(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left lateral")
-
-##GD####
-#template surface 
-GD_template_graph = SFs %>%
-  mutate(GD = scale(GD)) %>% #z score for consistenc 
-  select(Parcel, label_Yeo_7, GD)
-#adapt to plot
-schaefer7_400_GD = schaefer7_400_3d %>% #
-  filter(hemi == "left")%>%
-  mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
-                          full_join(GD_template_graph%>%
-                                      filter(Parcel < 201) %>% 
-                                      rename(region = label_Yeo_7) %>% 
-                                      select(region,GD),
-                                    by = "region")))
-#plot, shcafer parcelations ggseg3d
-GD_left_medial =
-  ggseg3d(
-    atlas = schaefer7_400_GD,
-    colour = "GD", text = "GD",
-    palette =  c( "#f0c27b"= min(GD_template_graph$GD, na.rm = T), "#9D6B63"  = 0, "#4b1248" =max(GD_template_graph$GD, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>%
-  remove_axes()%>%
-  pan_camera("left medial")
-GD_left_lateral =
-  ggseg3d(
-    atlas = schaefer7_400_GD,
-    colour = "GD", text = "GD",
-    palette =  c( "#f0c27b"= min(GD_template_graph$GD, na.rm = T), "#9D6B63"  = 0, "#4b1248" =max(GD_template_graph$GD, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>%
-  remove_axes()%>%
-  pan_camera("left lateral")

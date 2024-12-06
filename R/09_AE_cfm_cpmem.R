@@ -16,37 +16,37 @@ library(lavaan)
 rm(list = ls())
 
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
-
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-
-wdNOA_rawData = paste0(substr(
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
 
 # Microstructural intensity
-MPmi_i  =  read_csv(sprintf("%s/t1t2w/HCP_S1200_MPC_400.csv",wdNOA_rawData)) %>% rename(Sub = "Var1")
+MPmi_i  =  read_csv(sprintf("%s/HCP_S1200_MPC_400.csv",wd_noa_data)) %>% rename(Sub = "Var1")
 
 # Geodesic distances
-GD_i  =   read_csv(sprintf("%s/%s/01_GD.csv",wdNOA,wdNOA_output))
+GD_i  =   read_csv(sprintf("%s/01_GD.csv",wd_noa_output))
 
 # Functional gradient
-FC_g1_i_d1 =  read_csv(sprintf("%s/%s/03_GFC_i_d1.csv", wdNOA,wdNOA_output))
-FC_g1_i_d2 =  read_csv(sprintf("%s/%s/03_GFC_i_d2.csv", wdNOA,wdNOA_output))
+FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
+FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
 
 # inclusion index 
-Twin_sub =  read_csv(sprintf("%s/%s/00_twin_ids.csv", wdNOA,wdNOA_output))
+Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
 
 # cortical types and Yeo functional network annotations
-annotations = read_csv(sprintf("%s/%s/merged_YeoKongMesulamTypes.csv", wdNOA,wdNOA_Data))
+annotations = read_csv(sprintf("%s/cortical_types.csv", wd_noa_data))
 
 # tidy yeo 7 annotations 
 network_7_yeo = c()
@@ -61,11 +61,11 @@ annotations$label_Yeo7_short = network_7_yeo[,1]
 annotations = annotations %>% rename(Parcel = parcel_Yeo)
 
 # inclusion index 
-Twin_sub =  read_csv(sprintf("%s/%s/00_twin_ids.csv", wdNOA,wdNOA_output))
+Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
 
 # load dataFrames
-HCP  = read_csv(sprintf("%s/HCP/unrestricted_giaco_6_25_2021_3_50_21.csv",wdNOA_rawData))
-HCP_restricited  = read_csv(sprintf("%s/HCP/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wdNOA_rawData))
+HCP  = read_csv(sprintf("%s/unrestricted_giaco_6_25_2021_3_50_21.csv",wd_noa_data))
+HCP_restricited  = read_csv(sprintf("%s/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wd_noa_data))
 HCP_all = merge(HCP,HCP_restricited, by = "Subject", all = T)
 
 # FULL SAMPLE####
@@ -176,7 +176,7 @@ SFB_i_final %>%
 
 # Twin multivariate model with measurement error ####
 # source CTD model specification
-source(sprintf("%s/%s/functions/lavaantwda/CFM_cpmem_AE_2g3p.R", wdOA,wdOA_scripts))
+source(sprintf("%s/R/functions/lavaantwda/CFM_cpmem_AE_2g3p.R", wd_oa))
 
 # estimate h2 across parcels
 cfm_cpmem_AE_sumy = c()
@@ -275,12 +275,49 @@ SF4C_annot = merge(SF4C, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_sh
   select(-c(lhs,op,rhs,block,group))
 
 ## save####
-write_csv(SF4A_annot, sprintf("%s/%s/09_SF4A.csv",wdNOA,wdNOA_output))
-write_csv(SF4B_annot, sprintf("%s/%s/09_SF4B.csv",wdNOA,wdNOA_output))
-write_csv(SF4C_annot, sprintf("%s/%s/09_SF4C.csv",wdNOA,wdNOA_output))
+write_csv(SF4A_annot, sprintf("%s/SI/SFILE3.csv",wd_oa))
+write_csv(SF4B_annot, sprintf("%s/SI/SFILE4.csv",wd_oa))
+write_csv(SF4C_annot, sprintf("%s/SI/SFILE5.csv",wd_oa))
+
+#plot heritabilities
+# merge all data frames in list
+var_explained = SF4A_annot %>% 
+  filter((grepl("σA",label) |grepl("σE",label)) & grepl("2",label)) %>% 
+  filter(0 <= est & est <=1) %>% 
+  mutate(label_2 = sub("\\^.*", "", label),
+         prop = substr(label_2, 3,nchar(label_2)),
+         var_comp = substr(label_2, 1,2),
+         prop = factor(prop, levels = c("mi","GD","inter")),
+         prop = fct_recode(prop, 
+                           "Geodesic\ndistances"="GD",
+                           "Microstructural\nintensiry"="mi",
+                           "FCG1"="inter"
+                           ),
+         var_comp = fct_recode(var_comp, 
+                           "additive\ngenetic"="σA",
+                           "non-common\nenvironment"="σE"
+         ))%>% 
+  ggplot(aes(prop, est, fill = var_comp))+
+  geom_boxplot()+
+  scale_fill_manual(values = c("#D90B56","#E8A830")) +
+  #geom_hline(yintercept = mean(1-est), linetype = "dashed")+
+  ylim(0,1) +
+  labs(y = "Variance explained",
+       x = "S-A axis strucutre-function",
+       fill = "Variance\ncomponents")+
+  theme_classic(base_size = 14)
+
+# Save Fig 4B
+pdf(sprintf("%s/Figures/09_Fig_4B.pdf",wd_oa),
+    width = 6,
+    height = 4 )
+var_explained
+dev.off()
 
 cfm_cpmem_AE_sumy_short =  cfm_cpmem_AE_sumy %>%                                 
   filter((grepl("rE",label) | grepl("rA",label) | grepl("h",label)) & !(grepl("var",label)|grepl("bh",label)))
+
+
 
 #each parcel has 9 (6 cor and 3 h2) parameter estimates
 nrow(cfm_cpmem_AE_sumy_short)/9
@@ -315,7 +352,7 @@ est_AE_annot = AE_fltr_annot %>%
   mutate(p_adjust = p.adjust(pvalue, method ="bonferroni"))
 
 ## save####
-write_csv(est_AE_annot, sprintf("%s/%s/09_CPMEM_output.csv",wdNOA,wdNOA_output))
+write_csv(est_AE_annot, sprintf("%s/09_CPMEM_output.csv",wd_noa_output))
 
 # Heritability estimates
 library(ggtext)
@@ -479,5 +516,61 @@ association_mi_left_lateral =
     hemisphere = "left")%>% 
   remove_axes()%>%
   pan_camera("left lateral")
+
+
+cort_rA = est_AE_annot %>%
+  filter((grepl("rA",label))) %>% 
+  #first we re annotate the correlations names
+  mutate(label = factor(label, levels = c("rA_P12","rA_P13","rA_P23")),
+         label = fct_recode( label, 
+                             "Microstructural intensity" = "rA_P12",
+                             "Geodesic distances" = "rA_P13",
+                             "remove"  = "rA_P23")) %>% 
+  filter(label !="remove") %>%
+  rename(region = label_Yeo_7,
+         cor = label) %>% 
+  mutate(est = ifelse(p_adjust<.05,est,NA)) %>% 
+  ggplot() +
+  facet_grid(~cor) +
+  geom_brain(atlas = schaefer7_400, 
+             position = position_brain(hemi ~ side), #to stack them
+             aes(fill = est),
+             color = "#414a4c",
+             size = .5) +
+  scale_fill_distiller(palette = "RdPu", direction  = 1)+
+  labs(fill = expression(italic(r)[A]))+
+  theme_void(base_size = 12)
+
+cort_rE = est_AE_annot %>%
+  filter((grepl("rE",label))) %>% 
+  #first we re annotate the correlations names
+  mutate(label = factor(label, levels = c("rE_P12","rE_P13","rE_P23")),
+         label = fct_recode( label, 
+                             "Microstructural intensity" = "rE_P12",
+                             "Geodesic distances" = "rE_P13",
+                             "remove"  = "rE_P23")) %>% 
+  filter(label !="remove") %>%
+  rename(region = label_Yeo_7,
+         cor = label) %>% 
+  mutate(est = ifelse(p_adjust<.05,est,NA)) %>% 
+  ggplot() +
+  facet_grid(~cor) +
+  geom_brain(atlas = schaefer7_400, 
+             position = position_brain(hemi ~ side), #to stack them
+             aes(fill = est),
+             color = "#414a4c",
+             size = .5) +
+  scale_fill_distiller(palette = "YlOrBr", direction  = 1)+
+  labs(fill = expression(italic(r)[E]))+
+  theme_void(base_size = 12) +
+  theme(strip.text = element_blank())
+
+
+# Save Fig 4C
+pdf(sprintf("%s/Figures/09_Fig_4C.pdf",wd_oa),
+    width = 8,
+    height = 8 )
+(cort_rA/cort_rE) + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+dev.off()
 
 

@@ -6,30 +6,41 @@ library(tidyverse)
 library(readr)
 library(psych)
 
+# clear workspace
+rm(list = ls())
+
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-
-wdNOA_rawData = paste0(substr(
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
+wd_noa_rsfmri = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/private/rsfMRIavg")
+
+# load
+# inclusion index (based on subject inclusion in Valk et al., 2022 [Nat. Comms])
+Valk_sub = read_csv(sprintf("%s/subj_inclusion.csv",wd_noa_data), col_names = F) %>% rename(Subject = X1)
 
 # Load
-FC_name = list.files(sprintf("%s/rsfMRIavg/day_avg", wdNOA_rawData))
-FC_name_d1 = list.files(sprintf("%s/rsfMRIavg/day1", wdNOA_rawData))
-FC_name_d2 = list.files(sprintf("%s/rsfMRIavg/day2", wdNOA_rawData))
+FC_name = list.files(sprintf("%s/day_avg", wd_noa_rsfmri))
+FC_name_d1 = list.files(sprintf("%s/day1", wd_noa_rsfmri))
+FC_name_d2 = list.files(sprintf("%s/day2", wd_noa_rsfmri))
 
 # Compute mean FC for template
-# inclusion index (based on subject inclusion in Valk et al., 2022 [Nat. Comms])
-Valk_sub = read_csv(sprintf("%s%s/subjects_for_giaco.csv",wdNOA,wdNOA_Data), col_names = F) %>% rename(Subject = X1) %>% mutate(Subject = as.character(Subject))
 FC_m = matrix(0, 419, 419)
 isna = 0
 FC_name_index = FC_name[(substr(FC_name,1,6) %in% Valk_sub$Subject)]
@@ -37,7 +48,7 @@ FC_name_index = FC_name[(substr(FC_name,1,6) %in% Valk_sub$Subject)]
 # FC:AVERAGE####
 # create a long dataframe with the FC matrix per subject
 for (i in 1:(length(FC_name_index))){
-  FC_i = read_csv(sprintf("%s/rsfMRIavg/day_avg/%s", wdNOA_rawData,FC_name_index[i]), col_names = F)
+  FC_i = read_csv(sprintf("%s/day_avg/%s", wd_noa_rsfmri,FC_name_index[i]), col_names = F)
   if(is.na(FC_i$X1[1])){
     isna = isna +1
   }else{
@@ -57,7 +68,7 @@ FC_name_index_d1 = FC_name_d1[(substr(FC_name_d1,1,6) %in% Valk_sub$Subject)]
 
 # create a long df with the FC matrix per subject
 for (i in 1:(length(FC_name_index_d1))){
-  FC_i = read_csv(sprintf("%s/rsfMRIavg/day1/%s", wdNOA_rawData,FC_name_index_d1[i]), col_names = F)
+  FC_i = read_csv(sprintf("%s/day1/%s", wd_noa_rsfmri,FC_name_index_d1[i]), col_names = F)
   if(is.na(FC_i$X1[1])){
     isna = isna +1
   }else{
@@ -77,7 +88,7 @@ FC_name_index_d2 = FC_name_d2[(substr(FC_name_d2,1,6) %in% Valk_sub$Subject)]
 
 # create a long df with the FC matrix per subject
 for (i in 1:(length(FC_name_index_d2))){
-  FC_i = read_csv(sprintf("%s/rsfMRIavg/day2/%s", wdNOA_rawData,FC_name_index_d2[i]), col_names = F)
+  FC_i = read_csv(sprintf("%s/day2/%s", wd_noa_rsfmri,FC_name_index_d2[i]), col_names = F)
   if(is.na(FC_i$X1[1])){
     isna = isna +1
   }else{

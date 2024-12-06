@@ -15,40 +15,41 @@ library(ggridges)
 rm(list = ls())
 
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-
-wdNOA_rawData = paste0(substr(
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
 
 
 #load
 # Microstructural intensity
-MPmi_i  =  read_csv(sprintf("%s/t1t2w/HCP_S1200_MPC_400.csv",wdNOA_rawData)) %>% rename(Sub = "Var1")
+MPmi_i  =  read_csv(sprintf("%s/HCP_S1200_MPC_400.csv",wd_noa_data)) %>% rename(Sub = "Var1")
 
 # Geodesic distances
-GD_i  =   read_csv(sprintf("%s/%s/01_GD.csv",wdNOA,wdNOA_output))
+GD_i  =   read_csv(sprintf("%s/01_GD.csv",wd_noa_output))
 
 # Functional gradient
-FC_g1_i =  read_csv(sprintf("%s/%s/03_GFC_i.csv", wdNOA,wdNOA_output))
+FC_g1_i =  read_csv(sprintf("%s/03_GFC_i.csv",wd_noa_output))
 
 # Functional gradient(group-level)
-FC_g1 =  read_csv(sprintf("%s/%s/03_FC_m_G.csv", wdNOA,wdNOA_output))
+FC_g1 =  read_csv(sprintf("%s/03_FC_m_G.csv",wd_noa_output))
 
 #inclusion index 
-notTwin_sub =  read_csv(sprintf("%s/%s/00_nottwin_ids.csv", wdNOA,wdNOA_output))
+notTwin_sub =  read_csv(sprintf("%s/00_nottwin_ids.csv",wd_noa_output))
 
 # cortical types and Yeo functional network annotations
-annotations = read_csv(sprintf("%s/%s/merged_YeoKongMesulamTypes.csv", wdNOA,wdNOA_Data))
+annotations = read_csv(sprintf("%s/cortical_types.csv", wd_noa_data))
 
 # tidy yeo 7 annotations 
 network_7_yeo = c()
@@ -77,7 +78,7 @@ GD_i = GD_i %>%
   mutate(value = ifelse(value == 0, NA, value)) %>%
   rename(GD = value)
 
-# get individual values for gd
+# get individual values for g1
 FC_g1_i = FC_g1_i%>%
   filter(Sub %in% notTwin_sub$Subject) %>%
   select(Sub,Parcel,`0`)%>%
@@ -138,7 +139,7 @@ var_FCG1_p = SFs_i_final %>%
 
 
 ## save FIG. 2A####
-tiff(sprintf("%s/%s/05_fig2A.tiff",wdOA,wdNOA_ImageOutput), 
+tiff(sprintf("%s/Figures/05_Fig_2A.tiff",wd_oa), 
      units="in", 
      width=7.75, 
      height=2, 

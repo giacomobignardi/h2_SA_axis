@@ -6,28 +6,29 @@ rm(list = ls())
 library(tidyverse)
 
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-
-wdNOA_rawData = paste0(substr(
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
 
 # load
 # Geodesic Distances from Valk S.####
-GD = R.matlab::readMat(sprintf("%s/GD/hcp_gd.mat",wdNOA_rawData))
-GD_ids = R.matlab::readMat(sprintf("%s/GD/HCPids.mat",wdNOA_rawData))
+GD = R.matlab::readMat(sprintf("%s/hcp_gd.mat",wd_noa_data))
+GD_ids = R.matlab::readMat(sprintf("%s/HCPids.mat",wd_noa_data))
 
 # inclusion index (based on subject inclusion in Valk et al., 2022 [Nat. Comms])
-Valk_sub = read_csv(sprintf("%s%s/subjects_for_giaco.csv",wdNOA,wdNOA_Data), col_names = F) %>% rename(Subject = X1)
+Valk_sub = read_csv(sprintf("%s/subj_inclusion.csv",wd_noa_data), col_names = F) %>% rename(Subject = X1)
 
 # Prepare data for later analysis
 GD_id= which(GD_ids$iDs %in% Valk_sub$Subject)
@@ -41,4 +42,4 @@ GD_df_long = GD_df%>%pivot_longer(names_to = "Parcel",
   mutate(Parcel = Parcel - 1)
 
 # SAVE geodesic distances####
-write_csv(GD_df_long, sprintf("%s/%s/01_GD.csv",wdNOA,wdNOA_output))
+write_csv(GD_df_long, sprintf("%s/01_GD.csv",wd_noa_output))

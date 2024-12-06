@@ -16,40 +16,41 @@ library(lavaan)
 rm(list = ls())
 
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-
-wdNOA_rawData = paste0(substr(
+wd_noa_output = paste0(substr(
   getwd(),
   0,
-  nchar(getwd())-nchar("04_analysis_OA")-1
-),"/03_rawData/private")
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
 
 # load measurement error model
-source(sprintf("%s/%s/functions/meermo/SMEM.R", wdOA,wdOA_scripts))
+source(sprintf("%s/R/functions/meermo/SMEM.R", wd_oa))
 
 # load
 # Microstructural intensity
-MPmi_i = read_csv(sprintf("%s/t1t2w/HCP_S1200_MPC_400.csv",wdNOA_rawData)) %>% rename(Sub = "Var1")
+MPmi_i = read_csv(sprintf("%s/HCP_S1200_MPC_400.csv",wd_noa_data)) %>% rename(Sub = "Var1")
 
 # Geodesic distances
-GD_i = read_csv(sprintf("%s/%s/01_GD.csv",wdNOA,wdNOA_output))
+GD_i = read_csv(sprintf("%s/01_GD.csv",wd_noa_output))
 
 # Functional gradient
-FC_g1_i_d1 = read_csv(sprintf("%s/%s/03_GFC_i_d1.csv", wdNOA,wdNOA_output))
-FC_g1_i_d2 = read_csv(sprintf("%s/%s/03_GFC_i_d2.csv", wdNOA,wdNOA_output))
+FC_g1_i_d1 = read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
+FC_g1_i_d2 = read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
 
 # inclusion index 
-notTwin_sub = read_csv(sprintf("%s/%s/00_nottwin_ids.csv", wdNOA,wdNOA_output))
+notTwin_sub = read_csv(sprintf("%s/00_nottwin_ids.csv",wd_noa_output))
 
 # cortical types and Yeo functional network annotations
-annotations = read_csv(sprintf("%s/%s/merged_YeoKongMesulamTypes.csv", wdNOA,wdNOA_Data))
+annotations = read_csv(sprintf("%s/cortical_types.csv", wd_noa_data))
 
 # tidy yeo 7 annotations 
 network_7_yeo = c()
@@ -64,8 +65,8 @@ annotations$label_Yeo7_short = network_7_yeo[,1]
 annotations = annotations %>% rename(Parcel = parcel_Yeo)
 
 # load demographics
-HCP  = read_csv(sprintf("%s/HCP/unrestricted_giaco_6_25_2021_3_50_21.csv",wdNOA_rawData))
-HCP_restricited  = read_csv(sprintf("%s/HCP/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wdNOA_rawData))
+HCP  = read_csv(sprintf("%s/unrestricted_giaco_6_25_2021_3_50_21.csv",wd_noa_data))
+HCP_restricited  = read_csv(sprintf("%s/RESTRICTED_giaco_8_13_2021_11_47_39.csv",wd_noa_data))
 HCP_all = merge(HCP,HCP_restricited, by = "Subject", all = T) %>% 
   select(Subject,Gender,Age_in_Yrs) %>% 
   filter(Subject %in% notTwin_sub$Subject)
@@ -174,8 +175,8 @@ SF3A_annot = merge(SF3A, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_sh
   select(-c(lhs,op,rhs,))
 
 
-# SF3b: parameters in mem
-write_csv(SF3A_annot, sprintf("%s/%s/07_SF23.csv",wdNOA,wdNOA_output))
+# SF2b: parameters in mem
+write_csv(SF3A_annot, sprintf("%s/SI/SFILE2.csv",wd_oa))
 
 
 # merge with annotation to stratify across cortical networks
@@ -214,8 +215,8 @@ est_smem_annot %>%
 names(est_smem_annot)
 
 # percentage of significant parcels
-((n_negative_sig_t1wt2w) / 400)*100
-((n_positive_sig + n_negative_sig) / 400)*100
+((n_negative_sig_t1wt2w) / 400)*100 #1.75
+((n_positive_sig + n_negative_sig) / 400)*100 #56.75
 
 # clustering of results based on functional network
 est_smem_annot %>% 
@@ -323,10 +324,46 @@ association_mi_left_lateral =
   pan_camera("left lateral")
 
 
+
+# FIGURE 3B (2D)####
+#here we make a simpler 2d figure
+cort_r = est_smem_annot %>%
+  #first we re annotate the correlations names
+  mutate(label = fct_recode( label, 
+                            "Microstructural intensity" = "rP1P2",
+                            "Geodesic distances" = "rP1P3",
+                            "remove"  = "rP2P3")) %>% 
+  filter(label !="remove") %>%
+  rename(region = label_Yeo_7,
+         cor = label) %>% 
+  mutate(est.std = ifelse(p_adjust<.05,est.std,NA)) %>% 
+  ggplot() +
+  facet_grid(~cor) +
+  geom_brain(atlas = schaefer7_400, 
+             position = position_brain(hemi ~ side), #to stack them
+             aes(fill = est.std),
+             color = "#414a4c",
+             size = .5) +
+  scale_fill_distiller(palette = "RdBu")+
+  labs(fill = expression(italic(r)[p]))+
+  theme_void(base_size = 20)+
+  theme(legend.position = "bottom",
+        legend.title.position = "top",
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.title = element_text(hjust = 0.5))
+
+## save FIG. 3B####
+pdf(sprintf("%s/Figures/07_Fig_3B.pdf",wd_oa),
+    width = 10,
+    height = 5 )
+cort_r
+dev.off()
+
 # SUPPLEMENTARY ####
 # estimate correlations without partitioning intra-individual variability out to check for overall improvement
 # Load average Functional gradient
-FC_g1_i =  read_csv(sprintf("%s/%s/03_GFC_i.csv", wdNOA,wdNOA_output))
+FC_g1_i =  read_csv(sprintf("%s/03_GFC_i.csv",wd_noa_output))
 
 #get individual values for the functional gradient
 FC_g1_i = FC_g1_i%>%
@@ -416,7 +453,7 @@ est_r_annot = est_r_annot %>%
   mutate(p_adjust = p.adjust(pvalue, method ="bonferroni"))
 
 ## save####
-write_csv(est_smem, sprintf("%s/%s/07_SMEM_output.csv",wdNOA,wdNOA_output))
+write_csv(est_smem, sprintf("%s/07_SMEM_output.csv",wd_noa_output))
 
 # plot overall improvement
 est = merge(est_smem %>% rename(est_smem = est.std), est_r %>% rename(est_r = est), by = c("Parcel","label"))
@@ -428,9 +465,7 @@ est_annot = merge(est, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short
                                                                                                                                "SomMot",
                                                                                                                                "Vis"))))
 
-
-
-
+## SFIG. S1####
 scatter_plot = est_annot %>% 
   filter(label == "rP1P3") %>% 
   ggplot(aes(est_r,est_smem)) + 
@@ -452,7 +487,7 @@ scatter_plot = est_annot %>%
   theme_classic()
 
 ## save FIG. S1####
-pdf(sprintf("%s/%s/07_figS2.pdf",wdOA,wdNOA_ImageOutput), 
+pdf(sprintf("%s/Figures/07_Fig_S2.pdf",wd_oa), 
     width=4.5, 
     height=3)
 scatter_plot 

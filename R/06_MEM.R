@@ -9,29 +9,39 @@ library(reshape2)
 library(patchwork)
 library(lavaan)
 
+# clear workspace
+rm(list = ls())
+
 # set Open Access working directories
-wdOA = getwd()
-wdOA_scripts = "02_scripts"
-wdNOA_ImageOutput = "05_Figures"
+wd_oa = getwd()
+wd_oa_scripts = "10_github"
+# wdNOA_ImageOutput = "05_Figures"
 
 # set not Open Access working directories
-wdNOA = getwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
+wd_noa_output = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),  "/11_noa_output")
+wd_noa_data = paste0(substr(
+  getwd(),
+  0,
+  nchar(getwd())-nchar("10_github")-1
+),"/03_rawData/noa")
 
 # load measurement error model (meermo directory)
-source(sprintf("%s/%s/functions/meermo/mem.R", wdOA,wdOA_scripts))
+source(sprintf("%s/R/functions/meermo/mem.R", wd_oa))
 
 # load
 # Functional gradient
-FC_g1_i_d1 =  read_csv(sprintf("%s/%s/03_GFC_i_d1.csv", wdNOA,wdNOA_output))
-FC_g1_i_d2 =  read_csv(sprintf("%s/%s/03_GFC_i_d2.csv", wdNOA,wdNOA_output))
+FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
+FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
 
 # inclusion index 
-notTwin_sub =  read_csv(sprintf("%s/%s/00_nottwin_ids.csv", wdNOA,wdNOA_output))
+notTwin_sub =  read_csv(sprintf("%s/00_nottwin_ids.csv",wd_noa_output))
 
 # cortical types and Yeo functional network annotations
-annotations = read_csv(sprintf("%s/%s/merged_YeoKongMesulamTypes.csv", wdNOA,wdNOA_Data))
+annotations = read_csv(sprintf("%s/cortical_types.csv", wd_noa_data))
 
 # tidy yeo 7 annotations 
 network_7_yeo = c()
@@ -114,7 +124,7 @@ SF2C_annot = merge(SF2C, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_sh
   select(-c(lhs,op,rhs, pvalue,z))
 
 # SF2c: parameters in mem
-write_csv(SF2C_annot, sprintf("%s/%s/06_SF2C.csv",wdNOA,wdNOA_output))
+write_csv(SF2C_annot, sprintf("%s/SI/SFILE1.csv",wd_oa))
 
 # merge with annotation to stratify across cortical networks
 est_mem_annot = merge(est_mem, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
@@ -161,7 +171,7 @@ box_plot_inter = est_mem_annot %>%
   theme(axis.text.x = element_text(angle = 90),legend.position = "none")
 
 ## save FIG. 2D####
-pdf(sprintf("%s/%s/06_fig2D.pdf",wdOA,wdNOA_ImageOutput), 
+pdf(sprintf("%s/Figures/06_Fig_2D.pdf",wd_oa), 
      width=6, 
      height=3)
 box_plot_intra + box_plot_inter
@@ -192,7 +202,7 @@ sig_plot = aov_hsd$`as.factor(label_Yeo7_short)` %>%
        color = "significance")
 
 ## save FIG. S1####
-pdf(sprintf("%s/%s/06_figS1.pdf",wdOA,wdNOA_ImageOutput), 
+pdf(sprintf("%s/Figures/06_Fig_S1.pdf",wd_oa), 
     width=6, 
     height=6)
 sig_plot 
@@ -212,3 +222,77 @@ est_mem_annot %>% slice(which.max(ICC2k))
 # so the lower bound for the bias in the correlation with the functional gradient, assuming perfect reliability of strucure
 # range of lower bound for bias(r-observed, r-true) 
 sqrt(1*mean(est_mem$ICC2k))
+
+# subsample two individuals to make the conceptual inter- intra-individual
+# distinction present in Figure 2C
+set.seed(42)
+sub1 = sample(FC_gradients$Sub,1) 
+sub2 = sample(FC_gradients$Sub,1)
+
+#FIGURE 2C####
+FC_gradients_ann <- merge(FC_gradients,annotations, "Parcel")
+G1_s1_d1 <- FC_gradients_ann %>%
+  filter(Sub == sub1) %>%
+  rename(region = label_Yeo_7) %>% 
+  ggplot() +
+  geom_brain(atlas = schaefer7_400, 
+             side= "lateral",
+             hemi = "left",
+             aes(fill = P1_r1),
+             color = "#414a4c",
+             size = .5,
+             show.legend = FALSE) +
+  scale_fill_viridis_c()+
+  theme_void()
+
+G1_s1_d2 <- FC_gradients_ann %>%
+  filter(Sub == sub1) %>%
+  rename(region = label_Yeo_7) %>% 
+  ggplot() +
+  geom_brain(atlas = schaefer7_400, 
+             side= "lateral",
+             hemi = "left",
+             aes(fill = P1_r2),
+             color = "#414a4c",
+             size = .5,
+             show.legend = FALSE) +
+  scale_fill_viridis_c()+
+  theme_void()+
+  theme(legend.title.position = "none")
+
+G1_s2_d1 <- FC_gradients_ann %>%
+  filter(Sub == sub2) %>%
+  rename(region = label_Yeo_7) %>% 
+  ggplot() +
+  geom_brain(atlas = schaefer7_400, 
+             side= "lateral",
+             hemi = "left",
+             aes(fill = P1_r1),
+             color = "#414a4c",
+             size = .5,
+             show.legend = FALSE) +
+  scale_fill_viridis_c()+
+  theme_void()+
+  theme(legend.title.position = "none")
+
+G1_s2_d2 <- FC_gradients_ann %>%
+  filter(Sub == sub2) %>%
+  rename(region = label_Yeo_7) %>% 
+  ggplot() +
+  geom_brain(atlas = schaefer7_400, 
+             side= "lateral",
+             hemi = "left",
+             aes(fill = P1_r2),
+             color = "#414a4c",
+             size = .5,
+             show.legend = FALSE) +
+  scale_fill_viridis_c()+
+  theme_void()+
+  theme(legend.title.position = "none")
+
+## save FIGURE 2C####
+pdf(sprintf("%s/Figures/06_Fig_2C.pdf",wd_oa),
+    width = 3,
+    height = 3 )
+(G1_s1_d1 + G1_s2_d1) / (G1_s1_d2|G1_s2_d2)
+dev.off()
