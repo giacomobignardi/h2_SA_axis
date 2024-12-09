@@ -231,7 +231,7 @@ GD_left = GD_template_graph %>%
   scico::scale_fill_scico(palette = "bilbao", direction = -1)+
   labs(#title = "Geodesic distances",
        subtitle = "zGD",
-       fill = "Association-Sensorimotor")+
+       fill = "Sensorimotor-Association")+
   theme_void(base_size = 14)+
   theme(legend.position = "bottom",
         legend.title.position = "top",
@@ -260,7 +260,7 @@ G1_left = G1_template_graph %>%
   scale_fill_viridis_c()+
   labs(#title = "Functional gradient",
        subtitle = expression(zFC[G1]),
-       fill = "Association-Sensorimotor")+
+       fill = "Sensorimotor-Association")+
   theme_void(base_size = 14)+
   theme(legend.position = "bottom",
         legend.title.position = "top",
