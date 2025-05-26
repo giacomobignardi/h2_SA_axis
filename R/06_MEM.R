@@ -187,27 +187,6 @@ aov_mod = aov(zICC2k ~ as.factor(label_Yeo7_short),est_mem_annot %>% mutate(zICC
 summary(aov_mod)
 aov_hsd = TukeyHSD(aov_mod)
 
-## FIG. S1
-sig_plot = aov_hsd$`as.factor(label_Yeo7_short)` %>% 
-  as.data.frame() %>% 
-  mutate(is_sig = ifelse(`p adj` <.05, "p<.05","p=>.05")) %>% 
- rownames_to_column() %>% 
-  ggplot(aes(diff,rowname, color = as.factor(is_sig)))+
-  geom_point()+
-  geom_vline(xintercept = 0, linetype = "dashed")+
-  geom_errorbar(aes(xmin=lwr , xmax = upr))+
-  theme_bw()+
-  labs(x = "difference ICC2k", 
-       y = "Yeo-Kirenen 7 Network",
-       color = "significance")
-
-## save FIG. S1####
-pdf(sprintf("%s/Figures/06_Fig_S1.pdf",wd_oa), 
-    width=6, 
-    height=6)
-sig_plot 
-dev.off()
-
 #report anova results
 report::report(aov_mod)
 
