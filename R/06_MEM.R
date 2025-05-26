@@ -141,7 +141,7 @@ box_plot_intra = est_mem_annot %>%
   geom_boxplot() +
   geom_hline(yintercept = mean(1-est_mem$ICC2k), linetype = "dashed")+
   ylim(0,1) +
-  labs(y = "porportion of \nintra-individual variance",
+  labs(y = "proportion of \nintra-individual variance",
        x = "Yeo-Krienen 7 networks")+
   theme_classic()+
   scale_fill_manual(values = c('#9F53AA',
@@ -158,7 +158,7 @@ box_plot_inter = est_mem_annot %>%
   geom_boxplot() +
   geom_hline(yintercept = mean(est_mem$ICC2k), linetype = "dashed")+
   ylim(0,1) +
-  labs(y = "porportion of \ninter-individual variance",
+  labs(y = "proportion of \ninter-individual variance",
        x = "Yeo-Krienen 7 networks")+
   theme_classic()+
   scale_fill_manual(values = c('#9F53AA',
