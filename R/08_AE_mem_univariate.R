@@ -162,6 +162,9 @@ for(i in parcel_list$Parcel){
 AE_fltr = AE_sumy %>% filter(rmsea < 0.08, cfi > .90)
 # note that 398 parcel meet goodness of fit criteria
 nrow(AE_fltr)
+# add information for which parcel the model did not fit well
+AE_sumy %>% filter(rmsea >= 0.08, cfi <= .90) %>% pull(Parcel)
+#[1]  61 251
 
 # merge with annotation to stratify across cortical networks
 AE_fltr_annot = merge(AE_fltr, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
@@ -178,7 +181,7 @@ box_plot_AE = AE_fltr_annot %>%
   geom_boxplot() +
   geom_hline(yintercept = mean(AE_fltr_annot$est), linetype = "dashed")+
   ylim(0,1) +
-  labs(y = expression(h[twin]^2),
+  labs(y = expression(italic(h)[twin]^2),
        x = "Yeo-Krienen 7 networks")+
   theme_classic()+
   scale_fill_manual(values = c('#9F53AA',
@@ -240,8 +243,17 @@ for(i in parcel_list$Parcel){
 
 # retain only good fitting model (following Teeuw et al., 2021 Neuroimage)
 cpmem_AE_fltr = cpmem_AE_sumy %>% filter(rmsea < 0.08, cfi > .90)
-nrow(cpmem_AE_fltr)
 # 395 good model fitting parcels
+nrow(cpmem_AE_fltr)
+# add information for which parcel the model did not fit well
+cpmem_AE_sumy %>% filter(rmsea >= 0.08 | cfi <= .90) %>% pull(Parcel)
+# 100 152 163 214 235
+
+# exclude Heywood cases
+cpmem_AE_fltr = cpmem_AE_fltr %>% filter(est < 1, est > -1)
+# 1 Heywood cases
+cpmem_AE_sumy %>% filter(est >= 1 | est <= -1) %>% pull(Parcel)
+#[1] 114
 
 # merge with annotation to stratify across cortical networks
 cpmem_AE_fltr_annot = merge(cpmem_AE_fltr, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
@@ -259,7 +271,7 @@ box_plot_cpmem_AE = cpmem_AE_fltr_annot %>%
   geom_boxplot() +
   geom_hline(yintercept = mean(cpmem_AE_fltr_annot$est), linetype = "dashed")+
   ylim(0,1) +
-  labs(y = expression(h[twin]^2),
+  labs(y = expression(paste("deattenuated ", italic(h)[twin]^2)),
        x = "Yeo-Krienen 7 networks")+
   theme_classic()+
   scale_fill_manual(values = c('#9F53AA',
@@ -302,13 +314,13 @@ scatter_plot = AE_comparison %>%
                                            
   xlim(0,1)+
   ylim(0,1)+
-  labs(x = "estimates CTD",
-       y = "estimates cpmem",
+  labs(x = expression(italic(h)[twin]^2),
+       y = expression(paste("deattenuated ", italic(h)[twin]^2)),
        fill = "Yeo-Krienen 7")+
   theme_classic()
 
-## save FIG. S3####
-pdf(sprintf("%s/Figures/08_Fig_S3.pdf",wd_oa), 
+## save FIG. 4####
+pdf(sprintf("%s/Figures/08_Fig_4.pdf",wd_oa), 
     width=9, 
     height=3)
 (box_plot_AE|box_plot_cpmem_AE|scatter_plot) + plot_layout(guides = "collect") + plot_annotation(tag_levels = "A")
