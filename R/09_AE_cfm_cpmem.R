@@ -60,6 +60,15 @@ for(i in 1:400){
 annotations$label_Yeo7_short = network_7_yeo[,1]
 annotations = annotations %>% rename(Parcel = parcel_Yeo)
 
+# factor levels
+annotations$label_Yeo7_short = factor(annotations$label_Yeo7_short, levels = rev(c("Default", 
+                                                                    "Limbic", 
+                                                                    "Cont",
+                                                                    "SalVentAttn",
+                                                                    "DorsAttn",
+                                                                    "SomMot",
+                                                                    "Vis")))
+
 # inclusion index 
 Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
 
@@ -75,6 +84,7 @@ HCP_twin = HCP_all %>%
   filter(Subject %in% Twin_sub$Subject)%>% 
   mutate(Sib_ID = ifelse(duplicated(Family_ID),2,1), #create a twinship order
          ZygosityGT = fct_recode(ZygosityGT, "1" = "MZ", "2" = "DZ"))
+
 #INDIVIDUALS####
 #get individual values for mp
 MPmi_i = MPmi_i%>%
@@ -107,14 +117,7 @@ SFs_i_list = list(MPmi_i, GD_i,FC_gradients)
 # merge all data frames in list
 SFs_i = SFs_i_list %>% reduce(full_join, by=c("Sub",'Parcel'))
 SFs_i_final_list = list(SFs_i, annotations)
-SFs_i_final = SFs_i_final_list %>% reduce(full_join, by=c('Parcel'))%>% 
-  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                    "Limbic", 
-                                                                    "Cont",
-                                                                    "SalVentAttn",
-                                                                    "DorsAttn",
-                                                                    "SomMot",
-                                                                    "Vis"))))
+SFs_i_final = SFs_i_final_list %>% reduce(full_join, by=c('Parcel'))
 
 SFs = merge(SFs_i_final, HCP_all %>% rename(Sub = Subject), by = ("Sub"), all = T)
 
@@ -279,41 +282,59 @@ write_csv(SF4A_annot, sprintf("%s/SI/SFILE3.csv",wd_oa))
 write_csv(SF4B_annot, sprintf("%s/SI/SFILE4.csv",wd_oa))
 write_csv(SF4C_annot, sprintf("%s/SI/SFILE5.csv",wd_oa))
 
-#plot heritabilities
-# merge all data frames in list
-var_explained = SF4A_annot %>% 
-  filter((grepl("σA",label) |grepl("σE",label)) & grepl("2",label)) %>% 
-  filter(0 <= est & est <=1) %>% 
-  mutate(label_2 = sub("\\^.*", "", label),
-         prop = substr(label_2, 3,nchar(label_2)),
-         var_comp = substr(label_2, 1,2),
-         prop = factor(prop, levels = c("mi","GD","inter")),
-         prop = fct_recode(prop, 
-                           "Geodesic\ndistances"="GD",
-                           "Microstructural\nintensiry"="mi",
-                           "FCG1"="inter"
-                           ),
-         var_comp = fct_recode(var_comp, 
-                           "additive\ngenetic"="σA",
-                           "non-common\nenvironment"="σE"
-         ))%>% 
-  ggplot(aes(prop, est, fill = var_comp))+
-  geom_boxplot()+
-  scale_fill_manual(values = c("#D90B56","#E8A830")) +
-  #geom_hline(yintercept = mean(1-est), linetype = "dashed")+
+#plot h2 - microstructure
+mi_h2 = cfm_cpmem_AE_sumy %>% 
+  filter(label == "h2_P2") %>% 
+  merge(annotations %>% select(Parcel,label_Yeo7_short), by = "Parcel") %>% 
+  ggplot(aes(label_Yeo7_short,  est, fill = label_Yeo7_short))+
+  geom_boxplot() +
+  #geom_hline(yintercept = mean(cpmem_AE_fltr_annot$est), linetype = "dashed")+
   ylim(0,1) +
-  labs(y = "Variance explained",
-       x = "S-A axis strucutre-function",
-       fill = "Variance\ncomponents")+
-  theme_classic(base_size = 14)
+  labs(y = expression(paste(italic(h)[twin]^2)),
+       x = "Yeo-Krienen 7 networks")+
+  ggtitle("Microstructural\nintensity")+
+  theme_classic(base_size = 14)+
+  scale_fill_manual(values = c('#9F53AA',
+                               '#7A9ABD',
+                               '#3d8043',
+                               '#b584cf',
+                               '#e8a633',
+                               '#F4FEC8',
+                               '#D8707A'))+
+  theme(
+        legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank())
 
-# Save Fig 4B
-pdf(sprintf("%s/Figures/09_Fig_4B.pdf",wd_oa),
-    width = 6,
-    height = 4 )
-var_explained
+#plot h2 - geodesic distance
+gd_h2 = cfm_cpmem_AE_sumy %>% 
+  filter(label == "h2_P3") %>% 
+  merge(annotations %>% select(Parcel,label_Yeo7_short), by = "Parcel") %>% 
+  ggplot(aes(label_Yeo7_short,  est, fill = label_Yeo7_short))+
+  geom_boxplot() +
+  #geom_hline(yintercept = mean(cpmem_AE_fltr_annot$est), linetype = "dashed")+
+  ylim(0,1) +
+  labs(y = expression(paste(italic(h)[twin]^2)),
+       x = "Yeo-Krienen 7 networks")+
+  ggtitle("Geodesic\ndistances")+
+  theme_classic(base_size = 14)+
+  scale_fill_manual(values = c('#9F53AA',
+                               '#7A9ABD',
+                               '#3d8043',
+                               '#b584cf',
+                               '#e8a633',
+                               '#F4FEC8',
+                               '#D8707A'))+
+  theme(axis.text.x = element_text(angle = 90),legend.position = "none")
+
+# Figure 5 A-D ####
+pdf(sprintf("%s/Figures/09_Fig_5AD.pdf",wd_oa),
+    width = 3,
+    height = 6 )
+mi_h2/gd_h2
 dev.off()
 
+# correlations
 cfm_cpmem_AE_sumy_short =  cfm_cpmem_AE_sumy %>%                                 
   filter((grepl("rE",label) | grepl("rA",label) | grepl("h",label)) & !(grepl("var",label)|grepl("bh",label)))
 
@@ -327,23 +348,16 @@ cfs_fltr_fit = cfm_cpmem_AE_sumy_short %>%
   filter(rmsea < 0.08, cfi > .90)
 
 # how many with good fit
-nrow(cfs_fltr_fit)/9
+n_parcel_model = nrow(cfs_fltr_fit)/9
 
-# exclude heywood cases
-cfs_fltr = cfs_fltr_fit %>%   
-  filter(est < 1 | est > -1)
-
-# how many left
-n_pacerl_model = nrow(cfs_fltr)/9
+# exclude Heywood cases
+cfs_fltr_fit %>% filter(est > 1 | est < -1)
+# the parcel which was already identify (114, limbic network) produce out of bounds h2  
+parcel_exc <- cfs_fltr_fit %>% filter(est > 1 & grepl("h2",label)) %>% pull(Parcel)
 
 # merge with annotation to stratify across cortical networks
-AE_fltr_annot = merge(cfs_fltr, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                                                                                    "Limbic", 
-                                                                                                                                    "Cont",
-                                                                                                                                    "SalVentAttn",
-                                                                                                                                    "DorsAttn",
-                                                                                                                                    "SomMot",
-                                                                                                                                    "Vis"))))
+AE_fltr_annot = merge(cfs_fltr_fit, annotations, by = "Parcel") 
+
 # correct for multiple comparisions
 # NOTE P1P2 = inter FCg1 <-> t1t2w
 # NOTE P1P3 = inter FCg1 <-> GD
@@ -354,65 +368,73 @@ est_AE_annot = AE_fltr_annot %>%
 ## save####
 write_csv(est_AE_annot, sprintf("%s/09_CPMEM_output.csv",wd_noa_output))
 
-# Heritability estimates
-library(ggtext)
-
 # average heritability
 est_AE_annot %>% 
   filter(grepl("h2",label)) %>% 
+  filter(Parcel != parcel_exc) %>% #we remove parcel 114 as it produced out of bounds estimates for the measurement error model
   group_by(lhs) %>% 
   reframe(mean(est), sd(est))
 
 # display percentage of significant genetic and environemntal correlations 
 # amongst all the possible FCg1 <-> t1t2w (that is twice the number of parcels)
 (est_AE_annot %>% 
+  filter(Parcel != parcel_exc) %>%
   filter(p_adjust<.05 & label == "rA_P12" & est <0) %>% nrow() +
 est_AE_annot %>% 
+  filter(Parcel != parcel_exc) %>%
   filter(p_adjust<.05 & label == "rA_P12" & est >0) %>% nrow() +
 est_AE_annot %>% 
+  filter(Parcel != parcel_exc) %>%
   filter(p_adjust<.05 & label == "rE_P12" & est <0) %>% nrow() +
 est_AE_annot %>% 
+  filter(Parcel != parcel_exc) %>%
   filter(p_adjust<.05 & label == "rE_P12" & est >0) %>% nrow()) /
-  (n_pacerl_model*2)
+  ((n_parcel_model-1)*2)
 
 # focus on genetic correlations
 (est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rA_P12") %>% nrow())/
-  (n_pacerl_model)
-
+  (n_parcel_model-1)
 
 # display percentage of significant genetic and environemntal correlations 
 # amongst all the possible FCg1 <-> GD (that is twice the number of parcels)
 (est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est <0) %>% nrow() +
     est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est >0) %>% nrow()) /
-  (n_pacerl_model)
+  (n_parcel_model-1)
 
 (est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rE_P13" & est <0) %>% nrow() +
     est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rE_P13" & est >0) %>% nrow()) /
-  (n_pacerl_model)
-
+  (n_parcel_model-1)
 
 # focus on genetic correlations
 (est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est <0) %>% nrow())/
-  (n_pacerl_model)
+  (n_parcel_model-1)
 
 (est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est >0) %>% nrow()) /
-  (n_pacerl_model)
-
+  (n_parcel_model-1)
 
 # average magnitude of genetic correlations
 est_AE_annot %>% 
+  filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est <0) %>% 
   summarise(mean= psych::fisherz2r(mean(psych::fisherz(est))),
             sd = psych::fisherz2r(sd(psych::fisherz(est))))
 
 est_AE_annot %>% 
+  filter(Parcel != parcel_exc) %>%
   filter(p_adjust<.05 & label == "rA_P13" & est >0) %>% 
   summarise(mean= psych::fisherz2r(mean(psych::fisherz(est))),
             sd = psych::fisherz2r(sd(psych::fisherz(est))))
@@ -420,16 +442,17 @@ est_AE_annot %>%
 
 # focus on enviromental correlations
 (est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rE_P13" & est <0) %>% 
   nrow() +
   est_AE_annot %>% 
+    filter(Parcel != parcel_exc) %>%
     filter(p_adjust<.05 & label == "rE_P13" & est >0) %>% 
   nrow()) /
-  (n_pacerl_model)
+  (n_parcel_model-1)
 
 
 # plot associations on the cortex
-#Figure 3B-C####
 # template surface 
 associations2cortex = est_AE_annot %>% 
   filter(label == "rA_P13" & p_adjust<.05) %>% 
@@ -496,6 +519,7 @@ schaefer7_association_mi = schaefer7_400_3d %>% #
                                       rename(region = label_Yeo_7) %>% 
                                       select(region,est),
                                     by = "region")))
+
 # plot parcelations using ggseg3d
 association_mi_left_medial = 
   ggseg3d(
@@ -517,9 +541,10 @@ association_mi_left_lateral =
   remove_axes()%>%
   pan_camera("left lateral")
 
-
+# plot in 2D
 cort_rA = est_AE_annot %>%
   filter((grepl("rA",label))) %>% 
+  filter(Parcel!=parcel_exc) %>% 
   #first we re annotate the correlations names
   mutate(label = factor(label, levels = c("rA_P12","rA_P13","rA_P23")),
          label = fct_recode( label, 
@@ -531,18 +556,20 @@ cort_rA = est_AE_annot %>%
          cor = label) %>% 
   mutate(est = ifelse(p_adjust<.05,est,NA)) %>% 
   ggplot() +
-  facet_grid(~cor) +
+  facet_grid(rows = vars(cor)) +
   geom_brain(atlas = schaefer7_400, 
              position = position_brain(hemi ~ side), #to stack them
              aes(fill = est),
              color = "#414a4c",
              size = .5) +
-  scale_fill_distiller(palette = "RdPu", direction  = 1)+
+  scale_fill_distiller(palette = "Reds", direction  = 1)+
   labs(fill = expression(italic(r)[A]))+
-  theme_void(base_size = 12)
+  theme_void(base_size = 14)+
+  theme(strip.text = element_blank())
 
 cort_rE = est_AE_annot %>%
   filter((grepl("rE",label))) %>% 
+  filter(Parcel!=parcel_exc) %>% 
   #first we re annotate the correlations names
   mutate(label = factor(label, levels = c("rE_P12","rE_P13","rE_P23")),
          label = fct_recode( label, 
@@ -554,23 +581,20 @@ cort_rE = est_AE_annot %>%
          cor = label) %>% 
   mutate(est = ifelse(p_adjust<.05,est,NA)) %>% 
   ggplot() +
-  facet_grid(~cor) +
+  facet_grid(rows = vars(cor)) +
   geom_brain(atlas = schaefer7_400, 
              position = position_brain(hemi ~ side), #to stack them
              aes(fill = est),
              color = "#414a4c",
              size = .5) +
-  scale_fill_distiller(palette = "YlOrBr", direction  = 1)+
+  scale_fill_distiller(palette = "Blues", direction  = 1)+
   labs(fill = expression(italic(r)[E]))+
-  theme_void(base_size = 12) +
+  theme_void(base_size = 14) +
   theme(strip.text = element_blank())
 
-
-# Save Fig 4C
-pdf(sprintf("%s/Figures/09_Fig_4C.pdf",wd_oa),
-    width = 8,
-    height = 8 )
-(cort_rA/cort_rE) + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+# Figure 5 B-C-E-F ####
+pdf(sprintf("%s/Figures/09_Fig_5BCEF.pdf",wd_oa),
+    width = 6,
+    height = 6 )
+(cort_rA|cort_rE) + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 dev.off()
-
-
