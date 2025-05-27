@@ -346,19 +346,12 @@ cort_r = est_smem_annot %>%
              size = .5) +
   scale_fill_distiller(palette = "RdBu")+
   labs(fill = expression(italic(r)[p]))+
-  theme_void(base_size = 20)+
-  theme(legend.position = "bottom",
-        legend.title.position = "top",
+  theme_void(base_size = 14)+
+  theme(legend.title.position = "top",
         plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.title = element_text(hjust = 0.5))
 
-## save FIG. 3B####
-pdf(sprintf("%s/Figures/07_Fig_3B.pdf",wd_oa),
-    width = 10,
-    height = 5 )
-cort_r
-dev.off()
 
 # SUPPLEMENTARY ####
 # estimate correlations without partitioning intra-individual variability out to check for overall improvement
@@ -481,16 +474,17 @@ scatter_plot = est_annot %>%
                                          '#D8707A'))+
   xlim(-1,1)+
   ylim(-1,1)+
-  labs(x = "estimates pearson r")+
-  labs(y = "estimates smem")+
+  labs(x = expression(italic(r)[gd-g1]))+
+  labs(y =  expression(paste("corrected ",italic(r)[gd-g1])))+
   labs(fill = "Yeo-Krienen\n 7 networks")+
-  theme_classic()
+  theme_classic(base_size = 14)
 
-## save FIG. S1####
-pdf(sprintf("%s/Figures/07_Fig_S2.pdf",wd_oa), 
-    width=4.5, 
-    height=3)
-scatter_plot 
+
+## save FIG. 3####
+pdf(sprintf("%s/Figures/07_Fig_3.pdf",wd_oa), 
+    width=9.5, 
+    height=2.75)
+(cort_r|scatter_plot) +plot_layout(widths = c(2.5,1)) + plot_annotation(tag_levels = "A")
 dev.off()
 
 # range of improvement
