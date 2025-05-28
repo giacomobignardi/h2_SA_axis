@@ -59,6 +59,21 @@ for(i in 1:400){
 }
 # network_7_yeo = c(network_7_yeo, rep("Other", 19))
 annotations$label_Yeo7_short = network_7_yeo[,1]
+annotations$label_Yeo7_short = factor(annotations$label_Yeo7_short, levels = rev(c("Default",    
+                                                                    "Cont",
+                                                                    "Limbic", 
+                                                                    "SalVentAttn",
+                                                                    "DorsAttn",
+                                                                    "SomMot",
+                                                                    "Vis")))
+annotations$label_Yeo7_short = fct_recode(annotations$label_Yeo7_short, 
+                                       "Default" =  "Default",
+                                       "Frontoparietal" =  "Cont",
+                                       "Limbic" =  "Limbic",
+                                       "Ventral attention" =  "SalVentAttn",
+                                       "Dorsal attention" =  "DorsAttn",
+                                       "Somatomotor" =  "SomMot",
+                                       "Visual" =  "Vis")
 
 # GROUP-LEVEL####
 ## t1w/t2w####
@@ -93,14 +108,7 @@ SFs_list = list(MPmi, GD, FC_g1, annotations %>% rename(Parcel = parcel_Yeo)) #A
 # merge all data frames in list
 SFs = SFs_list %>% 
   reduce(full_join, by='Parcel') %>% 
-  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                 "Limbic", 
-                                                                 "Cont",
-                                                                 "SalVentAttn",
-                                                                 "DorsAttn",
-                                                                 "SomMot",
-                                                                 "Vis"))),
-         #if needed during revision 
+  mutate(#if needed during revision 
          classes_6_types = recode(class_types, 
                                   '7' = "Agranular",
                                   '6' = "Disgranular",
@@ -295,16 +303,15 @@ corplot_left = SFs %>%
                                         '#7A9ABD',
                                         '#3d8043',
                                         '#b584cf',
-                                        '#e8a633',
                                         '#F4FEC8',
+                                        '#e8a633',
                                         '#D8707A'))+
                                           geom_point(aes(fill = label_Yeo7_short), pch = 21, size = 2, color = "lightGray") +
   geom_smooth(method = "lm", color = "gray")+
   theme_classic() +
-  labs(fill = "Yeo-Krienen\n7 networks",
+  labs(fill = "Yeo-Krienen 7",
        x = bquote(zT1w/T2w[mi]),
-       y = bquote(zFC[G1]),
-       subtitle = "")+
+       y = bquote(zFC[G1]))+
   ylim(c(-1.7, 1.9))
 
 ## right : GD####            
@@ -314,22 +321,21 @@ corplot_right =SFs %>% mutate(zGD = scale(GD), zFC_G1 = scale(FC_G1)) %>%
                                         '#7A9ABD',
                                         '#3d8043',
                                         '#b584cf',
-                                        '#e8a633',
                                         '#F4FEC8',
+                                        '#e8a633',
                                         '#D8707A'))+
                                           geom_point(aes(fill = label_Yeo7_short), pch = 21, size = 2, color ="lightGray") +
   geom_smooth(method = "lm", color = "gray")+
   theme_classic() +
-  labs(fill = "Yeo-Krienen\n7 networks",
-       y = bquote(zFC[G1]),
-       subtitle = "")+
+  labs(fill = "Yeo-Krienen 7",
+       y = bquote(zFC[G1]))+
   ylim(c(-1.7, 1.9))
 
 ## save FIG. 1D####
 pdf(sprintf("%s/Figures/04_Fig_1D.pdf",wd_oa),
-    width = 5,
-    height =2 )
-(corplot_left|corplot_right) + plot_layout(guides = "collect")  & theme(legend.position = "none")
+    width = 6.25,
+    height =2.35 )
+(corplot_left|corplot_right) + plot_layout(guides = "collect")
 dev.off()
 
 #correlation between different S-F axis
