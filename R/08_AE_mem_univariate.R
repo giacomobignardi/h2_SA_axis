@@ -49,7 +49,23 @@ for(i in 1:400){
 
 # network_7_yeo = c(network_7_yeo, rep("Other", 19))
 annotations$label_Yeo7_short = network_7_yeo[,1]
-annotations = annotations %>% rename(Parcel = parcel_Yeo)
+annotations = annotations %>% rename(Parcel = parcel_Yeo)%>%   
+  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default",    
+                                                                    "Cont",
+                                                                    "Limbic", 
+                                                                    "SalVentAttn",
+                                                                    "DorsAttn",
+                                                                    "SomMot",
+                                                                    "Vis")))) %>%   
+  mutate(label_Yeo7_short = fct_recode(label_Yeo7_short, 
+                                       "Default" =  "Default",
+                                       "Frontoparietal" =  "Cont",
+                                       "Limbic" =  "Limbic",
+                                       "Ventral attention" =  "SalVentAttn",
+                                       "Dorsal attention" =  "DorsAttn",
+                                       "Somatomotor" =  "SomMot",
+                                       "Visual" =  "Vis"))
+
 
 # load dataFrames
 HCP  = read_csv(sprintf("%s/unrestricted_giaco_6_25_2021_3_50_21.csv",wd_noa_data))
@@ -76,14 +92,7 @@ FC_gradients = FC_gradients%>%
 
 # merge all data frames in list
 SFs_i_final_list = list(FC_gradients, annotations)
-SFs_i_final = SFs_i_final_list %>% reduce(full_join, by=c('Parcel'))%>% 
-  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                    "Limbic", 
-                                                                    "Cont",
-                                                                    "SalVentAttn",
-                                                                    "DorsAttn",
-                                                                    "SomMot",
-                                                                    "Vis"))))
+SFs_i_final = SFs_i_final_list %>% reduce(full_join, by=c('Parcel'))
 
 # merge with aesthetic sensitivity data
 SFB_i_list = list(SFs_i_final,HCP_twin %>% rename(Sub = Subject))
@@ -167,13 +176,7 @@ AE_sumy %>% filter(rmsea >= 0.08, cfi <= .90) %>% pull(Parcel)
 #[1]  61 251
 
 # merge with annotation to stratify across cortical networks
-AE_fltr_annot = merge(AE_fltr, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                                                                                     "Limbic", 
-                                                                                                                                     "Cont",
-                                                                                                                                     "SalVentAttn",
-                                                                                                                                     "DorsAttn",
-                                                                                                                                     "SomMot",
-                                                                                                                                     "Vis"))))
+AE_fltr_annot = merge(AE_fltr, annotations, by = "Parcel")
 
 # vizualize heritability stratified by cortical networks
 box_plot_AE = AE_fltr_annot %>% 
@@ -188,10 +191,10 @@ box_plot_AE = AE_fltr_annot %>%
                                         '#7A9ABD',
                                         '#3d8043',
                                         '#b584cf',
-                                        '#e8a633',
                                         '#F4FEC8',
+                                        '#e8a633',
                                         '#D8707A'))+
-                                          theme(axis.text.x = element_text(angle = 90),legend.position = "none")
+                                          theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),legend.position = "none")
 
 
 # Common Pathway Measurement Error Model ####
@@ -256,13 +259,7 @@ cpmem_AE_sumy %>% filter(est >= 1 | est <= -1) %>% pull(Parcel)
 #[1] 114
 
 # merge with annotation to stratify across cortical networks
-cpmem_AE_fltr_annot = merge(cpmem_AE_fltr, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                                                                                     "Limbic", 
-                                                                                                                                     "Cont",
-                                                                                                                                     "SalVentAttn",
-                                                                                                                                     "DorsAttn",
-                                                                                                                                     "SomMot",
-                                                                                                                                     "Vis"))))
+cpmem_AE_fltr_annot = merge(cpmem_AE_fltr, annotations, by = "Parcel")
 
 
 # box plot of univariate heritability (with mem)
@@ -278,10 +275,10 @@ box_plot_cpmem_AE = cpmem_AE_fltr_annot %>%
                                         '#7A9ABD',
                                         '#3d8043',
                                         '#b584cf',
-                                        '#e8a633',
                                         '#F4FEC8',
+                                        '#e8a633',
                                         '#D8707A'))+
-                                          theme(axis.text.x = element_text(angle = 90),legend.position = "none")
+                                          theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),legend.position = "none")
 
 # comparison between the two models####
 # 1 goodness of fit
@@ -308,8 +305,8 @@ scatter_plot = AE_comparison %>%
                                          '#7A9ABD',
                                          '#3d8043',
                                          '#b584cf',
-                                         '#e8a633',
                                          '#F4FEC8',
+                                         '#e8a633',
                                          '#D8707A'))+
                                            
   xlim(0,1)+
