@@ -187,6 +187,12 @@ SFB_i_final %>%
 # source CTD model specification
 source(sprintf("%s/R/functions/lavaantwda/CFM_cpmem_AE_2g3p.R", wd_oa))
 
+# quick and diry check of number of complete twin pairs per parcel across modalites
+for(i in 1:400){
+  complete_pair_i = psych::pairwiseCount(SFB_i_final %>% filter(Parcel==i) %>% select(starts_with("P"), -c("Parcel")))
+  print(c(complete_pair_i["P1_r1_T1","P1_r1_T2"],complete_pair_i["P1_r2_T1","P1_r2_T2"],complete_pair_i["P2_T1","P2_T2"],complete_pair_i["P3_T1","P3_T2"]))
+}
+
 # estimate h2 across parcels
 cfm_cpmem_AE_sumy = c()
 for(i in parcel_list$Parcel){
