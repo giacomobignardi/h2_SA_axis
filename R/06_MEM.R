@@ -2,7 +2,6 @@
 #Description: measurement error model to account for test-retest data in FCG1
 #Program: measurement error model------------------------------------------------------------------------------------------------------------------------------
 #clean working environment 
-
 rm(list = ls())
 library(tidyverse)
 library(reshape2)
@@ -53,8 +52,24 @@ for(i in 1:400){
 
 # network_7_yeo = c(network_7_yeo, rep("Other", 19))
 annotations$label_Yeo7_short = network_7_yeo[,1]
-annotations = annotations %>% rename(Parcel = parcel_Yeo)
+annotations = annotations %>% rename(Parcel = parcel_Yeo) %>%   
+  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default",    
+                                                                    "Cont",
+                                                                    "Limbic", 
+                                                                    "SalVentAttn",
+                                                                    "DorsAttn",
+                                                                    "SomMot",
+                                                                    "Vis")))) %>%   
+  mutate(label_Yeo7_short = fct_recode(label_Yeo7_short, 
+                                       "Default" =  "Default",
+                                       "Frontoparietal" =  "Cont",
+                                       "Limbic" =  "Limbic",
+                                       "Ventral attention" =  "SalVentAttn",
+                                       "Dorsal attention" =  "DorsAttn",
+                                       "Somatomotor" =  "SomMot",
+                                       "Visual" =  "Vis"))
 
+                                                                                                                              
 # FUNCTIONAL GRADIENTS####
 # bind dataframe to be able to fit a measurement error model later
 FC_gradients = rbind(FC_g1_i_d1, FC_g1_i_d2)
@@ -120,20 +135,14 @@ SF2C = mem_parm %>%
   ))
 
 SF2C_annot = merge(SF2C, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_short), by = "Parcel")%>% 
-  mutate(across(where(is.numeric), round, 3)) %>% 
+  mutate(across(where(is.numeric), round, 5)) %>% 
   select(-c(lhs,op,rhs, pvalue,z))
 
 # SF2c: parameters in mem
 write_csv(SF2C_annot, sprintf("%s/SI/SFILE1.csv",wd_oa))
 
 # merge with annotation to stratify across cortical networks
-est_mem_annot = merge(est_mem, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                                                                                   "Limbic", 
-                                                                                                                                   "Cont",
-                                                                                                                                   "SalVentAttn",
-                                                                                                                                   "DorsAttn",
-                                                                                                                                   "SomMot",
-                                                                                                                                   "Vis"))))
+est_mem_annot = merge(est_mem, annotations, by = "Parcel")
 
 # FIGURE 2D ####
 box_plot_intra = est_mem_annot %>% 
@@ -148,10 +157,10 @@ box_plot_intra = est_mem_annot %>%
                                         '#7A9ABD',
                                         '#3d8043',
                                         '#b584cf',
-                                        '#e8a633',
                                         '#F4FEC8',
+                                        '#e8a633',
                                         '#D8707A'))+
-                                          theme(axis.text.x = element_text(angle = 90),legend.position = "none")
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),legend.position = "none")
 
 box_plot_inter = est_mem_annot %>% 
   ggplot(aes(label_Yeo7_short, ICC2k, fill = label_Yeo7_short))+
@@ -165,10 +174,10 @@ box_plot_inter = est_mem_annot %>%
                                         '#7A9ABD',
                                         '#3d8043',
                                         '#b584cf',
-                                        '#e8a633',
                                         '#F4FEC8',
+                                        '#e8a633',
                                         '#D8707A'))+
-  theme(axis.text.x = element_text(angle = 90),legend.position = "none")
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),legend.position = "none")
 
 ## save FIG. 2D####
 pdf(sprintf("%s/Figures/06_Fig_2D.pdf",wd_oa), 

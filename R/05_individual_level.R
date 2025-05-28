@@ -98,8 +98,8 @@ SFs_i = SFs_i_list %>% reduce(full_join, by=c("Sub",'Parcel'))
 SFs_i_final_list = list(SFs_i, annotations)
 SFs_i_final = SFs_i_final_list %>% reduce(full_join, by=c('Parcel'))%>% 
   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                    "Limbic", 
                                                                     "Cont",
+                                                                    "Limbic", 
                                                                     "SalVentAttn",
                                                                     "DorsAttn",
                                                                     "SomMot",
@@ -112,8 +112,8 @@ SFs_list = list(FC_g1, annotations)
 SFs = SFs_list %>% 
   reduce(full_join, by='Parcel') %>% 
   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                    "Limbic", 
                                                                     "Cont",
+                                                                    "Limbic", 
                                                                     "SalVentAttn",
                                                                     "DorsAttn",
                                                                     "SomMot",
@@ -125,8 +125,8 @@ var_FCG1_p = SFs_i_final %>%
                                         '#7A9ABD',
                                         '#3d8043',
                                         '#b584cf',
-                                        '#e8a633',
                                         '#F4FEC8',
+                                        '#e8a633',
                                         '#D8707A'))+
                                           geom_point(aes(fill = label_Yeo7_short),color = "white",pch = 21) +
   geom_point(data= SFs %>%  rename(G1 = FC_G1), aes(Parcel, scale(G1),fill = label_Yeo7_short),color = "black",pch = 21) +
