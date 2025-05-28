@@ -62,7 +62,22 @@ for(i in 1:400){
 
 # network_7_yeo = c(network_7_yeo, rep("Other", 19))
 annotations$label_Yeo7_short = network_7_yeo[,1]
-annotations = annotations %>% rename(Parcel = parcel_Yeo)
+annotations = annotations %>% rename(Parcel = parcel_Yeo) %>%   
+  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default",    
+                                                                    "Cont",
+                                                                    "Limbic", 
+                                                                    "SalVentAttn",
+                                                                    "DorsAttn",
+                                                                    "SomMot",
+                                                                    "Vis")))) %>%   
+  mutate(label_Yeo7_short = fct_recode(label_Yeo7_short, 
+                                       "Default" =  "Default",
+                                       "Frontoparietal" =  "Cont",
+                                       "Limbic" =  "Limbic",
+                                       "Ventral attention" =  "SalVentAttn",
+                                       "Dorsal attention" =  "DorsAttn",
+                                       "Somatomotor" =  "SomMot",
+                                       "Visual" =  "Vis"))
 
 # load demographics
 HCP  = read_csv(sprintf("%s/unrestricted_giaco_6_25_2021_3_50_21.csv",wd_noa_data))
@@ -103,14 +118,7 @@ SFs_i_list = list(MPmi_i, GD_i,FC_gradients)
 # merge all data frames in list
 SFs_i = SFs_i_list %>% reduce(full_join, by=c("Sub",'Parcel'))
 SFs_i_final_list = list(SFs_i, annotations)
-SFs_i_final = SFs_i_final_list %>% reduce(full_join, by=c('Parcel'))%>% 
-  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                    "Limbic", 
-                                                                    "Cont",
-                                                                    "SalVentAttn",
-                                                                    "DorsAttn",
-                                                                    "SomMot",
-                                                                    "Vis"))))
+SFs_i_final = SFs_i_final_list %>% reduce(full_join, by=c('Parcel'))
 
 SFs = merge(SFs_i_final, HCP_all %>% rename(Sub = Subject), by = ("Sub"), all = T)
 
@@ -171,7 +179,7 @@ SF3A = est_smem %>%
   ))
 
 SF3A_annot = merge(SF3A, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_short), by = "Parcel")%>% 
-  mutate(across(where(is.numeric), round, 3)) %>% 
+  mutate(across(where(is.numeric), round, 5)) %>% 
   select(-c(lhs,op,rhs,))
 
 
@@ -181,13 +189,7 @@ write_csv(SF3A_annot, sprintf("%s/SI/SFILE2.csv",wd_oa))
 
 # merge with annotation to stratify across cortical networks
 est_smem_annot = merge(est_smem %>%  filter(grepl("rP",label)) %>%  group_by(Parcel) %>% 
-                         distinct(label, .keep_all = T) %>% ungroup() %>%  select(label, est.std ,pvalue, ci.lower, ci.upper, Parcel) , annotations, by = "Parcel") %>% mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                                                                                           "Limbic", 
-                                                                                                                                           "Cont",
-                                                                                                                                           "SalVentAttn",
-                                                                                                                                           "DorsAttn",
-                                                                                                                                           "SomMot",
-                                                                                                                                           "Vis"))))
+                         distinct(label, .keep_all = T) %>% ungroup() %>%  select(label, est.std ,pvalue, ci.lower, ci.upper, Parcel) , annotations, by = "Parcel")
 
 
 
@@ -225,12 +227,12 @@ est_smem_annot %>%
   summarise(mean_r = psych::fisherz2r(mean(psych::fisherz(est.std))))
 
 # one sample t
-t_vis = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Vis" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_som = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "SomMot" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_dor = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "DorsAttn" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_sal = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "SalVentAttn" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
+t_vis = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Visual" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
+t_som = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Somatomotor" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
+t_dor = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Dorsal attention" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
+t_sal = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Ventral attention" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
 t_lim = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Limbic" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_con = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Cont" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
+t_con = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Frontoparietal" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
 t_dmn = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Default" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
 
 # conservative approach (adjust for Bonferroni)
@@ -370,15 +372,7 @@ SFs_averaged_i_list = list(MPmi_i, GD_i,FC_g1_i)
 # merge all data frames in list
 SFs_averaged_i = SFs_averaged_i_list %>% reduce(full_join, by=c("Sub",'Parcel'))
 SFs_averaged_i_final_list = list(SFs_averaged_i, annotations)
-SFs_averaged_i_final = SFs_averaged_i_final_list %>% reduce(full_join, by=c('Parcel'))%>% 
-  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                    "Limbic", 
-                                                                    "Cont",
-                                                                    "SalVentAttn",
-                                                                    "DorsAttn",
-                                                                    "SomMot",
-                                                                    "Vis"))))
-
+SFs_averaged_i_final = SFs_averaged_i_final_list %>% reduce(full_join, by=c('Parcel'))
 # CORRELATIONS####
 # rename
 SFs_averaged_i_final = SFs_averaged_i_final %>% 
@@ -430,13 +424,7 @@ for(i in parcel_list$Parcel){
 }
 
 # merge with annotation to stratify across cortical networks
-est_r_annot = merge(est_r, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                                                                                     "Limbic", 
-                                                                                                                                     "Cont",
-                                                                                                                                     "SalVentAttn",
-                                                                                                                                     "DorsAttn",
-                                                                                                                                     "SomMot",
-                                                                                                                                     "Vis"))))
+est_r_annot = merge(est_r, annotations, by = "Parcel")
 
 # correct for multiple comparisions
 # NOTE P1P2 = inter FCg1 <-> t1t2w
@@ -450,13 +438,7 @@ write_csv(est_smem, sprintf("%s/07_SMEM_output.csv",wd_noa_output))
 
 # plot overall improvement
 est = merge(est_smem %>% rename(est_smem = est.std), est_r %>% rename(est_r = est), by = c("Parcel","label"))
-est_annot = merge(est, annotations, by = "Parcel") %>%   mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default", 
-                                                                                                                               "Limbic", 
-                                                                                                                               "Cont",
-                                                                                                                               "SalVentAttn",
-                                                                                                                               "DorsAttn",
-                                                                                                                               "SomMot",
-                                                                                                                               "Vis"))))
+est_annot = merge(est, annotations, by = "Parcel")
 
 ## SFIG. S1####
 scatter_plot = est_annot %>% 
@@ -469,14 +451,14 @@ scatter_plot = est_annot %>%
                                          '#7A9ABD',
                                          '#3d8043',
                                          '#b584cf',
-                                         '#e8a633',
                                          '#F4FEC8',
+                                         '#e8a633',
                                          '#D8707A'))+
   xlim(-1,1)+
   ylim(-1,1)+
   labs(x = expression(italic(r)[gd-g1]))+
-  labs(y =  expression(paste("corrected ",italic(r)[gd-g1])))+
-  labs(fill = "Yeo-Krienen\n 7 networks")+
+  labs(y =  expression(paste("deattenuated ",italic(r)[gd-g1])))+
+  labs(fill = "Yeo-Krienen 7")+
   theme_classic(base_size = 14)
 
 
