@@ -58,16 +58,22 @@ for(i in 1:400){
 
 # network_7_yeo = c(network_7_yeo, rep("Other", 19))
 annotations$label_Yeo7_short = network_7_yeo[,1]
-annotations = annotations %>% rename(Parcel = parcel_Yeo)
-
-# factor levels
-annotations$label_Yeo7_short = factor(annotations$label_Yeo7_short, levels = rev(c("Default", 
-                                                                    "Limbic", 
+annotations = annotations %>% rename(Parcel = parcel_Yeo) %>%   
+  mutate(label_Yeo7_short = factor(label_Yeo7_short, levels = rev(c("Default",    
                                                                     "Cont",
+                                                                    "Limbic", 
                                                                     "SalVentAttn",
                                                                     "DorsAttn",
                                                                     "SomMot",
-                                                                    "Vis")))
+                                                                    "Vis")))) %>%   
+  mutate(label_Yeo7_short = fct_recode(label_Yeo7_short, 
+                                       "Default" =  "Default",
+                                       "Frontoparietal" =  "Cont",
+                                       "Limbic" =  "Limbic",
+                                       "Ventral attention" =  "SalVentAttn",
+                                       "Dorsal attention" =  "DorsAttn",
+                                       "Somatomotor" =  "SomMot",
+                                       "Visual" =  "Vis"))
 
 # inclusion index 
 Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
@@ -291,20 +297,17 @@ mi_h2 = cfm_cpmem_AE_sumy %>%
   #geom_hline(yintercept = mean(cpmem_AE_fltr_annot$est), linetype = "dashed")+
   ylim(0,1) +
   labs(y = expression(paste(italic(h)[twin]^2)),
-       x = "Yeo-Krienen 7 networks")+
-  ggtitle("Microstructural\nintensity")+
-  theme_classic(base_size = 14)+
+       x = "Yeo-Krienen 7 networks",
+       subtitle = "")+
+  theme_classic(base_size = 10)+
   scale_fill_manual(values = c('#9F53AA',
                                '#7A9ABD',
                                '#3d8043',
                                '#b584cf',
-                               '#e8a633',
                                '#F4FEC8',
+                               '#e8a633',
                                '#D8707A'))+
-  theme(
-        legend.position = "none",
-        axis.title.x = element_blank(),
-        axis.text.x = element_blank())
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),legend.position = "none")
 
 #plot h2 - geodesic distance
 gd_h2 = cfm_cpmem_AE_sumy %>% 
@@ -315,24 +318,17 @@ gd_h2 = cfm_cpmem_AE_sumy %>%
   #geom_hline(yintercept = mean(cpmem_AE_fltr_annot$est), linetype = "dashed")+
   ylim(0,1) +
   labs(y = expression(paste(italic(h)[twin]^2)),
-       x = "Yeo-Krienen 7 networks")+
-  ggtitle("Geodesic\ndistances")+
-  theme_classic(base_size = 14)+
+       x = "Yeo-Krienen 7 networks",
+       subtitle = "")+
+  theme_classic(base_size = 10)+
   scale_fill_manual(values = c('#9F53AA',
                                '#7A9ABD',
                                '#3d8043',
                                '#b584cf',
-                               '#e8a633',
                                '#F4FEC8',
+                               '#e8a633',
                                '#D8707A'))+
-  theme(axis.text.x = element_text(angle = 90),legend.position = "none")
-
-# Figure 5 A-D ####
-pdf(sprintf("%s/Figures/09_Fig_5AD.pdf",wd_oa),
-    width = 3,
-    height = 6 )
-mi_h2/gd_h2
-dev.off()
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),legend.position = "none")
 
 # correlations
 cfm_cpmem_AE_sumy_short =  cfm_cpmem_AE_sumy %>%                                 
@@ -556,7 +552,7 @@ cort_rA = est_AE_annot %>%
          cor = label) %>% 
   mutate(est = ifelse(p_adjust<.05,est,NA)) %>% 
   ggplot() +
-  facet_grid(rows = vars(cor)) +
+  facet_grid(col = vars(cor)) +
   geom_brain(atlas = schaefer7_400, 
              position = position_brain(hemi ~ side), #to stack them
              aes(fill = est),
@@ -564,8 +560,11 @@ cort_rA = est_AE_annot %>%
              size = .5) +
   scale_fill_distiller(palette = "Reds", direction  = 1)+
   labs(fill = expression(italic(r)[A]))+
-  theme_void(base_size = 14)+
-  theme(strip.text = element_blank())
+  theme_classic(base_size = 10)+
+  theme(axis.text  = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        strip.background = element_blank())
 
 cort_rE = est_AE_annot %>%
   filter((grepl("rE",label))) %>% 
@@ -581,7 +580,7 @@ cort_rE = est_AE_annot %>%
          cor = label) %>% 
   mutate(est = ifelse(p_adjust<.05,est,NA)) %>% 
   ggplot() +
-  facet_grid(rows = vars(cor)) +
+  facet_grid(col = vars(cor)) +
   geom_brain(atlas = schaefer7_400, 
              position = position_brain(hemi ~ side), #to stack them
              aes(fill = est),
@@ -589,12 +588,16 @@ cort_rE = est_AE_annot %>%
              size = .5) +
   scale_fill_distiller(palette = "Blues", direction  = 1)+
   labs(fill = expression(italic(r)[E]))+
-  theme_void(base_size = 14) +
-  theme(strip.text = element_blank())
+  theme_classic(base_size = 10) +
+  theme(axis.text  = element_blank(),
+        axis.line  = element_blank(),
+        axis.ticks = element_blank(),
+        strip.background = element_blank())
+  
 
-# Figure 5 B-C-E-F ####
-pdf(sprintf("%s/Figures/09_Fig_5BCEF.pdf",wd_oa),
-    width = 6,
-    height = 6 )
-(cort_rA|cort_rE) + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+# Figure 5####
+pdf(sprintf("%s/Figures/09_Fig_5.pdf",wd_oa),
+    width=9, 
+    height=5)
+(((mi_h2/gd_h2) + plot_layout(axes = "collect"))|(cort_rA/cort_rE) + plot_layout(axes = "collect")) +plot_layout(widths = c(1,2.5), heights = c(1,1)) + plot_annotation(tag_levels = "A")
 dev.off()
