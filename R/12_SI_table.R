@@ -1,5 +1,5 @@
 #Author: Giacomo Bignardi
-# adapted from https://github.com/giacomobignardi/h2_BMRQ/blob/main/R/04_r1_MRS_facets_correlations.R 
+# adapted from https://github.com/giacomobignardi/model-etfd-iamdate/blob/main/SI/06_table5_est.csv
 # prepare supplementary file
 library(openxlsx)
 library(tidyverse)
