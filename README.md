@@ -9,7 +9,7 @@ Previous preprints can be found [here](https://www.biorxiv.org/content/10.1101/2
 ## Repository
 
 The following directories contain:
-- Python: **includes scripts for the analysis**
+- Python: **includes scripts for the analysis and the python setup for running the gradient script from RStudio (`Python/SETUP.md`)**
 - R: **includes scripts for the analysis**
   - functions
     - meermo: **measurement error modeling**
