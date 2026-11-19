@@ -99,10 +99,9 @@ for (i in 1:(length(FC_name_index_d2))){
 
 # compute the template mean
 FC_m_d2_f = data.frame(FC_m_d2/(length(FC_name_index_d2)-isna))
-wdOA_output = "03_outputs/processedData"
 
 # SAVE####
-# save FC averages
-write_csv(FC_m_f,sprintf("%s/%s/02_FC_m.csv",wdNOA,wdNOA_output))
-write_csv(FC_m_d1_f,sprintf("%s/%s/02_FC_m_t1.csv",wdNOA,wdNOA_output))
-write_csv(FC_m_d2_f,sprintf("%s/%s/02_FC_m_t2.csv",wdNOA,wdNOA_output))
+# SAVE####
+write_csv(FC_m_f,    sprintf("%s/02_FC_m.csv",    wd_noa_output))
+write_csv(FC_m_d1_f, sprintf("%s/02_FC_m_t1.csv", wd_noa_output))
+write_csv(FC_m_d2_f, sprintf("%s/02_FC_m_t2.csv", wd_noa_output))
