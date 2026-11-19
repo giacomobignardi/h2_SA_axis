@@ -1,4 +1,11 @@
-.Rproj.user
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# R / RStudio
+.Rproj.user/
 .Rhistory
 .RData
 .Ruserdata
