@@ -1,14 +1,14 @@
 #Author: Giacomo Bignardi
 #Program: Similarity indicies------------------------------------------------------------------------------------------------------------------------------
 #clean working environment 
-rm(list = ls())
 library(tidyverse)
 library(reshape2)
 library(lavaan)
 
 # clear workspace
 rm(list = ls())
-
+g1_tag = "_ordermatched"   # "" = Procrustes-aligned (main); "_signmatched" / "_ordermatched" = supplement (R2.2)
+run_profile_ci = FALSE   # set TRUE to compute profile-likelihood CIs (slow)
 
 # set Open Access working directories
 wd_oa = getwd()
@@ -77,8 +77,8 @@ SFs_group = SFs_list %>%
   reduce(full_join, by='Parcel')
 
 # Functional gradient
-FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
-FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
+FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1%s.csv",wd_noa_output, g1_tag))
+FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2%s.csv",wd_noa_output, g1_tag))
 
 # inclusion indexes
 notTwin_sub =  read_csv(sprintf("%s/00_nottwin_ids.csv",wd_noa_output))
@@ -292,7 +292,8 @@ cfm_cpmem_AE_fit_res = sem(cfm_cpmem_AE_model,
                            data = SFB_i_final_res,
                            group = "zyg",
                            group.label= c(1,2),
-                           std.ov = T)
+                           std.ov = T,
+                           missing = "ML")
 
 # extract summary statistics
 cfm_cpmem_AE_sumy_res = summary(cfm_cpmem_AE_fit_res, ci = T, fit.measures = T)
@@ -319,3 +320,16 @@ stand_AE_res %>% filter(grepl("=~",op) & grepl("E",lhs) ) %>% distinct(lhs,.keep
 # mem
 stand_AE_res %>% filter(grepl("f1",label))
 stand_AE_res %>% filter(grepl("intra",label))
+
+# REVISION: profile-likelihood CIs for the global genetic correlations (R2.5) -- main gradients only ####
+if (g1_tag == "" && run_profile_ci) {
+  source(sprintf("%s/R/functions/lavaantwda/profile_ci.R", wd_oa))
+  ci_si = bind_rows(
+    profile_ci(cfm_cpmem_AE_model, SFB_i_final, "covA_P13", "varA_P1", "varA_P3", "rA_P13"),
+    profile_ci(cfm_cpmem_AE_model, SFB_i_final, "covA_P12", "varA_P1", "varA_P2", "rA_P12"))
+  write_csv(ci_si, sprintf("%s/11.2_SI_profile_ci.csv", wd_noa_output))
+  print(ci_si)
+}
+
+SF_ind_i_final %>% filter(!is.na(Parcel)) %>% group_by(Sub) %>%
+  summarise(ordered = n() == 400 && all(Parcel == 1:400)) %>% count(ordered)
