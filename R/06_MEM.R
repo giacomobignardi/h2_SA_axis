@@ -7,6 +7,8 @@ library(tidyverse)
 library(reshape2)
 library(patchwork)
 library(lavaan)
+library(ggseg)
+library(ggsegSchaefer)
 
 # clear workspace
 rm(list = ls())
@@ -218,65 +220,24 @@ sub1 = sample(FC_gradients$Sub,1)
 sub2 = sample(FC_gradients$Sub,1)
 
 #FIGURE 2C####
-FC_gradients_ann <- merge(FC_gradients,annotations, "Parcel")
-G1_s1_d1 <- FC_gradients_ann %>%
-  filter(Sub == sub1) %>%
-  rename(region = label_Yeo_7) %>% 
+FC_gradients_ann <- merge(FC_gradients, annotations, "Parcel")
+plot_g1_lateral = function(sub, day_col) {
   ggplot() +
-  geom_brain(atlas = schaefer7_400, 
-             side= "lateral",
-             hemi = "left",
-             aes(fill = P1_r1),
-             color = "#414a4c",
-             size = .5,
-             show.legend = FALSE) +
-  scale_fill_viridis_c()+
-  theme_void()
-
-G1_s1_d2 <- FC_gradients_ann %>%
-  filter(Sub == sub1) %>%
-  rename(region = label_Yeo_7) %>% 
-  ggplot() +
-  geom_brain(atlas = schaefer7_400, 
-             side= "lateral",
-             hemi = "left",
-             aes(fill = P1_r2),
-             color = "#414a4c",
-             size = .5,
-             show.legend = FALSE) +
-  scale_fill_viridis_c()+
-  theme_void()+
-  theme(legend.title.position = "none")
-
-G1_s2_d1 <- FC_gradients_ann %>%
-  filter(Sub == sub2) %>%
-  rename(region = label_Yeo_7) %>% 
-  ggplot() +
-  geom_brain(atlas = schaefer7_400, 
-             side= "lateral",
-             hemi = "left",
-             aes(fill = P1_r1),
-             color = "#414a4c",
-             size = .5,
-             show.legend = FALSE) +
-  scale_fill_viridis_c()+
-  theme_void()+
-  theme(legend.title.position = "none")
-
-G1_s2_d2 <- FC_gradients_ann %>%
-  filter(Sub == sub2) %>%
-  rename(region = label_Yeo_7) %>% 
-  ggplot() +
-  geom_brain(atlas = schaefer7_400, 
-             side= "lateral",
-             hemi = "left",
-             aes(fill = P1_r2),
-             color = "#414a4c",
-             size = .5,
-             show.legend = FALSE) +
-  scale_fill_viridis_c()+
-  theme_void()+
-  theme(legend.title.position = "none")
+    geom_brain(atlas = schaefer7_400(),
+               data = FC_gradients_ann %>% filter(Sub == sub) %>% rename(region = label_Yeo_7),
+               mapping = aes(fill = .data[[day_col]]),
+               view = "lateral",
+               hemi = "left",
+               color = "#414a4c",
+               linewidth = .5,
+               show.legend = FALSE) +
+    scale_fill_viridis_c() +
+    theme_void()
+}
+G1_s1_d1 = plot_g1_lateral(sub1, "P1_r1")
+G1_s1_d2 = plot_g1_lateral(sub1, "P1_r2")
+G1_s2_d1 = plot_g1_lateral(sub2, "P1_r1")
+G1_s2_d2 = plot_g1_lateral(sub2, "P1_r2")
 
 ## save FIGURE 2C####
 pdf(sprintf("%s/Figures/06_Fig_2C.pdf",wd_oa),

@@ -7,7 +7,6 @@ library(tidyverse)
 library(reshape2)
 library(patchwork)
 library(ggseg)
-library(ggseg3d)
 library(ggsegSchaefer)
 library(ggridges)
 library(lavaan)
@@ -180,25 +179,22 @@ SF3A = est_smem %>%
 
 SF3A_annot = merge(SF3A, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_short), by = "Parcel")%>% 
   mutate(across(where(is.numeric), round, 5)) %>% 
-  select(-c(lhs,op,rhs,))
+  select(-c(lhs, op, rhs))
 
-
-# SF2b: parameters in mem
+# SF2: parameters in the structural measurement error model
 write_csv(SF3A_annot, sprintf("%s/SI/SFILE2.csv",wd_oa))
-
 
 # merge with annotation to stratify across cortical networks
 est_smem_annot = merge(est_smem %>%  filter(grepl("rP",label)) %>%  group_by(Parcel) %>% 
                          distinct(label, .keep_all = T) %>% ungroup() %>%  select(label, est.std ,pvalue, ci.lower, ci.upper, Parcel) , annotations, by = "Parcel")
 
-
-
-# correct for multiple comparisions
+# correct for multiple comparisons (Bonferroni: main text; BH-FDR, more lenient: supplement)
 # NOTE P1P2 = inter FCg1 <-> t1t2w
 # NOTE P1P3 = inter FCg1 <-> GD
 est_smem_annot = est_smem_annot %>% 
   group_by(label) %>% 
-  mutate(p_adjust = p.adjust(pvalue, method ="bonferroni"))
+  mutate(p_adjust = p.adjust(pvalue, method = "bonferroni"),
+         p_fdr    = p.adjust(pvalue, method = "BH"))
 
 # display total significant parcels
 n_negative_sig_t1wt2w = est_smem_annot %>% 
@@ -217,143 +213,54 @@ est_smem_annot %>%
 names(est_smem_annot)
 
 # percentage of significant parcels
-((n_negative_sig_t1wt2w) / 400)*100 #1.75
-((n_positive_sig + n_negative_sig) / 400)*100 #56.75
+((n_negative_sig_t1wt2w) / 400)*100 #2.25
+((n_positive_sig + n_negative_sig) / 400)*100 #57.5
 
-# clustering of results based on functional network
-est_smem_annot %>% 
-  filter(label == "rP1P3" & p_adjust<.05) %>% 
-  group_by(label_Yeo7_short) %>% 
-  summarise(mean_r = psych::fisherz2r(mean(psych::fisherz(est.std))))
+# counts per correction (Bonferroni: main text; FDR and uncorrected: supplement)
+est_smem_annot %>% group_by(label) %>%
+  summarise(n_bonf = sum(p_adjust < .05), n_fdr = sum(p_fdr < .05), n_uncorr = sum(pvalue < .05),
+            n_bonf_pos = sum(p_adjust < .05 & est.std > 0), n_bonf_neg = sum(p_adjust < .05 & est.std < 0),
+            median_r = median(est.std), median_abs_r = median(abs(est.std)))
 
-# one sample t
-t_vis = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Visual" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_som = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Somatomotor" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_dor = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Dorsal attention" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_sal = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Ventral attention" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_lim = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Limbic" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_con = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Frontoparietal" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-t_dmn = t.test(psych::fisherz(est_smem_annot %>% filter(label_Yeo7_short == "Default" & label == "rP1P3" & p_adjust<.05) %>% pull(est.std)))
-
-# conservative approach (adjust for Bonferroni)
-p_t = p.adjust(c(t_vis$p.value, t_som$p.value, t_dor$p.value, t_sal$p.value, t_lim$p.value, t_con$p.value, t_dmn$p.value), method = "bonferroni")
-p_t <.05
-t_vis; t_som; t_sal; t_dmn
+# network clustering of GD-G1 associations: test ALL parcels within each network
+net_t = est_smem_annot %>% ungroup() %>% filter(label == "rP1P3") %>%
+  group_by(label_Yeo7_short) %>%
+  summarise(n      = n(),
+            mean_r = psych::fisherz2r(mean(psych::fisherz(est.std))),
+            t      = unname(t.test(psych::fisherz(est.std))$statistic),
+            df     = unname(t.test(psych::fisherz(est.std))$parameter),
+            p      = t.test(psych::fisherz(est.std))$p.value, .groups = "drop") %>%
+  mutate(p_bonf = p.adjust(p, "bonferroni"))
+net_t
 
 # plot associations on the cortex
-## Figure 2F###
-# template surface 
-associations2cortex = est_smem_annot %>% 
-  filter(label == "rP1P3" & p_adjust<.05) %>% 
-  ungroup() %>% 
-  select(Parcel, label_Yeo_7, est.std)
-
-# range of parcel-wise estimates
-min(associations2cortex$est.std, na.rm = T)
-max(associations2cortex$est.std, na.rm = T)
-
-# adapt to plot
-schaefer7_association_GD = schaefer7_400_3d %>% #
-  filter(hemi == "left")%>%
-  mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
-                          full_join(associations2cortex%>%
-                                      filter(Parcel < 201) %>% #left hemisphere
-                                      rename(region = label_Yeo_7) %>% 
-                                      select(region,est.std),
-                                    by = "region")))
-
-# plot parcelations using ggseg3d
-association_GD_left_medial = 
-  ggseg3d(
-    atlas = schaefer7_association_GD,
-    colour = "est.std", text = "est.std",
-    palette =  c( "#4d48a0"= min(associations2cortex$est.std, na.rm = T), "white"  = 0, "#a65a53" =max(associations2cortex$est.std, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left medial")
-
-association_GD_left_lateral = 
-  ggseg3d(
-    atlas = schaefer7_association_GD,
-    colour = "est.std", text = "est.std",
-    palette =  c( "#4d48a0"= min(associations2cortex$est.std, na.rm = T), "white"  = 0, "#a65a53" =max(associations2cortex$est.std, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left lateral")
-
-
-# associaiton with microstructure
-associations2cortex_mi = est_smem_annot %>% 
-  filter(label == "rP1P2" & p_adjust<.05) %>% 
-  ungroup() %>% 
-  select(Parcel, label_Yeo_7, est.std)
-
-# range of parcel-wise estimates
-min(associations2cortex_mi$est.std, na.rm = T)
-max(associations2cortex_mi$est.std, na.rm = T)
-
-# adapt to plot
-schaefer7_association_mi = schaefer7_400_3d %>% #
-  filter(hemi == "left")%>%
-  mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
-                          full_join(associations2cortex_mi%>%
-                                      filter(Parcel < 201) %>% #left hemisphere
-                                      rename(region = label_Yeo_7) %>% 
-                                      select(region,est.std),
-                                    by = "region")))
-
-# plot parcelations using ggseg3d
-association_mi_left_medial = 
-  ggseg3d(
-    atlas = schaefer7_association_mi,
-    colour = "est.std", text = "est.std",
-    palette =  c( "#4d48a0"= min(associations2cortex_mi$est.std, na.rm = T), "white"  = 0),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left medial")
-
-association_mi_left_lateral = 
-  ggseg3d(
-    atlas = schaefer7_association_mi,
-    colour = "est.std", text = "est.std",
-    palette =  c( "#4d48a0"= min(associations2cortex_mi$est.std, na.rm = T), "white"  = 0),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left lateral")
-
-
-
 # FIGURE 3B (2D)####
-#here we make a simpler 2d figure
-cort_r = est_smem_annot %>%
-  #first we re annotate the correlations names
-  mutate(label = fct_recode( label, 
+cort_r_data = est_smem_annot %>% ungroup() %>%
+  mutate(label = fct_recode(label,
                             "Microstructural intensity" = "rP1P2",
                             "Geodesic distances" = "rP1P3",
-                            "remove"  = "rP2P3")) %>% 
-  filter(label !="remove") %>%
-  rename(region = label_Yeo_7,
-         cor = label) %>% 
-  mutate(est.std = ifelse(p_adjust<.05,est.std,NA)) %>% 
-  ggplot() +
-  facet_grid(~cor) +
-  geom_brain(atlas = schaefer7_400, 
-             position = position_brain(hemi ~ side), #to stack them
-             aes(fill = est.std),
+                            "remove" = "rP2P3")) %>%
+  filter(label != "remove") %>%
+  rename(region = label_Yeo_7, cor = label) %>%
+  mutate(est.std = ifelse(p_adjust < .05, est.std, NA)) %>%
+  select(region, cor, est.std) %>%
+  group_by(cor)
+
+cort_r = ggplot() +
+  geom_brain(atlas = schaefer7_400(),
+             data = cort_r_data,
+             mapping = aes(fill = est.std),
+             position = position_brain(hemi ~ view), #to stack them
              color = "#414a4c",
-             size = .5) +
-  scale_fill_distiller(palette = "RdBu")+
-  labs(fill = expression(italic(r)[p]))+
-  theme_void(base_size = 14)+
+             linewidth = .5) +
+  facet_grid(~cor) +
+  scale_fill_distiller(palette = "RdBu") +
+  labs(fill = expression(italic(r)[p])) +
+  theme_void(base_size = 14) +
   theme(legend.title.position = "top",
         plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.title = element_text(hjust = 0.5))
-
 
 # SUPPLEMENTARY ####
 # estimate correlations without partitioning intra-individual variability out to check for overall improvement
@@ -426,12 +333,15 @@ for(i in parcel_list$Parcel){
 # merge with annotation to stratify across cortical networks
 est_r_annot = merge(est_r, annotations, by = "Parcel")
 
-# correct for multiple comparisions
+# correct for multiple comparisons
 # NOTE P1P2 = inter FCg1 <-> t1t2w
 # NOTE P1P3 = inter FCg1 <-> GD
 est_r_annot = est_r_annot %>% 
   group_by(label) %>% 
-  mutate(p_adjust = p.adjust(pvalue, method ="bonferroni"))
+  mutate(p_adjust = p.adjust(pvalue, method = "bonferroni"))
+
+# symmetric analysis without measurement-error correction (R3.3)
+est_r_annot %>% group_by(label) %>% summarise(n_bonf = sum(p_adjust < .05), median_r = median(est))
 
 ## save####
 write_csv(est_smem, sprintf("%s/07_SMEM_output.csv",wd_noa_output))
