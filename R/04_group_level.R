@@ -7,7 +7,7 @@ library(tidyverse)
 library(reshape2)
 library(patchwork)
 library(ggseg)
-library(ggseg3d)
+# library(ggseg3d) not needed to generate output
 library(ggsegSchaefer)
 library(ggridges)
 
@@ -132,54 +132,54 @@ t1t2w_template_graph = SFs %>%
 min(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T)
 max(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T)
 
-# adapt to plot
-schaefer7_400_t1wt2w = schaefer7_400_3d %>% #
-  filter(hemi == "left")%>%
-  mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
-                          full_join(t1t2w_template_graph%>%
-                                      filter(Parcel < 201) %>% #left hemisphere
-                                      rename(region = label_Yeo_7) %>% 
-                                      select(region,`t1w/t2w_mi`),
-                                    by = "region")))
-# plot parcelations using ggseg3d
-t1wt2w_left_medial = 
-  ggseg3d(
-    atlas = schaefer7_400_t1wt2w,
-    colour = "t1w/t2w_mi", text = "t1w/t2w_mi",
-    palette =  c( "#0D0887FF"= min(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T), "#CC4678FF"  = 0, "#F0F921FF" =max(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left medial")
-t1wt2w_left_lateral = 
-  ggseg3d(
-    atlas = schaefer7_400_t1wt2w,
-    colour = "t1w/t2w_mi", text = "t1w/t2w_mi",
-    palette =  c( "#0D0887FF"= min(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T), "#CC4678FF"  = 0, "#F0F921FF" =max(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left lateral")
+# # adapt to plot
+# schaefer7_400_t1wt2w = schaefer7_400_3d %>% #
+#   filter(hemi == "left")%>%
+#   mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
+#                           full_join(t1t2w_template_graph%>%
+#                                       filter(Parcel < 201) %>% #left hemisphere
+#                                       rename(region = label_Yeo_7) %>% 
+#                                       select(region,`t1w/t2w_mi`),
+#                                     by = "region")))
+# 
+# # plot parcelations using ggseg3d
+# t1wt2w_left_medial = 
+#   ggseg3d(
+#     atlas = schaefer7_400_t1wt2w,
+#     colour = "t1w/t2w_mi", text = "t1w/t2w_mi",
+#     palette =  c( "#0D0887FF"= min(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T), "#CC4678FF"  = 0, "#F0F921FF" =max(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T)),
+#     surface = "inflated",
+#     hemisphere = "left")%>% 
+#   remove_axes()%>%
+#   pan_camera("left medial")
+# t1wt2w_left_lateral = 
+#   ggseg3d(
+#     atlas = schaefer7_400_t1wt2w,
+#     colour = "t1w/t2w_mi", text = "t1w/t2w_mi",
+#     palette =  c( "#0D0887FF"= min(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T), "#CC4678FF"  = 0, "#F0F921FF" =max(t1t2w_template_graph$`t1w/t2w_mi`, na.rm = T)),
+#     surface = "inflated",
+#     hemisphere = "left")%>% 
+#   remove_axes()%>%
+#   pan_camera("left lateral")
 
 ## A (2D): t1wt2w####
 # This automatise the process and makes making figures easier
-t1wt2w_left = t1t2w_template_graph %>%
-  rename(region = label_Yeo_7) %>% 
-  ggplot() +
-  geom_brain(atlas = schaefer7_400, 
+t1wt2w_left = ggplot() +
+  geom_brain(atlas = schaefer7_400(),
+             data = t1t2w_template_graph %>%
+               rename(region = label_Yeo_7, t1wt2w_mi = `t1w/t2w_mi`) %>%
+               mutate(t1wt2w_mi = as.numeric(t1wt2w_mi)),
+             mapping = aes(fill = t1wt2w_mi),
              hemi = "left",
-             position = position_brain(side  + hemi ~ .), #to stack them
-             aes(fill = `t1w/t2w_mi`),
+             position = position_brain(view + hemi ~ .), #to stack them
              color = "#414a4c",
-             size = .5,
-             hemisphere = "left") +
+             linewidth = .5) +
   scale_fill_viridis_c(option = "plasma")+
   labs(subtitle = expression(zT1w/T2w[mi]),
        fill = "Association-Sensorimotor")+
   theme_void(base_size = 14)+
   theme(legend.position = "bottom",
         legend.title.position = "top",
-        element_text(hjust = 0.5),
         plot.title = element_text(hjust = 0.5),
         plot.subtitle = element_text(hjust = 0.5),
         legend.title = element_text(hjust = 0.5))
@@ -194,48 +194,47 @@ GD_template_graph = SFs %>%
 min(GD_template_graph$GD)
 max(GD_template_graph$GD)
 
-# adapt to plot
-schaefer7_400_GD = schaefer7_400_3d %>% #
-  filter(hemi == "left")%>%
-  mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
-                          full_join(GD_template_graph%>%
-                                      filter(Parcel < 201) %>% 
-                                      rename(region = label_Yeo_7) %>% 
-                                      select(region,GD),
-                                    by = "region")))
-# plot with ggseg3d
-GD_left_medial =
-  ggseg3d(
-    atlas = schaefer7_400_GD,
-    colour = "GD", text = "GD",
-    palette =  c( "#f0c27b"= min(GD_template_graph$GD, na.rm = T), "#9D6B63"  = 0, "#4b1248" =max(GD_template_graph$GD, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>%
-  remove_axes()%>%
-  pan_camera("left medial")
-GD_left_lateral =
-  ggseg3d(
-    atlas = schaefer7_400_GD,
-    colour = "GD", text = "GD",
-    palette =  c( "#f0c27b"= min(GD_template_graph$GD, na.rm = T), "#9D6B63"  = 0, "#4b1248" =max(GD_template_graph$GD, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>%
-  remove_axes()%>%
-  pan_camera("left lateral")
+# # adapt to plot
+# schaefer7_400_GD = schaefer7_400_3d %>% #
+#   filter(hemi == "left")%>%
+#   mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
+#                           full_join(GD_template_graph%>%
+#                                       filter(Parcel < 201) %>% 
+#                                       rename(region = label_Yeo_7) %>% 
+#                                       select(region,GD),
+#                                     by = "region")))
+# # plot with ggseg3d
+# GD_left_medial =
+#   ggseg3d(
+#     atlas = schaefer7_400_GD,
+#     colour = "GD", text = "GD",
+#     palette =  c( "#f0c27b"= min(GD_template_graph$GD, na.rm = T), "#9D6B63"  = 0, "#4b1248" =max(GD_template_graph$GD, na.rm = T)),
+#     surface = "inflated",
+#     hemisphere = "left")%>%
+#   remove_axes()%>%
+#   pan_camera("left medial")
+# GD_left_lateral =
+#   ggseg3d(
+#     atlas = schaefer7_400_GD,
+#     colour = "GD", text = "GD",
+#     palette =  c( "#f0c27b"= min(GD_template_graph$GD, na.rm = T), "#9D6B63"  = 0, "#4b1248" =max(GD_template_graph$GD, na.rm = T)),
+#     surface = "inflated",
+#     hemisphere = "left")%>%
+#   remove_axes()%>%
+#   pan_camera("left lateral")
 
 ## B (2D): t1wt2w####
 # This automatise the process and makes making figures easier
-
-GD_left = GD_template_graph %>%
-  rename(region = label_Yeo_7) %>% 
-  ggplot() +
-  geom_brain(atlas = schaefer7_400, 
+GD_left = ggplot() +
+  geom_brain(atlas = schaefer7_400(),
+             data = GD_template_graph %>%
+               rename(region = label_Yeo_7) %>%
+               mutate(GD = as.numeric(GD)),
+             mapping = aes(fill = GD),
              hemi = "left",
-             position = position_brain(side  + hemi ~ .), #to stack them
-             aes(fill = GD),
+             position = position_brain(view + hemi ~ .),
              color = "#414a4c",
-             size = .5,
-             hemisphere = "left") +
+             linewidth = .5) +
   scico::scale_fill_scico(palette = "bilbao", direction = -1)+
   labs(#title = "Geodesic distances",
        subtitle = "zGD",
@@ -255,16 +254,16 @@ G1_template_graph = SFs %>%
   select(Parcel, label_Yeo_7, G1)
 
 
-G1_left = G1_template_graph %>%
-  rename(region = label_Yeo_7) %>% 
-  ggplot() +
-  geom_brain(atlas = schaefer7_400, 
+G1_left = ggplot() +
+  geom_brain(atlas = schaefer7_400(),
+             data = G1_template_graph %>%
+               rename(region = label_Yeo_7) %>%
+               mutate(G1 = as.numeric(G1)),
+             mapping = aes(fill = G1),
              hemi = "left",
-             position = position_brain(side  + hemi ~ .), #to stack them
-             aes(fill = G1),
+             position = position_brain(view + hemi ~ .),
              color = "#414a4c",
-             size = .5,
-             hemisphere = "left") +
+             linewidth = .5) +
   scale_fill_viridis_c()+
   labs(#title = "Functional gradient",
        subtitle = expression(zFC[G1]),
@@ -287,7 +286,15 @@ dev.off()
 pdf(sprintf("%s/Figures/04_legend1.pdf",wd_oa),
     width = 4,
     height = 4 )
-plot(schaefer7_400, color = "gray",hemi = "left",position = position_brain(side  + hemi ~ .), size = .5,) + 
+ggplot() +
+  geom_brain(atlas = schaefer7_400(),
+             mapping = aes(fill = label),
+             hemi = "left",
+             position = position_brain(view + hemi ~ .),
+             colour = "gray",
+             linewidth = .5,
+             show.legend = FALSE) +
+  scale_fill_manual(values = schaefer7_400()$palette, na.value = "grey") +
   theme_void() +
   theme(legend.position = "none", plot.title = element_blank())
 dev.off()
