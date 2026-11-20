@@ -1,163 +1,88 @@
-#Author: Giacomo Bignardi
-#Partially adapted from: Tutorial from Brainspace https://brainspace.readthedocs.io/en/latest/pages/getting_started.html
-#Description: Reduce FCs computed on the tSchaefer 400 parcelation to the first 10 eigenvectors  
-#Program: compute individual gradients ------------------------------------------------------------------------------------------------------------------------------
-#load pyhton venv 
-reticulate::py_config()
-
-# import relevant packages
-import pandas as pd
-import numpy as np
+# Author: Giacomo Bignardi
+# Partially adapted from the BrainSpace tutorial (https://brainspace.readthedocs.io)
+# Description: decompose individual functional connectomes (Schaefer 400) into 10 gradients by
+#              diffusion map embedding and align them to the group-level template by Procrustes rotation.
+# Revision:
+#   - template computed from the cortical 400 x 400 block of the group-average connectome,
+#     as the individual matrices (previously 400 cortical rows x all 419 columns);
+#   - standard BrainSpace instead of a locally modified copy;
+#   - template sign fixed by convention (G1: default mode > somatomotor; G2: visual > somatomotor);
+#   - additionally writes sign-matched, unrotated G1 (sensitivity analysis) and per-subject
+#     alignment diagnostics.
+# To run reticulate::source_python("Python/03_FC_G.py")
+import os
 import glob
-from brainspace_modified.gradient import GradientMaps
+import numpy as np
+import pandas as pd
+from brainspace.gradient import GradientMaps
+from brainspace.gradient.alignment import procrustes
 
-# set Open Access working directories
-wdOA_scripts = "/02_scripts"
-wdOA_ImageOutput = "/05_Figures"
+# directories (data and outputs live outside the repository)
+wd_up    = os.path.dirname(os.getcwd())
+wd_out   = os.path.join(wd_up, "11_noa_output")
+wd_noa   = os.path.join(wd_up, "03_rawData", "noa")
+wd_fc    = os.path.join(wd_up, "03_rawData", "private", "rsfMRIavg")
+ids_file = os.path.join(wd_noa, "subj_inclusion.csv")
 
-# set not Open Access working directories
-wdNOA = os.getcwd()
-wdNOA_Data = "/01_input"
-wdNOA_output = "/03_outputs/processedData"
-wdNOA_ImageOutput = "/05_Figures"
-wdNOA_rawData = os.getcwd()[0:(len(os.getcwd())-len("/04_analysis_OA"))] + "/03_rawData/private"
+GM_KW = dict(n_components=10, kernel="normalized_angle", approach="dm", random_state=42)
+N = 400  # cortical parcels
 
-# GROUP LEVEL####
-# load mean template
-FC_mean = pd.read_csv(wdNOA + wdNOA_output + "/02_FC_m.csv")
-FC_gradients = pd.DataFrame()
-# SUP: GRADIENT---------------------------------------
-# calculate percentage of variance
-GtFC = GradientMaps(n_components = 10,kernel ='normalized_angle', approach ='dm',random_state=42)
-GtFC.fit(FC_mean.values[0:400])
-GtFC.lambdas_[0]  / GtFC.lambdas_.sum()
-(GtFC.lambdas_[0] + GtFC.lambdas_[1] + GtFC.lambdas_[2])   / GtFC.lambdas_.sum()
-#---------------------------------------
-# Save Gradient
-pd.DataFrame(GtFC.gradients_).to_csv(wdNOA + wdNOA_output + "/03_FC_m_G.csv",index=False)
+# GROUP LEVEL ####
+fc_mean = pd.read_csv(os.path.join(wd_out, "02_FC_m.csv")).values[:N, :N]
+gm_t = GradientMaps(**GM_KW)
+gm_t.fit(fc_mean)
+T = gm_t.gradients_.copy()
 
-# INDIVIDUAL LEVEL####
-# Pick ids for individual level gradients
-ids = pd.read_csv(wdNOA + wdNOA_Data + "/subjects_for_giaco.csv",header=None)
-# Load subjects IDs for sessions averaged within day
-files_d1 = glob.glob(wdNOA_rawData  + "/rsfMRIavg/day1/*.csv")
-files_d2 = glob.glob(wdNOA_rawData  + "/rsfMRIavg/day2/*.csv")
-files = glob.glob(wdNOA_rawData  + "/rsfMRIavg/day_avg/*.csv")
+# fix the arbitrary sign of the template by convention (Yeo-Krienen 7 labels)
+ann = pd.read_csv(os.path.join(wd_noa, "cortical_types.csv"))
+def parcels(net):
+    return ann.loc[ann["label_Yeo_7"].str.contains(net), "parcel_Yeo"].values.astype(int) - 1
+dmn, som, vis = parcels("_Default_"), parcels("_SomMot_"), parcels("_Vis_")
+if T[dmn, 0].mean() < T[som, 0].mean():
+    T[:, 0] *= -1                                             # G1: default mode positive
+if T[vis, 1].mean() < T[som, 1].mean():
+    T[:, 1] *= -1                                             # G2: visual positive
+print("variance explained, G1:", round(gm_t.lambdas_[0] / gm_t.lambdas_.sum(), 4),
+      "| G1-G3:", round(gm_t.lambdas_[:3].sum() / gm_t.lambdas_.sum(), 4))
+pd.DataFrame(T).to_csv(os.path.join(wd_out, "03_FC_m_G.csv"), index=False)
 
-# create a list of file to be extracted
-sub_name_d1 = [] #day1
-for i in list(range(len(files_d1))):
-  sub_name_d1.append(files_d1[i].rsplit('/', 1)[-1].rsplit('.', 1)[0]) #split directory to the last /; select what last element; split directory to the last.; select the first element; append to an array
-sub_name_d1.sort()
+# INDIVIDUAL LEVEL ####
+ids = set(pd.read_csv(ids_file, header=None)[0].astype(int))
 
-sub_name_d2 = [] #day2
-for i in list(range(len(files_d2))):
-  sub_name_d2.append(files_d2[i].rsplit('/', 1)[-1].rsplit('.', 1)[0]) #split directory to the last /; select what last element; split directory to the last.; select the first element; append to an array
-sub_name_d2.sort()
+def individual(fc):
+    """Gradients of one connectome: aligned to the template, sign-matched G1, diagnostics."""
+    gm = GradientMaps(**GM_KW)
+    gm.fit(fc)
+    U, lam = gm.gradients_, gm.lambdas_
+    A = procrustes(U, T)                                         # rotation onto the fixed template
+    r_raw = np.array([np.corrcoef(U[:, k], T[:, 0])[0, 1] for k in range(U.shape[1])])
+    S = U[:, :1] * np.sign(r_raw[0])                             # first component, sign-matched only
+    diag = dict(expl_g1=lam[0] / lam.sum(),                      # explanatory ratio of G1
+                r_raw_g1=abs(r_raw[0]),                          # raw comp 1 vs template G1
+                best_raw_comp=int(np.argmax(np.abs(r_raw))) + 1, # 1 = raw comp 1 is the S-A gradient
+                r_aligned_g1=np.corrcoef(A[:, 0], T[:, 0])[0, 1],
+                resid=np.linalg.norm(A - T) / np.linalg.norm(T)) # normalised Procrustes residual
+    return A, S, diag
 
-sub_name = [] #average across days
-for i in list(range(len(files))):
-  sub_name.append(files[i].rsplit('/', 1)[-1].rsplit('.', 1)[0]) #split directory to the last /; select what last element; split directory to the last.; select the first element; append to an array
-sub_name.sort()
+def run(day_dir, session, suffix):
+    files = glob.glob(os.path.join(wd_fc, day_dir, "*.csv"))
+    subs = sorted(s for s in (int(os.path.basename(f).rsplit(".", 1)[0]) for f in files) if s in ids)
+    out_a, out_s, out_d = [], [], []
+    for s in subs:
+        fc = pd.read_csv(os.path.join(wd_fc, day_dir, f"{s}.csv"), header=None).values[:N, :N]
+        if np.isnan(fc).any():
+            A, S, d = np.full((N, 3), np.nan), np.full((N, 1), np.nan), {}
+        else:
+            A, S, d = individual(fc)
+        meta = pd.DataFrame({"Sub": s, "Session": session, "Parcel": np.arange(1, N + 1)})
+        out_a.append(pd.concat([meta, pd.DataFrame(A[:, :3])], axis=1))
+        out_s.append(pd.concat([meta, pd.DataFrame(S)], axis=1))
+        out_d.append({"Sub": s, "Session": session, **d})
+    pd.concat(out_a).to_csv(os.path.join(wd_out, f"03_GFC_i{suffix}.csv"), index=False)
+    pd.concat(out_s).to_csv(os.path.join(wd_out, f"03_GFC_i{suffix}_signmatched.csv"), index=False)
+    pd.DataFrame(out_d).to_csv(os.path.join(wd_out, f"03_GFC_i{suffix}_diag.csv"), index=False)
+    print(f"{day_dir}: {len(subs)} subjects written")
 
-sub_name_d1 = [int(x) for x in sub_name_d1]
-sub_name_d2 = [int(x) for x in sub_name_d2]
-sub_name = [int(x) for x in sub_name]
-
-seti = list(ids[0])
-sub_d1 = list(set(seti).intersection(list(map(int, sub_name_d1)))) 
-sub_d1.sort()
-sub_d2 = list(set(seti).intersection(list(map(int, sub_name_d2)))) 
-sub_d2.sort()
-sub = list(set(seti).intersection(list(map(int, sub_name)))) 
-sub.sort()
-
-# GRADIENT DAY 1---------------------------------------
-# run diffusion map embedding for FC computed at day1
-FCG_d1 = pd.DataFrame()
-FCG_d1_er = pd.DataFrame()
-# list(range(len(sub_name_1RL)))
-for i in list(range(len(sub_d1))):
-    #read subj FC matrix for different runs
-  i_d1 = pd.DataFrame(); i_FC_d1 = pd.DataFrame();
-  i_d1 = pd.read_csv(f"{wdNOA_rawData}/rsfMRIavg/day1/{sub_d1[i]}.csv", header=None)
-  i_FC_d1 = i_d1.loc[0:399,0:399]
-#######Compute indvidual gradientes and align to the template#######---------------------------------------  
-  if (i_FC_d1.isnull().values.any() == False):
-    G_FC_d1 = GradientMaps(n_components = 10,kernel ='normalized_angle', approach ='dm', alignment='procrustes',random_state=42)
-    G_FC_d1.fit([FC_mean.values[0:400],i_FC_d1.values[0:400]]) 
-    G_FC_d1_er = G_FC_d1.lambdas_[1][0]/ G_FC_d1.lambdas_[1].sum()
-  else:
-    G_FC_d1.aligned_ = (np.array([[np.nan]* 10]*400),np.array([[np.nan]* 10]*400))
-    G_FC_d1_er = np.nan
-  ##############---------------------------------------  
-  FC_i_d1 = pd.DataFrame()
-  FC_i_d1 = pd.DataFrame(G_FC_d1.aligned_[1])
-  FC_i_d1 = pd.concat((pd.DataFrame([sub_d1[i]] * 400, columns = ['Sub']), pd.DataFrame([1.5] * 400, columns = ['Session']), pd.DataFrame(list(range(1,401,1)), columns = ['Parcel']),FC_i_d1), axis = 1)
-  FCG_d1 = FCG_d1.append(FC_i_d1)
-  FC_i_d1_er = pd.DataFrame()
-  FC_i_d1_er = pd.DataFrame([G_FC_d1_er], columns = ['explanatory_ratio'])
-  FC_i_d1_er = pd.concat((pd.DataFrame([sub_d1[i]], columns = ['Sub']),FC_i_d1_er), axis = 1)
-  FCG_d1_er = FCG_d1_er.append(FC_i_d1_er)
-
-# note  FCG_d1_er (explanatory ratio) might be needed for further follow up projects on cognitive-behavioral differences
-
-# SAVE GRADIENTS Day1#### 
-FCG_d1.iloc[:,0:6].to_csv(wdNOA + wdNOA_output + "/03_GFC_i_d1.csv",index=False)
-FCG_d1_er.to_csv(wdNOA + wdNOA_output + "/03_GFC_i_er_d1.csv",index=False)
-
-# GRADIENT DAY 2---------------------------------------
-# run diffusion map embedding for FC computed at day2
-FCG_d2 = pd.DataFrame()
-FCG_d2_er = pd.DataFrame()
-# list(range(len(sub_name_1RL)))
-for i in list(range(len(sub_d2))):
-    #read subj FC matrix for different runs
-  i_d2 = pd.DataFrame(); i_FC_d2 = pd.DataFrame();
-  i_d2 = pd.read_csv(f"{wdNOA_rawData}/rsfMRIavg/day2/{sub_d2[i]}.csv", header=None)
-  i_FC_d2 = i_d2.loc[0:399,0:399]
-#######Compute indvidual gradientes and align to the template#######---------------------------------------  
-  if (i_FC_d2.isnull().values.any() == False):
-    G_FC_d2 = GradientMaps(n_components = 10,kernel ='normalized_angle', approach ='dm', alignment='procrustes',random_state=42)
-    G_FC_d2.fit([FC_mean.values[0:400],i_FC_d2.values[0:400]])
-    G_FC_d2_er = G_FC_d2.lambdas_[1][0]/ G_FC_d2.lambdas_[1].sum()
-  else:
-    G_FC_d2.aligned_ = (np.array([[np.nan]* 10]*400),np.array([[np.nan]* 10]*400))
-    G_FC_d2_er = np.nan
-  ##############---------------------------------------  
-  FC_i_d2 = pd.DataFrame()
-  FC_i_d2 = pd.DataFrame(G_FC_d2.aligned_[1])
-  FC_i_d2 = pd.concat((pd.DataFrame([sub_d2[i]] * 400, columns = ['Sub']), pd.DataFrame([2.5] * 400, columns = ['Session']), pd.DataFrame(list(range(1,401,1)), columns = ['Parcel']),FC_i_d2), axis = 1)
-  FCG_d2 = FCG_d2.append(FC_i_d2)
-  FC_i_d2_er = pd.DataFrame()
-  FC_i_d2_er = pd.DataFrame([G_FC_d2_er], columns = ['explanatory_ratio'])
-  FC_i_d2_er = pd.concat((pd.DataFrame([sub_d2[i]], columns = ['Sub']),FC_i_d2_er), axis = 1)
-  FCG_d2_er = FCG_d2_er.append(FC_i_d2_er)
-
-# SAVE GRADIENTS Day2####  
-FCG_d2.iloc[:,0:6].to_csv(wdNOA + wdNOA_output + "/03_GFC_i_d2.csv",index=False)
-FCG_d2_er.to_csv(wdNOA + wdNOA_output + "/03_GFC_i_er_d2.csv",index=False)
-
-# GRADIENT average across days---------------------------------------
-# run diffusion map embedding for FC averaged across days of scanning session
-FCG = pd.DataFrame()
-# list(range(len(sub_name_1RL)))
-for i in list(range(len(sub))):
-    #read subj FC matrix for different runs
-  i_df = pd.DataFrame(); i_FC = pd.DataFrame();
-  i_df = pd.read_csv(f"{wdNOA_rawData}/rsfMRIavg/day_avg/{sub[i]}.csv", header=None)
-  i_FC = i_df.loc[0:399,0:399]
-#######Compute indvidual gradientes and align to the template#######---------------------------------------  
-  if (i_FC.isnull().values.any() == False):
-    G_FC = GradientMaps(n_components = 10,kernel ='normalized_angle', approach ='dm', alignment='procrustes',random_state=42)
-    G_FC.fit([FC_mean.values[0:400],i_FC.values[0:400]]) 
-  else:
-    G_FC.aligned_ = (np.array([[np.nan]* 10]*400),np.array([[np.nan]* 10]*400))
-  ##############---------------------------------------  
-  FC_i = pd.DataFrame()
-  FC_i = pd.DataFrame(G_FC.aligned_[1])
-  FC_i = pd.concat((pd.DataFrame([sub[i]] * 400, columns = ['Sub']), pd.DataFrame([0] * 400, columns = ['Session']), pd.DataFrame(list(range(1,401,1)), columns = ['Parcel']),FC_i), axis = 1)
-  FCG = FCG.append(FC_i)
-
-# SAVE GRADIENTS####  
-FCG.iloc[:,0:6].to_csv(wdNOA + wdNOA_output + "/03_GFC_i.csv",index=False)
+run("day1", 1.5, "_d1")      # sessions averaged within day 1
+run("day2", 2.5, "_d2")      # sessions averaged within day 2
+run("day_avg", 0, "")        # averaged across days
