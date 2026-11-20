@@ -7,7 +7,6 @@ library(tidyverse)
 library(reshape2)
 library(patchwork)
 library(ggseg)
-library(ggseg3d)
 library(ggsegSchaefer)
 library(ggridges)
 library(lavaan)
@@ -185,7 +184,7 @@ SFB_i_final %>%
 
 # Twin multivariate model with measurement error ####
 # source CTD model specification
-source(sprintf("%s/R/functions/lavaantwda/CFM_cpmem_AE_2g3p.R", wd_oa))
+source(sprintf("%s/R/functions/lavaantwda/CFM_CPMEM_AE_2g3p.R", wd_oa))
 
 # quick and diry check of number of complete twin pairs per parcel across modalites
 for(i in 1:400){
@@ -355,7 +354,7 @@ n_parcel_model = nrow(cfs_fltr_fit)/9
 # exclude Heywood cases
 cfs_fltr_fit %>% filter(est > 1 | est < -1)
 # the parcel which was already identify (114, limbic network) produce out of bounds h2  
-parcel_exc <- cfs_fltr_fit %>% filter(est > 1 & grepl("h2",label)) %>% pull(Parcel)
+parcel_exc <- cfs_fltr_fit %>% filter(est > 1 & grepl("h2",label)) %>% pull(Parcel) %>% unique()
 
 # merge with annotation to stratify across cortical networks
 AE_fltr_annot = merge(cfs_fltr_fit, annotations, by = "Parcel") 
@@ -365,7 +364,12 @@ AE_fltr_annot = merge(cfs_fltr_fit, annotations, by = "Parcel")
 # NOTE P1P3 = inter FCg1 <-> GD
 est_AE_annot = AE_fltr_annot %>% 
   group_by(label) %>% 
-  mutate(p_adjust = p.adjust(pvalue, method ="bonferroni"))
+  mutate(p_adjust = p.adjust(pvalue, method = "bonferroni"),
+         p_fdr    = p.adjust(pvalue, method = "BH"))
+
+# flag inadmissible correlation estimates (|r| > 1; direct-symmetric models do not bound correlations)
+est_AE_annot = est_AE_annot %>% mutate(admissible = !(grepl("^r[AE]_", label) & abs(est) > 1))
+est_AE_annot %>% filter(!admissible) %>% select(Parcel, label, est, pvalue)
 
 ## save####
 write_csv(est_AE_annot, sprintf("%s/09_CPMEM_output.csv",wd_noa_output))
@@ -373,70 +377,70 @@ write_csv(est_AE_annot, sprintf("%s/09_CPMEM_output.csv",wd_noa_output))
 # average heritability
 est_AE_annot %>% 
   filter(grepl("h2",label)) %>% 
-  filter(Parcel != parcel_exc) %>% #we remove parcel 114 as it produced out of bounds estimates for the measurement error model
+  filter(!Parcel %in% parcel_exc, admissible) %>% #we remove parcel 114 as it produced out of bounds estimates for the measurement error model
   group_by(lhs) %>% 
   reframe(mean(est), sd(est))
 
 # display percentage of significant genetic and environemntal correlations 
 # amongst all the possible FCg1 <-> t1t2w (that is twice the number of parcels)
 (est_AE_annot %>% 
-  filter(Parcel != parcel_exc) %>%
+  filter(!Parcel %in% parcel_exc, admissible) %>%
   filter(p_adjust<.05 & label == "rA_P12" & est <0) %>% nrow() +
 est_AE_annot %>% 
-  filter(Parcel != parcel_exc) %>%
+  filter(!Parcel %in% parcel_exc, admissible) %>%
   filter(p_adjust<.05 & label == "rA_P12" & est >0) %>% nrow() +
 est_AE_annot %>% 
-  filter(Parcel != parcel_exc) %>%
+  filter(!Parcel %in% parcel_exc, admissible) %>%
   filter(p_adjust<.05 & label == "rE_P12" & est <0) %>% nrow() +
 est_AE_annot %>% 
-  filter(Parcel != parcel_exc) %>%
+  filter(!Parcel %in% parcel_exc, admissible) %>%
   filter(p_adjust<.05 & label == "rE_P12" & est >0) %>% nrow()) /
-  ((n_parcel_model-1)*2)
+  ((n_parcel_model - length(parcel_exc))*2)
 
 # focus on genetic correlations
 (est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rA_P12") %>% nrow())/
-  (n_parcel_model-1)
+  (n_parcel_model - length(parcel_exc))
 
 # display percentage of significant genetic and environemntal correlations 
 # amongst all the possible FCg1 <-> GD (that is twice the number of parcels)
 (est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est <0) %>% nrow() +
     est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est >0) %>% nrow()) /
-  (n_parcel_model-1)
+  (n_parcel_model - length(parcel_exc))
 
 (est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rE_P13" & est <0) %>% nrow() +
     est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rE_P13" & est >0) %>% nrow()) /
-  (n_parcel_model-1)
+  (n_parcel_model - length(parcel_exc))
 
 # focus on genetic correlations
 (est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est <0) %>% nrow())/
-  (n_parcel_model-1)
+  (n_parcel_model - length(parcel_exc))
 
 (est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est >0) %>% nrow()) /
-  (n_parcel_model-1)
+  (n_parcel_model - length(parcel_exc))
 
 # average magnitude of genetic correlations
 est_AE_annot %>% 
-  filter(Parcel != parcel_exc) %>%
+  filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rA_P13" & est <0) %>% 
   summarise(mean= psych::fisherz2r(mean(psych::fisherz(est))),
             sd = psych::fisherz2r(sd(psych::fisherz(est))))
 
 est_AE_annot %>% 
-  filter(Parcel != parcel_exc) %>%
+  filter(!Parcel %in% parcel_exc, admissible) %>%
   filter(p_adjust<.05 & label == "rA_P13" & est >0) %>% 
   summarise(mean= psych::fisherz2r(mean(psych::fisherz(est))),
             sd = psych::fisherz2r(sd(psych::fisherz(est))))
@@ -444,14 +448,14 @@ est_AE_annot %>%
 
 # focus on enviromental correlations
 (est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rE_P13" & est <0) %>% 
   nrow() +
   est_AE_annot %>% 
-    filter(Parcel != parcel_exc) %>%
+    filter(!Parcel %in% parcel_exc, admissible) %>%
     filter(p_adjust<.05 & label == "rE_P13" & est >0) %>% 
   nrow()) /
-  (n_parcel_model-1)
+  (n_parcel_model - length(parcel_exc))
 
 
 # plot associations on the cortex
@@ -463,143 +467,38 @@ associations2cortex = est_AE_annot %>%
 
 min(associations2cortex$est, na.rm = T)
 max(associations2cortex$est, na.rm = T)
-# adapt to plot
-schaefer7_association_GD = schaefer7_400_3d %>% #
-  filter(hemi == "left")%>%
-  mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
-                          full_join(associations2cortex%>%
-                                      filter(Parcel < 201) %>% #left hemisphere
-                                      rename(region = label_Yeo_7) %>% 
-                                      select(region,est),
-                                    by = "region")))
-# plot parcelations using ggseg3d
-association_GD_left_medial = 
-  ggseg3d(
-    atlas = schaefer7_association_GD,
-    colour = "est", text = "est",
-    palette =  c( "#4d48a0"= min(associations2cortex$est, na.rm = T), "white"  = 0, "#a65a53" =max(associations2cortex$est, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left medial")
-
-association_GD_left_lateral = 
-  ggseg3d(
-    atlas = schaefer7_association_GD,
-    colour = "est", text = "est",
-    palette =  c( "#4d48a0"= min(associations2cortex$est, na.rm = T), "white"  = 0, "#a65a53" =max(associations2cortex$est, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left lateral")
-
-#plot association with microstructure
-associations2cortex_mi = est_AE_annot %>% 
-filter(label == "rA_P12" & p_adjust<.05) %>% 
-  ungroup() %>% 
-  select(Parcel, label_Yeo_7, est)
-
-est_AE_annot %>% 
-  filter(label == "rA_P12") %>% 
-  pull(est)
-
-
-min(est_AE_annot %>% 
-      filter(label == "rA_P12") %>% 
-      pull(est)
-    , na.rm = T)
-max(est_AE_annot %>% 
-      filter(label == "rA_P12") %>% 
-      pull(est), na.rm = T)
-
-# adapt to plot
-schaefer7_association_mi = schaefer7_400_3d %>% #
-  filter(hemi == "left")%>%
-  mutate(ggseg_3d = map(ggseg_3d, ~ .x %>% 
-                          full_join(associations2cortex_mi%>%
-                                      filter(Parcel < 201) %>% #left hemisphere
-                                      rename(region = label_Yeo_7) %>% 
-                                      select(region,est),
-                                    by = "region")))
-
-# plot parcelations using ggseg3d
-association_mi_left_medial = 
-  ggseg3d(
-    atlas = schaefer7_association_mi,
-    colour = "est", text = "est",
-    palette =  c( "#4d48a0"= min(associations2cortex$est, na.rm = T), "white"  = 0, "#a65a53" =max(associations2cortex$est, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left medial")
-
-association_mi_left_lateral = 
-  ggseg3d(
-    atlas = schaefer7_association_mi,
-    colour = "est", text = "est",
-    palette =  c( "#4d48a0"= min(associations2cortex$est, na.rm = T), "white"  = 0, "#a65a53" =max(associations2cortex$est, na.rm = T)),
-    surface = "inflated",
-    hemisphere = "left")%>% 
-  remove_axes()%>%
-  pan_camera("left lateral")
 
 # plot in 2D
-cort_rA = est_AE_annot %>%
-  filter((grepl("rA",label))) %>% 
-  filter(Parcel!=parcel_exc) %>% 
-  #first we re annotate the correlations names
-  mutate(label = factor(label, levels = c("rA_P12","rA_P13","rA_P23")),
-         label = fct_recode( label, 
-                             "Microstructural intensity" = "rA_P12",
-                             "Geodesic distances" = "rA_P13",
-                             "remove"  = "rA_P23")) %>% 
-  filter(label !="remove") %>%
-  rename(region = label_Yeo_7,
-         cor = label) %>% 
-  mutate(est = ifelse(p_adjust<.05,est,NA)) %>% 
-  ggplot() +
-  facet_grid(col = vars(cor)) +
-  geom_brain(atlas = schaefer7_400, 
-             position = position_brain(hemi ~ side), #to stack them
-             aes(fill = est),
-             color = "#414a4c",
-             size = .5) +
-  scale_fill_distiller(palette = "Reds", direction  = 1)+
-  labs(fill = expression(italic(r)[A]))+
-  theme_classic(base_size = 10)+
-  theme(axis.text  = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        strip.background = element_blank())
+fig5_data = function(prefix) {
+  est_AE_annot %>% ungroup() %>%
+    filter(grepl(prefix, label), !Parcel %in% parcel_exc) %>%
+    mutate(label = factor(label, levels = paste0(prefix, c("_P12", "_P13", "_P23"))),
+           label = fct_recode(label, "Microstructural intensity" = paste0(prefix, "_P12"),
+                              "Geodesic distances"        = paste0(prefix, "_P13"),
+                              "remove"                    = paste0(prefix, "_P23"))) %>%
+    filter(label != "remove") %>%
+    rename(region = label_Yeo_7, cor = label) %>%
+    mutate(est = ifelse(p_adjust < .05 & abs(est) <= 1, est, NA)) %>%
+    select(region, cor, est) %>%
+    group_by(cor)
+}
+fig5_theme = theme_classic(base_size = 10) +
+  theme(axis.text = element_blank(), axis.line = element_blank(),
+        axis.ticks = element_blank(), strip.background = element_blank())
 
-cort_rE = est_AE_annot %>%
-  filter((grepl("rE",label))) %>% 
-  filter(Parcel!=parcel_exc) %>% 
-  #first we re annotate the correlations names
-  mutate(label = factor(label, levels = c("rE_P12","rE_P13","rE_P23")),
-         label = fct_recode( label, 
-                             "Microstructural intensity" = "rE_P12",
-                             "Geodesic distances" = "rE_P13",
-                             "remove"  = "rE_P23")) %>% 
-  filter(label !="remove") %>%
-  rename(region = label_Yeo_7,
-         cor = label) %>% 
-  mutate(est = ifelse(p_adjust<.05,est,NA)) %>% 
-  ggplot() +
-  facet_grid(col = vars(cor)) +
-  geom_brain(atlas = schaefer7_400, 
-             position = position_brain(hemi ~ side), #to stack them
-             aes(fill = est),
-             color = "#414a4c",
-             size = .5) +
-  scale_fill_distiller(palette = "Blues", direction  = 1)+
-  labs(fill = expression(italic(r)[E]))+
-  theme_classic(base_size = 10) +
-  theme(axis.text  = element_blank(),
-        axis.line  = element_blank(),
-        axis.ticks = element_blank(),
-        strip.background = element_blank())
-  
+cort_rA = ggplot() +
+  geom_brain(atlas = schaefer7_400(), data = fig5_data("rA"), mapping = aes(fill = est),
+             position = position_brain(hemi ~ view), color = "#414a4c", linewidth = .5) +
+  facet_grid(cols = vars(cor)) +
+  scale_fill_distiller(palette = "Reds", direction = 1) +
+  labs(fill = expression(italic(r)[A])) + fig5_theme
+
+cort_rE = ggplot() +
+  geom_brain(atlas = schaefer7_400(), data = fig5_data("rE"), mapping = aes(fill = est),
+             position = position_brain(hemi ~ view), color = "#414a4c", linewidth = .5) +
+  facet_grid(cols = vars(cor)) +
+  scale_fill_distiller(palette = "Blues", direction = 1) +
+  labs(fill = expression(italic(r)[E])) + fig5_theme
 
 # Figure 5####
 pdf(sprintf("%s/Figures/09_Fig_5.pdf",wd_oa),
@@ -607,3 +506,17 @@ pdf(sprintf("%s/Figures/09_Fig_5.pdf",wd_oa),
     height=5)
 (((mi_h2/gd_h2) + plot_layout(axes = "collect"))|(cort_rA/cort_rE) + plot_layout(axes = "collect")) +plot_layout(widths = c(1,2.5), heights = c(1,1)) + plot_annotation(tag_levels = "A")
 dev.off()
+
+
+# output including response to reviewer
+n_parcel_model; parcel_exc
+# summary for the text (admissible estimates only)
+est_AE_annot %>% filter(!Parcel %in% parcel_exc) %>% group_by(label) %>%
+  summarise(n_inadmissible = sum(!admissible),
+            n = sum(admissible),
+            n_bonf = sum(admissible & p_adjust < .05), n_fdr = sum(admissible & p_fdr < .05),
+            n_bonf_pos = sum(admissible & p_adjust < .05 & est > 0),
+            n_bonf_neg = sum(admissible & p_adjust < .05 & est < 0))
+# complete twin pairs per modality
+est_AE_annot %>% filter(grepl("^h2", label), !Parcel %in% parcel_exc) %>% group_by(label) %>%
+  summarise(mean = mean(est), sd = sd(est))
