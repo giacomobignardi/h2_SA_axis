@@ -1,0 +1,1201 @@
+Parcel,label,est,se,ci.lower,ci.upper,label_Yeo_7,label_Yeo7_short
+1,σ1intra^2,0.56808,0.05497,0.46034,0.67583,7Networks_LH_Vis_1,Visual
+1,σ2intra^2,0.56808,0.05497,0.46034,0.67583,7Networks_LH_Vis_1,Visual
+1,σinter^2,0.42984,0.04949,0.33284,0.52684,7Networks_LH_Vis_1,Visual
+2,σ1intra^2,0.47123,0.04911,0.37497,0.56748,7Networks_LH_Vis_2,Visual
+2,σ2intra^2,0.47123,0.04911,0.37497,0.56748,7Networks_LH_Vis_2,Visual
+2,σinter^2,0.5267,0.0514,0.42596,0.62744,7Networks_LH_Vis_2,Visual
+3,σ1intra^2,0.51911,0.05204,0.41711,0.62112,7Networks_LH_Vis_3,Visual
+3,σ2intra^2,0.51911,0.05204,0.41711,0.62112,7Networks_LH_Vis_3,Visual
+3,σinter^2,0.47881,0.05042,0.38,0.57762,7Networks_LH_Vis_3,Visual
+4,σ1intra^2,0.58984,0.05625,0.47959,0.70009,7Networks_LH_Vis_4,Visual
+4,σ2intra^2,0.58984,0.05625,0.47959,0.70009,7Networks_LH_Vis_4,Visual
+4,σinter^2,0.40808,0.04911,0.31183,0.50433,7Networks_LH_Vis_4,Visual
+5,σ1intra^2,0.50812,0.05138,0.40742,0.60881,7Networks_LH_Vis_5,Visual
+5,σ2intra^2,0.50812,0.05138,0.40742,0.60881,7Networks_LH_Vis_5,Visual
+5,σinter^2,0.48981,0.05063,0.39057,0.58905,7Networks_LH_Vis_5,Visual
+6,σ1intra^2,0.46667,0.04883,0.37097,0.56237,7Networks_LH_Vis_6,Visual
+6,σ2intra^2,0.46667,0.04883,0.37097,0.56237,7Networks_LH_Vis_6,Visual
+6,σinter^2,0.53126,0.05149,0.43033,0.63218,7Networks_LH_Vis_6,Visual
+7,σ1intra^2,0.43234,0.04667,0.34087,0.52381,7Networks_LH_Vis_7,Visual
+7,σ2intra^2,0.43234,0.04667,0.34087,0.52381,7Networks_LH_Vis_7,Visual
+7,σinter^2,0.56559,0.05225,0.46318,0.66799,7Networks_LH_Vis_7,Visual
+8,σ1intra^2,0.51264,0.05165,0.41141,0.61388,7Networks_LH_Vis_8,Visual
+8,σ2intra^2,0.51264,0.05165,0.41141,0.61388,7Networks_LH_Vis_8,Visual
+8,σinter^2,0.48528,0.05054,0.38622,0.58434,7Networks_LH_Vis_8,Visual
+9,σ1intra^2,0.53033,0.05272,0.427,0.63366,7Networks_LH_Vis_9,Visual
+9,σ2intra^2,0.53033,0.05272,0.427,0.63366,7Networks_LH_Vis_9,Visual
+9,σinter^2,0.4676,0.0502,0.36922,0.56598,7Networks_LH_Vis_9,Visual
+10,σ1intra^2,0.55209,0.05402,0.44621,0.65797,7Networks_LH_Vis_10,Visual
+10,σ2intra^2,0.55209,0.05402,0.44621,0.65797,7Networks_LH_Vis_10,Visual
+10,σinter^2,0.44583,0.04978,0.34826,0.54341,7Networks_LH_Vis_10,Visual
+11,σ1intra^2,0.55546,0.05422,0.44919,0.66174,7Networks_LH_Vis_11,Visual
+11,σ2intra^2,0.55546,0.05422,0.44919,0.66174,7Networks_LH_Vis_11,Visual
+11,σinter^2,0.44246,0.04972,0.34501,0.53991,7Networks_LH_Vis_11,Visual
+12,σ1intra^2,0.4417,0.04726,0.34907,0.53434,7Networks_LH_Vis_12,Visual
+12,σ2intra^2,0.4417,0.04726,0.34907,0.53434,7Networks_LH_Vis_12,Visual
+12,σinter^2,0.55622,0.05204,0.45423,0.65822,7Networks_LH_Vis_12,Visual
+13,σ1intra^2,0.60923,0.05738,0.49676,0.72169,7Networks_LH_Vis_13,Visual
+13,σ2intra^2,0.60923,0.05738,0.49676,0.72169,7Networks_LH_Vis_13,Visual
+13,σinter^2,0.3887,0.04878,0.29309,0.48431,7Networks_LH_Vis_13,Visual
+14,σ1intra^2,0.45069,0.04783,0.35695,0.54443,7Networks_LH_Vis_14,Visual
+14,σ2intra^2,0.45069,0.04783,0.35695,0.54443,7Networks_LH_Vis_14,Visual
+14,σinter^2,0.54724,0.05184,0.44563,0.64884,7Networks_LH_Vis_14,Visual
+15,σ1intra^2,0.52038,0.05212,0.41822,0.62253,7Networks_LH_Vis_15,Visual
+15,σ2intra^2,0.52038,0.05212,0.41822,0.62253,7Networks_LH_Vis_15,Visual
+15,σinter^2,0.47755,0.05039,0.37878,0.57631,7Networks_LH_Vis_15,Visual
+16,σ1intra^2,0.55284,0.05407,0.44687,0.65881,7Networks_LH_Vis_16,Visual
+16,σ2intra^2,0.55284,0.05407,0.44687,0.65881,7Networks_LH_Vis_16,Visual
+16,σinter^2,0.44508,0.04977,0.34754,0.54263,7Networks_LH_Vis_16,Visual
+17,σ1intra^2,0.46305,0.0486,0.36779,0.55831,7Networks_LH_Vis_17,Visual
+17,σ2intra^2,0.46305,0.0486,0.36779,0.55831,7Networks_LH_Vis_17,Visual
+17,σinter^2,0.53487,0.05157,0.43379,0.63595,7Networks_LH_Vis_17,Visual
+18,σ1intra^2,0.45309,0.04798,0.35905,0.54713,7Networks_LH_Vis_18,Visual
+18,σ2intra^2,0.45309,0.04798,0.35905,0.54713,7Networks_LH_Vis_18,Visual
+18,σinter^2,0.54483,0.05179,0.44333,0.64634,7Networks_LH_Vis_18,Visual
+19,σ1intra^2,0.42201,0.04601,0.33184,0.51219,7Networks_LH_Vis_19,Visual
+19,σ2intra^2,0.42201,0.04601,0.33184,0.51219,7Networks_LH_Vis_19,Visual
+19,σinter^2,0.57591,0.05248,0.47305,0.67877,7Networks_LH_Vis_19,Visual
+20,σ1intra^2,0.49692,0.05069,0.39756,0.59628,7Networks_LH_Vis_20,Visual
+20,σ2intra^2,0.49692,0.05069,0.39756,0.59628,7Networks_LH_Vis_20,Visual
+20,σinter^2,0.50101,0.05086,0.40132,0.60069,7Networks_LH_Vis_20,Visual
+21,σ1intra^2,0.53749,0.05315,0.43332,0.64167,7Networks_LH_Vis_21,Visual
+21,σ2intra^2,0.53749,0.05315,0.43332,0.64167,7Networks_LH_Vis_21,Visual
+21,σinter^2,0.46043,0.05006,0.36232,0.55854,7Networks_LH_Vis_21,Visual
+22,σ1intra^2,0.54485,0.05359,0.43981,0.64988,7Networks_LH_Vis_22,Visual
+22,σ2intra^2,0.54485,0.05359,0.43981,0.64988,7Networks_LH_Vis_22,Visual
+22,σinter^2,0.45308,0.04992,0.35524,0.55092,7Networks_LH_Vis_22,Visual
+23,σ1intra^2,0.44682,0.04759,0.35355,0.54008,7Networks_LH_Vis_23,Visual
+23,σ2intra^2,0.44682,0.04759,0.35355,0.54008,7Networks_LH_Vis_23,Visual
+23,σinter^2,0.55111,0.05193,0.44934,0.65288,7Networks_LH_Vis_23,Visual
+24,σ1intra^2,0.50255,0.05104,0.40252,0.60258,7Networks_LH_Vis_24,Visual
+24,σ2intra^2,0.50255,0.05104,0.40252,0.60258,7Networks_LH_Vis_24,Visual
+24,σinter^2,0.49537,0.05075,0.39591,0.59484,7Networks_LH_Vis_24,Visual
+25,σ1intra^2,0.52579,0.05245,0.42299,0.62858,7Networks_LH_Vis_25,Visual
+25,σ2intra^2,0.52579,0.05245,0.42299,0.62858,7Networks_LH_Vis_25,Visual
+25,σinter^2,0.47214,0.05028,0.37358,0.5707,7Networks_LH_Vis_25,Visual
+26,σ1intra^2,0.50073,0.05093,0.40092,0.60055,7Networks_LH_Vis_26,Visual
+26,σ2intra^2,0.50073,0.05093,0.40092,0.60055,7Networks_LH_Vis_26,Visual
+26,σinter^2,0.49719,0.05078,0.39766,0.59672,7Networks_LH_Vis_26,Visual
+27,σ1intra^2,0.46425,0.04868,0.36884,0.55965,7Networks_LH_Vis_27,Visual
+27,σ2intra^2,0.46425,0.04868,0.36884,0.55965,7Networks_LH_Vis_27,Visual
+27,σinter^2,0.53368,0.05155,0.43265,0.63471,7Networks_LH_Vis_27,Visual
+28,σ1intra^2,0.44978,0.04777,0.35615,0.54341,7Networks_LH_Vis_28,Visual
+28,σ2intra^2,0.44978,0.04777,0.35615,0.54341,7Networks_LH_Vis_28,Visual
+28,σinter^2,0.54814,0.05186,0.4465,0.64979,7Networks_LH_Vis_28,Visual
+29,σ1intra^2,0.51892,0.05203,0.41694,0.6209,7Networks_LH_Vis_29,Visual
+29,σ2intra^2,0.51892,0.05203,0.41694,0.6209,7Networks_LH_Vis_29,Visual
+29,σinter^2,0.47901,0.05042,0.38019,0.57783,7Networks_LH_Vis_29,Visual
+30,σ1intra^2,0.4759,0.0494,0.37908,0.57272,7Networks_LH_Vis_30,Visual
+30,σ2intra^2,0.4759,0.0494,0.37908,0.57272,7Networks_LH_Vis_30,Visual
+30,σinter^2,0.52203,0.0513,0.42148,0.62257,7Networks_LH_Vis_30,Visual
+31,σ1intra^2,0.46664,0.04883,0.37095,0.56234,7Networks_LH_Vis_31,Visual
+31,σ2intra^2,0.46664,0.04883,0.37095,0.56234,7Networks_LH_Vis_31,Visual
+31,σinter^2,0.53128,0.05149,0.43035,0.63221,7Networks_LH_Vis_31,Visual
+32,σ1intra^2,0.62199,0.05812,0.50807,0.73591,7Networks_LH_SomMot_1,Somatomotor
+32,σ2intra^2,0.62199,0.05812,0.50807,0.73591,7Networks_LH_SomMot_1,Somatomotor
+32,σinter^2,0.37593,0.04857,0.28073,0.47113,7Networks_LH_SomMot_1,Somatomotor
+33,σ1intra^2,0.60888,0.05736,0.49646,0.72131,7Networks_LH_SomMot_2,Somatomotor
+33,σ2intra^2,0.60888,0.05736,0.49646,0.72131,7Networks_LH_SomMot_2,Somatomotor
+33,σinter^2,0.38904,0.04879,0.29342,0.48466,7Networks_LH_SomMot_2,Somatomotor
+34,σ1intra^2,0.61861,0.05793,0.50508,0.73215,7Networks_LH_SomMot_3,Somatomotor
+34,σ2intra^2,0.61861,0.05793,0.50508,0.73215,7Networks_LH_SomMot_3,Somatomotor
+34,σinter^2,0.37931,0.04863,0.284,0.47462,7Networks_LH_SomMot_3,Somatomotor
+35,σ1intra^2,0.6258,0.05834,0.51146,0.74015,7Networks_LH_SomMot_4,Somatomotor
+35,σ2intra^2,0.6258,0.05834,0.51146,0.74015,7Networks_LH_SomMot_4,Somatomotor
+35,σinter^2,0.37212,0.04851,0.27704,0.4672,7Networks_LH_SomMot_4,Somatomotor
+36,σ1intra^2,0.55919,0.05444,0.45248,0.6659,7Networks_LH_SomMot_5,Somatomotor
+36,σ2intra^2,0.55919,0.05444,0.45248,0.6659,7Networks_LH_SomMot_5,Somatomotor
+36,σinter^2,0.43874,0.04965,0.34142,0.53605,7Networks_LH_SomMot_5,Somatomotor
+37,σ1intra^2,0.50856,0.0514,0.40781,0.60931,7Networks_LH_SomMot_6,Somatomotor
+37,σ2intra^2,0.50856,0.0514,0.40781,0.60931,7Networks_LH_SomMot_6,Somatomotor
+37,σinter^2,0.48937,0.05063,0.39014,0.58859,7Networks_LH_SomMot_6,Somatomotor
+38,σ1intra^2,0.53715,0.05313,0.43302,0.64129,7Networks_LH_SomMot_7,Somatomotor
+38,σ2intra^2,0.53715,0.05313,0.43302,0.64129,7Networks_LH_SomMot_7,Somatomotor
+38,σinter^2,0.46077,0.05007,0.36264,0.5589,7Networks_LH_SomMot_7,Somatomotor
+39,σ1intra^2,0.57702,0.0555,0.46824,0.68579,7Networks_LH_SomMot_8,Somatomotor
+39,σ2intra^2,0.57702,0.0555,0.46824,0.68579,7Networks_LH_SomMot_8,Somatomotor
+39,σinter^2,0.42091,0.04933,0.32422,0.5176,7Networks_LH_SomMot_8,Somatomotor
+40,σ1intra^2,0.62123,0.05808,0.5074,0.73506,7Networks_LH_SomMot_9,Somatomotor
+40,σ2intra^2,0.62123,0.05808,0.5074,0.73506,7Networks_LH_SomMot_9,Somatomotor
+40,σinter^2,0.3767,0.04858,0.28147,0.47192,7Networks_LH_SomMot_9,Somatomotor
+41,σ1intra^2,0.64441,0.05941,0.52796,0.76086,7Networks_LH_SomMot_10,Somatomotor
+41,σ2intra^2,0.64441,0.05941,0.52796,0.76086,7Networks_LH_SomMot_10,Somatomotor
+41,σinter^2,0.35352,0.04822,0.259,0.44803,7Networks_LH_SomMot_10,Somatomotor
+42,σ1intra^2,0.54718,0.05373,0.44187,0.65249,7Networks_LH_SomMot_11,Somatomotor
+42,σ2intra^2,0.54718,0.05373,0.44187,0.65249,7Networks_LH_SomMot_11,Somatomotor
+42,σinter^2,0.45075,0.04988,0.35299,0.5485,7Networks_LH_SomMot_11,Somatomotor
+43,σ1intra^2,0.62649,0.05838,0.51206,0.74092,7Networks_LH_SomMot_12,Somatomotor
+43,σ2intra^2,0.62649,0.05838,0.51206,0.74092,7Networks_LH_SomMot_12,Somatomotor
+43,σinter^2,0.37144,0.0485,0.27638,0.4665,7Networks_LH_SomMot_12,Somatomotor
+44,σ1intra^2,0.64331,0.05935,0.52699,0.75964,7Networks_LH_SomMot_13,Somatomotor
+44,σ2intra^2,0.64331,0.05935,0.52699,0.75964,7Networks_LH_SomMot_13,Somatomotor
+44,σinter^2,0.35461,0.04824,0.26007,0.44916,7Networks_LH_SomMot_13,Somatomotor
+45,σ1intra^2,0.59977,0.05683,0.48838,0.71116,7Networks_LH_SomMot_14,Somatomotor
+45,σ2intra^2,0.59977,0.05683,0.48838,0.71116,7Networks_LH_SomMot_14,Somatomotor
+45,σinter^2,0.39816,0.04894,0.30224,0.49407,7Networks_LH_SomMot_14,Somatomotor
+46,σ1intra^2,0.57434,0.05534,0.46588,0.68281,7Networks_LH_SomMot_15,Somatomotor
+46,σ2intra^2,0.57434,0.05534,0.46588,0.68281,7Networks_LH_SomMot_15,Somatomotor
+46,σinter^2,0.42358,0.04938,0.3268,0.52036,7Networks_LH_SomMot_15,Somatomotor
+47,σ1intra^2,0.43911,0.0471,0.34679,0.53142,7Networks_LH_SomMot_16,Somatomotor
+47,σ2intra^2,0.43911,0.0471,0.34679,0.53142,7Networks_LH_SomMot_16,Somatomotor
+47,σinter^2,0.55882,0.0521,0.45671,0.66093,7Networks_LH_SomMot_16,Somatomotor
+48,σ1intra^2,0.56213,0.05462,0.45508,0.66918,7Networks_LH_SomMot_17,Somatomotor
+48,σ2intra^2,0.56213,0.05462,0.45508,0.66918,7Networks_LH_SomMot_17,Somatomotor
+48,σinter^2,0.4358,0.0496,0.33859,0.53301,7Networks_LH_SomMot_17,Somatomotor
+49,σ1intra^2,0.62568,0.05834,0.51135,0.74002,7Networks_LH_SomMot_18,Somatomotor
+49,σ2intra^2,0.62568,0.05834,0.51135,0.74002,7Networks_LH_SomMot_18,Somatomotor
+49,σinter^2,0.37224,0.04851,0.27716,0.46733,7Networks_LH_SomMot_18,Somatomotor
+50,σ1intra^2,0.45779,0.04827,0.36318,0.55241,7Networks_LH_SomMot_19,Somatomotor
+50,σ2intra^2,0.45779,0.04827,0.36318,0.55241,7Networks_LH_SomMot_19,Somatomotor
+50,σinter^2,0.54013,0.05169,0.43883,0.64143,7Networks_LH_SomMot_19,Somatomotor
+51,σ1intra^2,0.51076,0.05154,0.40975,0.61178,7Networks_LH_SomMot_20,Somatomotor
+51,σ2intra^2,0.51076,0.05154,0.40975,0.61178,7Networks_LH_SomMot_20,Somatomotor
+51,σinter^2,0.48716,0.05058,0.38802,0.5863,7Networks_LH_SomMot_20,Somatomotor
+52,σ1intra^2,0.47767,0.04951,0.38063,0.57471,7Networks_LH_SomMot_21,Somatomotor
+52,σ2intra^2,0.47767,0.04951,0.38063,0.57471,7Networks_LH_SomMot_21,Somatomotor
+52,σinter^2,0.52026,0.05126,0.41979,0.62073,7Networks_LH_SomMot_21,Somatomotor
+53,σ1intra^2,0.5375,0.05315,0.43333,0.64167,7Networks_LH_SomMot_22,Somatomotor
+53,σ2intra^2,0.5375,0.05315,0.43333,0.64167,7Networks_LH_SomMot_22,Somatomotor
+53,σinter^2,0.46043,0.05006,0.36231,0.55854,7Networks_LH_SomMot_22,Somatomotor
+54,σ1intra^2,0.61364,0.05764,0.50067,0.72661,7Networks_LH_SomMot_23,Somatomotor
+54,σ2intra^2,0.61364,0.05764,0.50067,0.72661,7Networks_LH_SomMot_23,Somatomotor
+54,σinter^2,0.38428,0.04871,0.28882,0.47975,7Networks_LH_SomMot_23,Somatomotor
+55,σ1intra^2,0.59167,0.05636,0.48121,0.70213,7Networks_LH_SomMot_24,Somatomotor
+55,σ2intra^2,0.59167,0.05636,0.48121,0.70213,7Networks_LH_SomMot_24,Somatomotor
+55,σinter^2,0.40626,0.04908,0.31007,0.50244,7Networks_LH_SomMot_24,Somatomotor
+56,σ1intra^2,0.6052,0.05715,0.49319,0.71721,7Networks_LH_SomMot_25,Somatomotor
+56,σ2intra^2,0.6052,0.05715,0.49319,0.71721,7Networks_LH_SomMot_25,Somatomotor
+56,σinter^2,0.39273,0.04885,0.29699,0.48847,7Networks_LH_SomMot_25,Somatomotor
+57,σ1intra^2,0.62855,0.0585,0.51389,0.74321,7Networks_LH_SomMot_26,Somatomotor
+57,σ2intra^2,0.62855,0.0585,0.51389,0.74321,7Networks_LH_SomMot_26,Somatomotor
+57,σinter^2,0.36937,0.04847,0.27438,0.46437,7Networks_LH_SomMot_26,Somatomotor
+58,σ1intra^2,0.42845,0.04642,0.33746,0.51943,7Networks_LH_SomMot_27,Somatomotor
+58,σ2intra^2,0.42845,0.04642,0.33746,0.51943,7Networks_LH_SomMot_27,Somatomotor
+58,σinter^2,0.56948,0.05233,0.4669,0.67205,7Networks_LH_SomMot_27,Somatomotor
+59,σ1intra^2,0.53822,0.05319,0.43396,0.64247,7Networks_LH_SomMot_28,Somatomotor
+59,σ2intra^2,0.53822,0.05319,0.43396,0.64247,7Networks_LH_SomMot_28,Somatomotor
+59,σinter^2,0.45971,0.05005,0.36162,0.5578,7Networks_LH_SomMot_28,Somatomotor
+60,σ1intra^2,0.49367,0.0505,0.3947,0.59264,7Networks_LH_SomMot_29,Somatomotor
+60,σ2intra^2,0.49367,0.0505,0.3947,0.59264,7Networks_LH_SomMot_29,Somatomotor
+60,σinter^2,0.50425,0.05093,0.40444,0.60407,7Networks_LH_SomMot_29,Somatomotor
+61,σ1intra^2,0.61521,0.05773,0.50206,0.72835,7Networks_LH_SomMot_30,Somatomotor
+61,σ2intra^2,0.61521,0.05773,0.50206,0.72835,7Networks_LH_SomMot_30,Somatomotor
+61,σinter^2,0.38272,0.04868,0.2873,0.47813,7Networks_LH_SomMot_30,Somatomotor
+62,σ1intra^2,0.60593,0.05719,0.49384,0.71802,7Networks_LH_SomMot_31,Somatomotor
+62,σ2intra^2,0.60593,0.05719,0.49384,0.71802,7Networks_LH_SomMot_31,Somatomotor
+62,σinter^2,0.392,0.04884,0.29628,0.48771,7Networks_LH_SomMot_31,Somatomotor
+63,σ1intra^2,0.49544,0.0506,0.39626,0.59462,7Networks_LH_SomMot_32,Somatomotor
+63,σ2intra^2,0.49544,0.0506,0.39626,0.59462,7Networks_LH_SomMot_32,Somatomotor
+63,σinter^2,0.50249,0.05089,0.40274,0.60223,7Networks_LH_SomMot_32,Somatomotor
+64,σ1intra^2,0.55389,0.05413,0.4478,0.65998,7Networks_LH_SomMot_33,Somatomotor
+64,σ2intra^2,0.55389,0.05413,0.4478,0.65998,7Networks_LH_SomMot_33,Somatomotor
+64,σinter^2,0.44403,0.04975,0.34652,0.54154,7Networks_LH_SomMot_33,Somatomotor
+65,σ1intra^2,0.6684,0.06078,0.54927,0.78753,7Networks_LH_SomMot_34,Somatomotor
+65,σ2intra^2,0.6684,0.06078,0.54927,0.78753,7Networks_LH_SomMot_34,Somatomotor
+65,σinter^2,0.32953,0.04787,0.23571,0.42335,7Networks_LH_SomMot_34,Somatomotor
+66,σ1intra^2,0.61358,0.05763,0.50062,0.72654,7Networks_LH_SomMot_35,Somatomotor
+66,σ2intra^2,0.61358,0.05763,0.50062,0.72654,7Networks_LH_SomMot_35,Somatomotor
+66,σinter^2,0.38434,0.04871,0.28888,0.47981,7Networks_LH_SomMot_35,Somatomotor
+67,σ1intra^2,0.61121,0.0575,0.49852,0.72391,7Networks_LH_SomMot_36,Somatomotor
+67,σ2intra^2,0.61121,0.0575,0.49852,0.72391,7Networks_LH_SomMot_36,Somatomotor
+67,σinter^2,0.38671,0.04875,0.29117,0.48226,7Networks_LH_SomMot_36,Somatomotor
+68,σ1intra^2,0.6112,0.0575,0.49851,0.72389,7Networks_LH_SomMot_37,Somatomotor
+68,σ2intra^2,0.6112,0.0575,0.49851,0.72389,7Networks_LH_SomMot_37,Somatomotor
+68,σinter^2,0.38673,0.04875,0.29118,0.48227,7Networks_LH_SomMot_37,Somatomotor
+69,σ1intra^2,0.50632,0.05127,0.40584,0.60681,7Networks_LH_DorsAttn_Post_1,Dorsal attention
+69,σ2intra^2,0.50632,0.05127,0.40584,0.60681,7Networks_LH_DorsAttn_Post_1,Dorsal attention
+69,σinter^2,0.4916,0.05067,0.39229,0.59091,7Networks_LH_DorsAttn_Post_1,Dorsal attention
+70,σ1intra^2,0.53439,0.05296,0.43058,0.6382,7Networks_LH_DorsAttn_Post_2,Dorsal attention
+70,σ2intra^2,0.53439,0.05296,0.43058,0.6382,7Networks_LH_DorsAttn_Post_2,Dorsal attention
+70,σinter^2,0.46353,0.05012,0.3653,0.56176,7Networks_LH_DorsAttn_Post_2,Dorsal attention
+71,σ1intra^2,0.48937,0.05023,0.39092,0.58782,7Networks_LH_DorsAttn_Post_3,Dorsal attention
+71,σ2intra^2,0.48937,0.05023,0.39092,0.58782,7Networks_LH_DorsAttn_Post_3,Dorsal attention
+71,σinter^2,0.50856,0.05102,0.40857,0.60855,7Networks_LH_DorsAttn_Post_3,Dorsal attention
+72,σ1intra^2,0.43727,0.04698,0.34519,0.52935,7Networks_LH_DorsAttn_Post_4,Dorsal attention
+72,σ2intra^2,0.43727,0.04698,0.34519,0.52935,7Networks_LH_DorsAttn_Post_4,Dorsal attention
+72,σinter^2,0.56066,0.05214,0.45847,0.66284,7Networks_LH_DorsAttn_Post_4,Dorsal attention
+73,σ1intra^2,0.41113,0.04531,0.32232,0.49994,7Networks_LH_DorsAttn_Post_5,Dorsal attention
+73,σ2intra^2,0.41113,0.04531,0.32232,0.49994,7Networks_LH_DorsAttn_Post_5,Dorsal attention
+73,σinter^2,0.5868,0.05273,0.48345,0.69014,7Networks_LH_DorsAttn_Post_5,Dorsal attention
+74,σ1intra^2,0.55365,0.05412,0.44759,0.65972,7Networks_LH_DorsAttn_Post_6,Dorsal attention
+74,σ2intra^2,0.55365,0.05412,0.44759,0.65972,7Networks_LH_DorsAttn_Post_6,Dorsal attention
+74,σinter^2,0.44427,0.04976,0.34675,0.54179,7Networks_LH_DorsAttn_Post_6,Dorsal attention
+75,σ1intra^2,0.25554,0.03455,0.18782,0.32325,7Networks_LH_DorsAttn_Post_7,Dorsal attention
+75,σ2intra^2,0.25554,0.03455,0.18782,0.32325,7Networks_LH_DorsAttn_Post_7,Dorsal attention
+75,σinter^2,0.74239,0.05665,0.63135,0.85342,7Networks_LH_DorsAttn_Post_7,Dorsal attention
+76,σ1intra^2,0.59789,0.05672,0.48672,0.70906,7Networks_LH_DorsAttn_Post_8,Dorsal attention
+76,σ2intra^2,0.59789,0.05672,0.48672,0.70906,7Networks_LH_DorsAttn_Post_8,Dorsal attention
+76,σinter^2,0.40003,0.04897,0.30405,0.49602,7Networks_LH_DorsAttn_Post_8,Dorsal attention
+77,σ1intra^2,0.45836,0.04831,0.36367,0.55304,7Networks_LH_DorsAttn_Post_9,Dorsal attention
+77,σ2intra^2,0.45836,0.04831,0.36367,0.55304,7Networks_LH_DorsAttn_Post_9,Dorsal attention
+77,σinter^2,0.53957,0.05167,0.43829,0.64084,7Networks_LH_DorsAttn_Post_9,Dorsal attention
+78,σ1intra^2,0.39637,0.04435,0.30944,0.4833,7Networks_LH_DorsAttn_Post_10,Dorsal attention
+78,σ2intra^2,0.39637,0.04435,0.30944,0.4833,7Networks_LH_DorsAttn_Post_10,Dorsal attention
+78,σinter^2,0.60155,0.05307,0.49752999999999997,0.70558,7Networks_LH_DorsAttn_Post_10,Dorsal attention
+79,σ1intra^2,0.5414,0.05338,0.43676,0.64603,7Networks_LH_DorsAttn_Post_11,Dorsal attention
+79,σ2intra^2,0.5414,0.05338,0.43676,0.64603,7Networks_LH_DorsAttn_Post_11,Dorsal attention
+79,σinter^2,0.45653,0.04998,0.35856,0.5545,7Networks_LH_DorsAttn_Post_11,Dorsal attention
+80,σ1intra^2,0.36417,0.04223,0.28141,0.44693,7Networks_LH_DorsAttn_Post_12,Dorsal attention
+80,σ2intra^2,0.36417,0.04223,0.28141,0.44693,7Networks_LH_DorsAttn_Post_12,Dorsal attention
+80,σinter^2,0.63375,0.05385,0.52822,0.73929,7Networks_LH_DorsAttn_Post_12,Dorsal attention
+81,σ1intra^2,0.46459,0.0487,0.36914,0.56003,7Networks_LH_DorsAttn_Post_13,Dorsal attention
+81,σ2intra^2,0.46459,0.0487,0.36914,0.56003,7Networks_LH_DorsAttn_Post_13,Dorsal attention
+81,σinter^2,0.53334,0.05154,0.43233,0.63435,7Networks_LH_DorsAttn_Post_13,Dorsal attention
+82,σ1intra^2,0.33425,0.0402,0.25547,0.41304,7Networks_LH_DorsAttn_Post_14,Dorsal attention
+82,σ2intra^2,0.33425,0.0402,0.25547,0.41304,7Networks_LH_DorsAttn_Post_14,Dorsal attention
+82,σinter^2,0.66367,0.05459,0.55668,0.77066,7Networks_LH_DorsAttn_Post_14,Dorsal attention
+83,σ1intra^2,0.55094,0.05395,0.44519,0.65669,7Networks_LH_DorsAttn_Post_15,Dorsal attention
+83,σ2intra^2,0.55094,0.05395,0.44519,0.65669,7Networks_LH_DorsAttn_Post_15,Dorsal attention
+83,σinter^2,0.44699,0.04981,0.34937,0.5446,7Networks_LH_DorsAttn_Post_15,Dorsal attention
+84,σ1intra^2,0.50232,0.05102,0.40232,0.60233,7Networks_LH_DorsAttn_Post_16,Dorsal attention
+84,σ2intra^2,0.50232,0.05102,0.40232,0.60233,7Networks_LH_DorsAttn_Post_16,Dorsal attention
+84,σinter^2,0.4956,0.05075,0.39613,0.59507,7Networks_LH_DorsAttn_Post_16,Dorsal attention
+85,σ1intra^2,0.52395,0.05234,0.42137,0.62653,7Networks_LH_DorsAttn_Post_17,Dorsal attention
+85,σ2intra^2,0.52395,0.05234,0.42137,0.62653,7Networks_LH_DorsAttn_Post_17,Dorsal attention
+85,σinter^2,0.47398,0.05032,0.37535,0.5726,7Networks_LH_DorsAttn_Post_17,Dorsal attention
+86,σ1intra^2,0.34483,0.04092,0.26463,0.42504,7Networks_LH_DorsAttn_FEF_1,Dorsal attention
+86,σ2intra^2,0.34483,0.04092,0.26463,0.42504,7Networks_LH_DorsAttn_FEF_1,Dorsal attention
+86,σinter^2,0.65309,0.05432,0.54662,0.75956,7Networks_LH_DorsAttn_FEF_1,Dorsal attention
+87,σ1intra^2,0.46802,0.04891,0.37216,0.56389,7Networks_LH_DorsAttn_FEF_2,Dorsal attention
+87,σ2intra^2,0.46802,0.04891,0.37216,0.56389,7Networks_LH_DorsAttn_FEF_2,Dorsal attention
+87,σinter^2,0.5299,0.05147,0.42903,0.63077,7Networks_LH_DorsAttn_FEF_2,Dorsal attention
+88,σ1intra^2,0.30271,0.03799,0.22824,0.37718,7Networks_LH_DorsAttn_FEF_3,Dorsal attention
+88,σ2intra^2,0.30271,0.03799,0.22824,0.37718,7Networks_LH_DorsAttn_FEF_3,Dorsal attention
+88,σinter^2,0.69521,0.0554,0.58664,0.80379,7Networks_LH_DorsAttn_FEF_3,Dorsal attention
+89,σ1intra^2,0.58482,0.05596,0.47515,0.69449,7Networks_LH_DorsAttn_FEF_4,Dorsal attention
+89,σ2intra^2,0.58482,0.05596,0.47515,0.69449,7Networks_LH_DorsAttn_FEF_4,Dorsal attention
+89,σinter^2,0.4131,0.04919,0.31668,0.50952,7Networks_LH_DorsAttn_FEF_4,Dorsal attention
+90,σ1intra^2,0.3837,0.04352,0.2984,0.469,7Networks_LH_DorsAttn_PrCv_1,Dorsal attention
+90,σ2intra^2,0.3837,0.04352,0.2984,0.469,7Networks_LH_DorsAttn_PrCv_1,Dorsal attention
+90,σinter^2,0.61423,0.05337,0.50961,0.71884,7Networks_LH_DorsAttn_PrCv_1,Dorsal attention
+91,σ1intra^2,0.29807,0.03766,0.22425,0.37189,7Networks_LH_DorsAttn_PrCv_2,Dorsal attention
+91,σ2intra^2,0.29807,0.03766,0.22425,0.37189,7Networks_LH_DorsAttn_PrCv_2,Dorsal attention
+91,σinter^2,0.69985,0.05552,0.59104,0.80867,7Networks_LH_DorsAttn_PrCv_2,Dorsal attention
+92,σ1intra^2,0.49794,0.05076,0.39846,0.59743,7Networks_LH_SalVentAttn_ParOper_1,Ventral attention
+92,σ2intra^2,0.49794,0.05076,0.39846,0.59743,7Networks_LH_SalVentAttn_ParOper_1,Ventral attention
+92,σinter^2,0.49998,0.05084,0.40034,0.59963,7Networks_LH_SalVentAttn_ParOper_1,Ventral attention
+93,σ1intra^2,0.49272,0.05044,0.39386,0.59157,7Networks_LH_SalVentAttn_ParOper_2,Ventral attention
+93,σ2intra^2,0.49272,0.05044,0.39386,0.59157,7Networks_LH_SalVentAttn_ParOper_2,Ventral attention
+93,σinter^2,0.50521,0.05095,0.40535,0.60506,7Networks_LH_SalVentAttn_ParOper_2,Ventral attention
+94,σ1intra^2,0.49692,0.05069,0.39756,0.59628,7Networks_LH_SalVentAttn_ParOper_3,Ventral attention
+94,σ2intra^2,0.49692,0.05069,0.39756,0.59628,7Networks_LH_SalVentAttn_ParOper_3,Ventral attention
+94,σinter^2,0.501,0.05086,0.40132,0.60069,7Networks_LH_SalVentAttn_ParOper_3,Ventral attention
+95,σ1intra^2,0.41595,0.04562,0.32653,0.50536,7Networks_LH_SalVentAttn_ParOper_4,Ventral attention
+95,σ2intra^2,0.41595,0.04562,0.32653,0.50536,7Networks_LH_SalVentAttn_ParOper_4,Ventral attention
+95,σinter^2,0.58198,0.05262,0.47885,0.68511,7Networks_LH_SalVentAttn_ParOper_4,Ventral attention
+96,σ1intra^2,0.27829,0.03624,0.20727,0.34931,7Networks_LH_SalVentAttn_TempOcc_1,Ventral attention
+96,σ2intra^2,0.27829,0.03624,0.20727,0.34931,7Networks_LH_SalVentAttn_TempOcc_1,Ventral attention
+96,σinter^2,0.71964,0.05604,0.6098,0.82947,7Networks_LH_SalVentAttn_TempOcc_1,Ventral attention
+97,σ1intra^2,0.67507,0.06116,0.55519,0.79494,7Networks_LH_SalVentAttn_FrOperIns_1,Ventral attention
+97,σ2intra^2,0.67507,0.06116,0.55519,0.79494,7Networks_LH_SalVentAttn_FrOperIns_1,Ventral attention
+97,σinter^2,0.32286,0.04777,0.22922,0.41649,7Networks_LH_SalVentAttn_FrOperIns_1,Ventral attention
+98,σ1intra^2,0.64827,0.05963,0.53139,0.76515,7Networks_LH_SalVentAttn_FrOperIns_2,Ventral attention
+98,σ2intra^2,0.64827,0.05963,0.53139,0.76515,7Networks_LH_SalVentAttn_FrOperIns_2,Ventral attention
+98,σinter^2,0.34966,0.04816,0.25526,0.44406,7Networks_LH_SalVentAttn_FrOperIns_2,Ventral attention
+99,σ1intra^2,0.47465,0.04932,0.37798,0.57132,7Networks_LH_SalVentAttn_FrOperIns_3,Ventral attention
+99,σ2intra^2,0.47465,0.04932,0.37798,0.57132,7Networks_LH_SalVentAttn_FrOperIns_3,Ventral attention
+99,σinter^2,0.52327,0.05132,0.42268,0.62387,7Networks_LH_SalVentAttn_FrOperIns_3,Ventral attention
+100,σ1intra^2,0.60344,0.05705,0.49163,0.71525,7Networks_LH_SalVentAttn_FrOperIns_4,Ventral attention
+100,σ2intra^2,0.60344,0.05705,0.49163,0.71525,7Networks_LH_SalVentAttn_FrOperIns_4,Ventral attention
+100,σinter^2,0.39449,0.04888,0.29869,0.49028,7Networks_LH_SalVentAttn_FrOperIns_4,Ventral attention
+101,σ1intra^2,0.36795,0.04248,0.28469,0.45121,7Networks_LH_SalVentAttn_FrOperIns_5,Ventral attention
+101,σ2intra^2,0.36795,0.04248,0.28469,0.45121,7Networks_LH_SalVentAttn_FrOperIns_5,Ventral attention
+101,σinter^2,0.62997,0.05375,0.52462,0.73533,7Networks_LH_SalVentAttn_FrOperIns_5,Ventral attention
+102,σ1intra^2,0.47178,0.04915,0.37546,0.56811,7Networks_LH_SalVentAttn_FrOperIns_6,Ventral attention
+102,σ2intra^2,0.47178,0.04915,0.37546,0.56811,7Networks_LH_SalVentAttn_FrOperIns_6,Ventral attention
+102,σinter^2,0.52614,0.05138,0.42543,0.62686,7Networks_LH_SalVentAttn_FrOperIns_6,Ventral attention
+103,σ1intra^2,0.55804,0.05438,0.45147,0.66462,7Networks_LH_SalVentAttn_FrOperIns_7,Ventral attention
+103,σ2intra^2,0.55804,0.05438,0.45147,0.66462,7Networks_LH_SalVentAttn_FrOperIns_7,Ventral attention
+103,σinter^2,0.43988,0.04967,0.34252,0.53724,7Networks_LH_SalVentAttn_FrOperIns_7,Ventral attention
+104,σ1intra^2,0.5461,0.05367,0.44092,0.65129,7Networks_LH_SalVentAttn_FrOperIns_8,Ventral attention
+104,σ2intra^2,0.5461,0.05367,0.44092,0.65129,7Networks_LH_SalVentAttn_FrOperIns_8,Ventral attention
+104,σinter^2,0.45182,0.0499,0.35403,0.54962,7Networks_LH_SalVentAttn_FrOperIns_8,Ventral attention
+105,σ1intra^2,0.4352,0.04685,0.34338,0.52703,7Networks_LH_SalVentAttn_FrOperIns_9,Ventral attention
+105,σ2intra^2,0.4352,0.04685,0.34338,0.52703,7Networks_LH_SalVentAttn_FrOperIns_9,Ventral attention
+105,σinter^2,0.56272,0.05218,0.46045,0.665,7Networks_LH_SalVentAttn_FrOperIns_9,Ventral attention
+106,σ1intra^2,0.46637,0.04881,0.37071,0.56204,7Networks_LH_SalVentAttn_PFCl_1,Ventral attention
+106,σ2intra^2,0.46637,0.04881,0.37071,0.56204,7Networks_LH_SalVentAttn_PFCl_1,Ventral attention
+106,σinter^2,0.53155,0.0515,0.43061,0.63249,7Networks_LH_SalVentAttn_PFCl_1,Ventral attention
+107,σ1intra^2,0.53911,0.05325,0.43474,0.64347,7Networks_LH_SalVentAttn_Med_1,Ventral attention
+107,σ2intra^2,0.53911,0.05325,0.43474,0.64347,7Networks_LH_SalVentAttn_Med_1,Ventral attention
+107,σinter^2,0.45882,0.05003,0.36076,0.55687,7Networks_LH_SalVentAttn_Med_1,Ventral attention
+108,σ1intra^2,0.64059,0.05919,0.52457,0.75661,7Networks_LH_SalVentAttn_Med_2,Ventral attention
+108,σ2intra^2,0.64059,0.05919,0.52457,0.75661,7Networks_LH_SalVentAttn_Med_2,Ventral attention
+108,σinter^2,0.35734,0.048280000000000003,0.26271,0.45197,7Networks_LH_SalVentAttn_Med_2,Ventral attention
+109,σ1intra^2,0.41776,0.04574,0.32812,0.5074,7Networks_LH_SalVentAttn_Med_3,Ventral attention
+109,σ2intra^2,0.41776,0.04574,0.32812,0.5074,7Networks_LH_SalVentAttn_Med_3,Ventral attention
+109,σinter^2,0.58017,0.05258,0.47712,0.68322,7Networks_LH_SalVentAttn_Med_3,Ventral attention
+110,σ1intra^2,0.60699,0.05725,0.49478,0.71921,7Networks_LH_SalVentAttn_Med_4,Ventral attention
+110,σ2intra^2,0.60699,0.05725,0.49478,0.71921,7Networks_LH_SalVentAttn_Med_4,Ventral attention
+110,σinter^2,0.39093,0.04882,0.29525,0.48661,7Networks_LH_SalVentAttn_Med_4,Ventral attention
+111,σ1intra^2,0.33212,0.04005,0.25362,0.41062,7Networks_LH_SalVentAttn_Med_5,Ventral attention
+111,σ2intra^2,0.33212,0.04005,0.25362,0.41062,7Networks_LH_SalVentAttn_Med_5,Ventral attention
+111,σinter^2,0.6658,0.05464,0.55871,0.7729,7Networks_LH_SalVentAttn_Med_5,Ventral attention
+112,σ1intra^2,0.46755,0.04888,0.37174,0.56336,7Networks_LH_SalVentAttn_Med_6,Ventral attention
+112,σ2intra^2,0.46755,0.04888,0.37174,0.56336,7Networks_LH_SalVentAttn_Med_6,Ventral attention
+112,σinter^2,0.53037,0.05148,0.42948,0.63126,7Networks_LH_SalVentAttn_Med_6,Ventral attention
+113,σ1intra^2,0.55422,0.05415,0.44809,0.66035,7Networks_LH_SalVentAttn_Med_7,Ventral attention
+113,σ2intra^2,0.55422,0.05415,0.44809,0.66035,7Networks_LH_SalVentAttn_Med_7,Ventral attention
+113,σinter^2,0.44371,0.04974,0.34621,0.54121,7Networks_LH_SalVentAttn_Med_7,Ventral attention
+114,σ1intra^2,0.75679,0.06574,0.62794,0.88564,7Networks_LH_Limbic_OFC_1,Limbic
+114,σ2intra^2,0.75679,0.06574,0.62794,0.88564,7Networks_LH_Limbic_OFC_1,Limbic
+114,σinter^2,0.24114,0.04676,0.14949,0.33279,7Networks_LH_Limbic_OFC_1,Limbic
+115,σ1intra^2,0.58893,0.0562,0.47879,0.69908,7Networks_LH_Limbic_OFC_2,Limbic
+115,σ2intra^2,0.58893,0.0562,0.47879,0.69908,7Networks_LH_Limbic_OFC_2,Limbic
+115,σinter^2,0.40899,0.04912,0.31271,0.50527,7Networks_LH_Limbic_OFC_2,Limbic
+116,σ1intra^2,0.71231,0.06326,0.58831,0.8363,7Networks_LH_Limbic_OFC_3,Limbic
+116,σ2intra^2,0.71231,0.06326,0.58831,0.8363,7Networks_LH_Limbic_OFC_3,Limbic
+116,σinter^2,0.28562,0.04728,0.19295,0.37828,7Networks_LH_Limbic_OFC_3,Limbic
+117,σ1intra^2,0.67043,0.0609,0.55108,0.78979,7Networks_LH_Limbic_OFC_4,Limbic
+117,σ2intra^2,0.67043,0.0609,0.55108,0.78979,7Networks_LH_Limbic_OFC_4,Limbic
+117,σinter^2,0.32749,0.04784,0.23373,0.42125,7Networks_LH_Limbic_OFC_4,Limbic
+118,σ1intra^2,0.46534,0.04875,0.3698,0.56088,7Networks_LH_Limbic_OFC_5,Limbic
+118,σ2intra^2,0.46534,0.04875,0.3698,0.56088,7Networks_LH_Limbic_OFC_5,Limbic
+118,σinter^2,0.53258,0.05152,0.4316,0.63356,7Networks_LH_Limbic_OFC_5,Limbic
+119,σ1intra^2,0.53354,0.05291,0.42984,0.63725,7Networks_LH_Limbic_TempPole_1,Limbic
+119,σ2intra^2,0.53354,0.05291,0.42984,0.63725,7Networks_LH_Limbic_TempPole_1,Limbic
+119,σinter^2,0.46438,0.05013,0.36612,0.56264,7Networks_LH_Limbic_TempPole_1,Limbic
+120,σ1intra^2,0.75327,0.06555,0.6248,0.88174,7Networks_LH_Limbic_TempPole_2,Limbic
+120,σ2intra^2,0.75327,0.06555,0.6248,0.88174,7Networks_LH_Limbic_TempPole_2,Limbic
+120,σinter^2,0.24466,0.0468,0.15293,0.33638,7Networks_LH_Limbic_TempPole_2,Limbic
+121,σ1intra^2,0.69098,0.06206,0.56934,0.81262,7Networks_LH_Limbic_TempPole_3,Limbic
+121,σ2intra^2,0.69098,0.06206,0.56934,0.81262,7Networks_LH_Limbic_TempPole_3,Limbic
+121,σinter^2,0.30694,0.04756,0.21374,0.40015,7Networks_LH_Limbic_TempPole_3,Limbic
+122,σ1intra^2,0.49929,0.05084,0.39964,0.59893,7Networks_LH_Limbic_TempPole_4,Limbic
+122,σ2intra^2,0.49929,0.05084,0.39964,0.59893,7Networks_LH_Limbic_TempPole_4,Limbic
+122,σinter^2,0.49864000000000003,0.05081,0.39905,0.59823,7Networks_LH_Limbic_TempPole_4,Limbic
+123,σ1intra^2,0.45703,0.04823,0.36251,0.55155,7Networks_LH_Limbic_TempPole_5,Limbic
+123,σ2intra^2,0.45703,0.04823,0.36251,0.55155,7Networks_LH_Limbic_TempPole_5,Limbic
+123,σinter^2,0.54089,0.0517,0.43956,0.64223,7Networks_LH_Limbic_TempPole_5,Limbic
+124,σ1intra^2,0.50638,0.05127,0.40589,0.60687,7Networks_LH_Limbic_TempPole_6,Limbic
+124,σ2intra^2,0.50638,0.05127,0.40589,0.60687,7Networks_LH_Limbic_TempPole_6,Limbic
+124,σinter^2,0.49155,0.05067,0.39224,0.59086,7Networks_LH_Limbic_TempPole_6,Limbic
+125,σ1intra^2,0.53957,0.05328,0.43515,0.64399,7Networks_LH_Limbic_TempPole_7,Limbic
+125,σ2intra^2,0.53957,0.05328,0.43515,0.64399,7Networks_LH_Limbic_TempPole_7,Limbic
+125,σinter^2,0.45836,0.05002,0.36032,0.55639,7Networks_LH_Limbic_TempPole_7,Limbic
+126,σ1intra^2,0.55247,0.05405,0.44654,0.6584,7Networks_LH_Limbic_TempPole_8,Limbic
+126,σ2intra^2,0.55247,0.05405,0.44654,0.6584,7Networks_LH_Limbic_TempPole_8,Limbic
+126,σinter^2,0.44545,0.04978,0.34789,0.54302,7Networks_LH_Limbic_TempPole_8,Limbic
+127,σ1intra^2,0.47284,0.04921,0.37639,0.56929,7Networks_LH_Cont_Par_1,Frontoparietal
+127,σ2intra^2,0.47284,0.04921,0.37639,0.56929,7Networks_LH_Cont_Par_1,Frontoparietal
+127,σinter^2,0.52509,0.05136,0.42442,0.62575,7Networks_LH_Cont_Par_1,Frontoparietal
+128,σ1intra^2,0.3804,0.04331,0.29553,0.46528,7Networks_LH_Cont_Par_2,Frontoparietal
+128,σ2intra^2,0.3804,0.04331,0.29553,0.46528,7Networks_LH_Cont_Par_2,Frontoparietal
+128,σinter^2,0.61752,0.05345,0.51275,0.72229,7Networks_LH_Cont_Par_2,Frontoparietal
+129,σ1intra^2,0.36887,0.04254,0.28549,0.45224,7Networks_LH_Cont_Par_3,Frontoparietal
+129,σ2intra^2,0.36887,0.04254,0.28549,0.45224,7Networks_LH_Cont_Par_3,Frontoparietal
+129,σinter^2,0.62906,0.05373,0.52375,0.73437,7Networks_LH_Cont_Par_3,Frontoparietal
+130,σ1intra^2,0.38262,0.04345,0.29745,0.46778,7Networks_LH_Cont_Par_4,Frontoparietal
+130,σ2intra^2,0.38262,0.04345,0.29745,0.46778,7Networks_LH_Cont_Par_4,Frontoparietal
+130,σinter^2,0.61531,0.0534,0.51065,0.71997,7Networks_LH_Cont_Par_4,Frontoparietal
+131,σ1intra^2,0.39221,0.04408,0.30581,0.47861,7Networks_LH_Cont_Par_5,Frontoparietal
+131,σ2intra^2,0.39221,0.04408,0.30581,0.47861,7Networks_LH_Cont_Par_5,Frontoparietal
+131,σinter^2,0.60572,0.05317,0.5015,0.70993,7Networks_LH_Cont_Par_5,Frontoparietal
+132,σ1intra^2,0.51233,0.05163,0.41113,0.61353,7Networks_LH_Cont_Par_6,Frontoparietal
+132,σ2intra^2,0.51233,0.05163,0.41113,0.61353,7Networks_LH_Cont_Par_6,Frontoparietal
+132,σinter^2,0.48559,0.05055,0.38652,0.58467,7Networks_LH_Cont_Par_6,Frontoparietal
+133,σ1intra^2,0.47257,0.04919,0.37615,0.56899,7Networks_LH_Cont_Temp_1,Frontoparietal
+133,σ2intra^2,0.47257,0.04919,0.37615,0.56899,7Networks_LH_Cont_Temp_1,Frontoparietal
+133,σinter^2,0.52535,0.05137,0.42467,0.62603,7Networks_LH_Cont_Temp_1,Frontoparietal
+134,σ1intra^2,0.42008,0.04589,0.33015,0.51002,7Networks_LH_Cont_OFC_1,Frontoparietal
+134,σ2intra^2,0.42008,0.04589,0.33015,0.51002,7Networks_LH_Cont_OFC_1,Frontoparietal
+134,σinter^2,0.57784,0.05252,0.4749,0.68079,7Networks_LH_Cont_OFC_1,Frontoparietal
+135,σ1intra^2,0.3902,0.04395,0.30406,0.47634,7Networks_LH_Cont_PFCl_1,Frontoparietal
+135,σ2intra^2,0.3902,0.04395,0.30406,0.47634,7Networks_LH_Cont_PFCl_1,Frontoparietal
+135,σinter^2,0.60773,0.05322,0.50342,0.71204,7Networks_LH_Cont_PFCl_1,Frontoparietal
+136,σ1intra^2,0.34659,0.04104,0.26615,0.42703,7Networks_LH_Cont_PFCl_2,Frontoparietal
+136,σ2intra^2,0.34659,0.04104,0.26615,0.42703,7Networks_LH_Cont_PFCl_2,Frontoparietal
+136,σinter^2,0.65134,0.05428,0.54495,0.75772,7Networks_LH_Cont_PFCl_2,Frontoparietal
+137,σ1intra^2,0.36019,0.04196,0.27795,0.44243,7Networks_LH_Cont_PFCl_3,Frontoparietal
+137,σ2intra^2,0.36019,0.04196,0.27795,0.44243,7Networks_LH_Cont_PFCl_3,Frontoparietal
+137,σinter^2,0.63773,0.05394,0.53201,0.74346,7Networks_LH_Cont_PFCl_3,Frontoparietal
+138,σ1intra^2,0.40759,0.04508,0.31923,0.49594,7Networks_LH_Cont_PFCl_4,Frontoparietal
+138,σ2intra^2,0.40759,0.04508,0.31923,0.49594,7Networks_LH_Cont_PFCl_4,Frontoparietal
+138,σinter^2,0.59034,0.05281,0.48683,0.69385,7Networks_LH_Cont_PFCl_4,Frontoparietal
+139,σ1intra^2,0.36677,0.0424,0.28367,0.44988,7Networks_LH_Cont_PFCl_5,Frontoparietal
+139,σ2intra^2,0.36677,0.0424,0.28367,0.44988,7Networks_LH_Cont_PFCl_5,Frontoparietal
+139,σinter^2,0.63115,0.05378,0.52574,0.73656,7Networks_LH_Cont_PFCl_5,Frontoparietal
+140,σ1intra^2,0.38526,0.04363,0.29976,0.47077,7Networks_LH_Cont_PFCl_6,Frontoparietal
+140,σ2intra^2,0.38526,0.04363,0.29976,0.47077,7Networks_LH_Cont_PFCl_6,Frontoparietal
+140,σinter^2,0.61266,0.05334,0.50813,0.7172,7Networks_LH_Cont_PFCl_6,Frontoparietal
+141,σ1intra^2,0.30899,0.03844,0.23365,0.38433,7Networks_LH_Cont_PFCl_7,Frontoparietal
+141,σ2intra^2,0.30899,0.03844,0.23365,0.38433,7Networks_LH_Cont_PFCl_7,Frontoparietal
+141,σinter^2,0.68894,0.05523,0.58068,0.79719,7Networks_LH_Cont_PFCl_7,Frontoparietal
+142,σ1intra^2,0.36796,0.04248,0.2847,0.45122,7Networks_LH_Cont_PFCl_8,Frontoparietal
+142,σ2intra^2,0.36796,0.04248,0.2847,0.45122,7Networks_LH_Cont_PFCl_8,Frontoparietal
+142,σinter^2,0.62997,0.05375,0.52461,0.73532,7Networks_LH_Cont_PFCl_8,Frontoparietal
+143,σ1intra^2,0.495,0.05058,0.39587,0.59413,7Networks_LH_Cont_PFCv_1,Frontoparietal
+143,σ2intra^2,0.495,0.05058,0.39587,0.59413,7Networks_LH_Cont_PFCv_1,Frontoparietal
+143,σinter^2,0.50292,0.0509,0.40316,0.60269,7Networks_LH_Cont_PFCv_1,Frontoparietal
+144,σ1intra^2,0.45622,0.04818,0.3618,0.55064,7Networks_LH_Cont_pCun_1,Frontoparietal
+144,σ2intra^2,0.45622,0.04818,0.3618,0.55064,7Networks_LH_Cont_pCun_1,Frontoparietal
+144,σinter^2,0.54171,0.05172,0.44034,0.64307,7Networks_LH_Cont_pCun_1,Frontoparietal
+145,σ1intra^2,0.46589,0.04878,0.37028,0.56149,7Networks_LH_Cont_pCun_2,Frontoparietal
+145,σ2intra^2,0.46589,0.04878,0.37028,0.56149,7Networks_LH_Cont_pCun_2,Frontoparietal
+145,σinter^2,0.53204,0.05151,0.43108,0.633,7Networks_LH_Cont_pCun_2,Frontoparietal
+146,σ1intra^2,0.60572,0.05718,0.49365,0.71778,7Networks_LH_Cont_Cing_1,Frontoparietal
+146,σ2intra^2,0.60572,0.05718,0.49365,0.71778,7Networks_LH_Cont_Cing_1,Frontoparietal
+146,σinter^2,0.39221,0.04884,0.29649,0.48793,7Networks_LH_Cont_Cing_1,Frontoparietal
+147,σ1intra^2,0.51957,0.05207,0.41751,0.62163,7Networks_LH_Cont_Cing_2,Frontoparietal
+147,σ2intra^2,0.51957,0.05207,0.41751,0.62163,7Networks_LH_Cont_Cing_2,Frontoparietal
+147,σinter^2,0.47835,0.05041,0.37956,0.57715,7Networks_LH_Cont_Cing_2,Frontoparietal
+148,σ1intra^2,0.50614,0.05126,0.40568,0.6066,7Networks_LH_Cont_PFCmp_1,Frontoparietal
+148,σ2intra^2,0.50614,0.05126,0.40568,0.6066,7Networks_LH_Cont_PFCmp_1,Frontoparietal
+148,σinter^2,0.49178,0.05067,0.39246,0.5911,7Networks_LH_Cont_PFCmp_1,Frontoparietal
+149,σ1intra^2,0.61705,0.05784,0.50369,0.73041,7Networks_LH_Default_Temp_1,Default
+149,σ2intra^2,0.61705,0.05784,0.50369,0.73041,7Networks_LH_Default_Temp_1,Default
+149,σinter^2,0.38088,0.04865,0.28552,0.47623,7Networks_LH_Default_Temp_1,Default
+150,σ1intra^2,0.49923,0.05084,0.39959,0.59887,7Networks_LH_Default_Temp_2,Default
+150,σ2intra^2,0.49923,0.05084,0.39959,0.59887,7Networks_LH_Default_Temp_2,Default
+150,σinter^2,0.49869,0.05081,0.3991,0.59829,7Networks_LH_Default_Temp_2,Default
+151,σ1intra^2,0.42867,0.04644,0.33766,0.51968,7Networks_LH_Default_Temp_3,Default
+151,σ2intra^2,0.42867,0.04644,0.33766,0.51968,7Networks_LH_Default_Temp_3,Default
+151,σinter^2,0.56926,0.05233,0.46669,0.67182,7Networks_LH_Default_Temp_3,Default
+152,σ1intra^2,0.59639,0.05663,0.48539,0.70739,7Networks_LH_Default_Temp_4,Default
+152,σ2intra^2,0.59639,0.05663,0.48539,0.70739,7Networks_LH_Default_Temp_4,Default
+152,σinter^2,0.40154,0.049,0.30551,0.49757,7Networks_LH_Default_Temp_4,Default
+153,σ1intra^2,0.55089,0.05395,0.44514,0.65663,7Networks_LH_Default_Temp_5,Default
+153,σ2intra^2,0.55089,0.05395,0.44514,0.65663,7Networks_LH_Default_Temp_5,Default
+153,σinter^2,0.44704,0.04981,0.34942,0.54466,7Networks_LH_Default_Temp_5,Default
+154,σ1intra^2,0.45151,0.04788,0.35767,0.54536,7Networks_LH_Default_Temp_6,Default
+154,σ2intra^2,0.45151,0.04788,0.35767,0.54536,7Networks_LH_Default_Temp_6,Default
+154,σinter^2,0.54641,0.05182,0.44484,0.64798,7Networks_LH_Default_Temp_6,Default
+155,σ1intra^2,0.45569,0.04814,0.36133,0.55005,7Networks_LH_Default_Temp_7,Default
+155,σ2intra^2,0.45569,0.04814,0.36133,0.55005,7Networks_LH_Default_Temp_7,Default
+155,σinter^2,0.54224000000000006,0.05173,0.44085,0.64363,7Networks_LH_Default_Temp_7,Default
+156,σ1intra^2,0.52873,0.05262,0.42558,0.63187,7Networks_LH_Default_Temp_8,Default
+156,σ2intra^2,0.52873,0.05262,0.42558,0.63187,7Networks_LH_Default_Temp_8,Default
+156,σinter^2,0.4692,0.05023,0.37075,0.56764,7Networks_LH_Default_Temp_8,Default
+157,σ1intra^2,0.51915,0.05205,0.41714,0.62116,7Networks_LH_Default_Temp_9,Default
+157,σ2intra^2,0.51915,0.05205,0.41714,0.62116,7Networks_LH_Default_Temp_9,Default
+157,σinter^2,0.47878,0.05041,0.37997,0.57759,7Networks_LH_Default_Temp_9,Default
+158,σ1intra^2,0.41268,0.04541,0.32367,0.50168,7Networks_LH_Default_Temp_10,Default
+158,σ2intra^2,0.41268,0.04541,0.32367,0.50168,7Networks_LH_Default_Temp_10,Default
+158,σinter^2,0.58525,0.05269,0.48197,0.68853,7Networks_LH_Default_Temp_10,Default
+159,σ1intra^2,0.47374,0.04927,0.37718,0.5703,7Networks_LH_Default_Par_1,Default
+159,σ2intra^2,0.47374,0.04927,0.37718,0.5703,7Networks_LH_Default_Par_1,Default
+159,σinter^2,0.52419,0.05134,0.42356,0.62482,7Networks_LH_Default_Par_1,Default
+160,σ1intra^2,0.49519,0.05059,0.39603,0.59434,7Networks_LH_Default_Par_2,Default
+160,σ2intra^2,0.49519,0.05059,0.39603,0.59434,7Networks_LH_Default_Par_2,Default
+160,σinter^2,0.50274,0.0509,0.40298,0.60249,7Networks_LH_Default_Par_2,Default
+161,σ1intra^2,0.47248,0.04919,0.37607,0.56889,7Networks_LH_Default_Par_3,Default
+161,σ2intra^2,0.47248,0.04919,0.37607,0.56889,7Networks_LH_Default_Par_3,Default
+161,σinter^2,0.52544,0.05137,0.42476,0.62613,7Networks_LH_Default_Par_3,Default
+162,σ1intra^2,0.44918,0.04773,0.35562,0.54273,7Networks_LH_Default_Par_4,Default
+162,σ2intra^2,0.44918,0.04773,0.35562,0.54273,7Networks_LH_Default_Par_4,Default
+162,σinter^2,0.54875,0.05187,0.44708,0.65042,7Networks_LH_Default_Par_4,Default
+163,σ1intra^2,0.47994,0.04965,0.38263,0.57726,7Networks_LH_Default_Par_5,Default
+163,σ2intra^2,0.47994,0.04965,0.38263,0.57726,7Networks_LH_Default_Par_5,Default
+163,σinter^2,0.51798,0.05121,0.41761,0.61836,7Networks_LH_Default_Par_5,Default
+164,σ1intra^2,0.42703,0.04633,0.33622,0.51784,7Networks_LH_Default_Par_6,Default
+164,σ2intra^2,0.42703,0.04633,0.33622,0.51784,7Networks_LH_Default_Par_6,Default
+164,σinter^2,0.5709,0.05237,0.46826,0.67353,7Networks_LH_Default_Par_6,Default
+165,σ1intra^2,0.43378,0.04676,0.34213,0.52543,7Networks_LH_Default_Par_7,Default
+165,σ2intra^2,0.43378,0.04676,0.34213,0.52543,7Networks_LH_Default_Par_7,Default
+165,σinter^2,0.56415,0.05221,0.46181,0.66649,7Networks_LH_Default_Par_7,Default
+166,σ1intra^2,0.54615,0.05367,0.44096,0.65133,7Networks_LH_Default_PFC_1,Default
+166,σ2intra^2,0.54615,0.05367,0.44096,0.65133,7Networks_LH_Default_PFC_1,Default
+166,σinter^2,0.45178,0.0499,0.35399,0.54957,7Networks_LH_Default_PFC_1,Default
+167,σ1intra^2,0.38359,0.04352,0.2983,0.46888,7Networks_LH_Default_PFC_2,Default
+167,σ2intra^2,0.38359,0.04352,0.2983,0.46888,7Networks_LH_Default_PFC_2,Default
+167,σinter^2,0.61434,0.05338,0.50972,0.71895,7Networks_LH_Default_PFC_2,Default
+168,σ1intra^2,0.51095,0.05155,0.40992,0.61199,7Networks_LH_Default_PFC_3,Default
+168,σ2intra^2,0.51095,0.05155,0.40992,0.61199,7Networks_LH_Default_PFC_3,Default
+168,σinter^2,0.48697,0.05058,0.38784,0.5861,7Networks_LH_Default_PFC_3,Default
+169,σ1intra^2,0.43383,0.04676,0.34218,0.52549,7Networks_LH_Default_PFC_4,Default
+169,σ2intra^2,0.43383,0.04676,0.34218,0.52549,7Networks_LH_Default_PFC_4,Default
+169,σinter^2,0.56409,0.05221,0.46176,0.66643,7Networks_LH_Default_PFC_4,Default
+170,σ1intra^2,0.41375,0.04548,0.32461,0.50288,7Networks_LH_Default_PFC_5,Default
+170,σ2intra^2,0.41375,0.04548,0.32461,0.50288,7Networks_LH_Default_PFC_5,Default
+170,σinter^2,0.58418,0.05267,0.48095,0.68741,7Networks_LH_Default_PFC_5,Default
+171,σ1intra^2,0.33947,0.04056,0.25999,0.41896,7Networks_LH_Default_PFC_6,Default
+171,σ2intra^2,0.33947,0.04056,0.25999,0.41896,7Networks_LH_Default_PFC_6,Default
+171,σinter^2,0.65845,0.05446,0.55172,0.76519,7Networks_LH_Default_PFC_6,Default
+172,σ1intra^2,0.34837,0.04116,0.2677,0.42905,7Networks_LH_Default_PFC_7,Default
+172,σ2intra^2,0.34837,0.04116,0.2677,0.42905,7Networks_LH_Default_PFC_7,Default
+172,σinter^2,0.64955,0.05424,0.54325,0.75585,7Networks_LH_Default_PFC_7,Default
+173,σ1intra^2,0.4474,0.04762,0.35406,0.54074,7Networks_LH_Default_PFC_8,Default
+173,σ2intra^2,0.4474,0.04762,0.35406,0.54074,7Networks_LH_Default_PFC_8,Default
+173,σinter^2,0.55052,0.05191,0.44878,0.65227,7Networks_LH_Default_PFC_8,Default
+174,σ1intra^2,0.50058,0.05092,0.40079,0.60038,7Networks_LH_Default_PFC_9,Default
+174,σ2intra^2,0.50058,0.05092,0.40079,0.60038,7Networks_LH_Default_PFC_9,Default
+174,σinter^2,0.49734,0.05079,0.3978,0.59688,7Networks_LH_Default_PFC_9,Default
+175,σ1intra^2,0.3456,0.04097,0.2653,0.42591,7Networks_LH_Default_PFC_10,Default
+175,σ2intra^2,0.3456,0.04097,0.2653,0.42591,7Networks_LH_Default_PFC_10,Default
+175,σinter^2,0.65232,0.0543,0.54589,0.75876,7Networks_LH_Default_PFC_10,Default
+176,σ1intra^2,0.43973,0.04714,0.34734,0.53212,7Networks_LH_Default_PFC_11,Default
+176,σ2intra^2,0.43973,0.04714,0.34734,0.53212,7Networks_LH_Default_PFC_11,Default
+176,σinter^2,0.5582,0.05208,0.45612,0.66027,7Networks_LH_Default_PFC_11,Default
+177,σ1intra^2,0.55177,0.054,0.44592,0.65761,7Networks_LH_Default_PFC_12,Default
+177,σ2intra^2,0.55177,0.054,0.44592,0.65761,7Networks_LH_Default_PFC_12,Default
+177,σinter^2,0.44616,0.04979,0.34857,0.54375,7Networks_LH_Default_PFC_12,Default
+178,σ1intra^2,0.46159,0.04851,0.36651,0.55667,7Networks_LH_Default_PFC_13,Default
+178,σ2intra^2,0.46159,0.04851,0.36651,0.55667,7Networks_LH_Default_PFC_13,Default
+178,σinter^2,0.53634,0.0516,0.43519,0.63748,7Networks_LH_Default_PFC_13,Default
+179,σ1intra^2,0.41292,0.04543,0.32389,0.50196,7Networks_LH_Default_PFC_14,Default
+179,σ2intra^2,0.41292,0.04543,0.32389,0.50196,7Networks_LH_Default_PFC_14,Default
+179,σinter^2,0.585,0.05269,0.48173,0.68827,7Networks_LH_Default_PFC_14,Default
+180,σ1intra^2,0.50728,0.05133,0.40668,0.60788,7Networks_LH_Default_PFC_15,Default
+180,σ2intra^2,0.50728,0.05133,0.40668,0.60788,7Networks_LH_Default_PFC_15,Default
+180,σinter^2,0.49064,0.05065,0.39137,0.58992,7Networks_LH_Default_PFC_15,Default
+181,σ1intra^2,0.42508,0.04621,0.33452,0.51565,7Networks_LH_Default_PFC_16,Default
+181,σ2intra^2,0.42508,0.04621,0.33452,0.51565,7Networks_LH_Default_PFC_16,Default
+181,σinter^2,0.57284,0.05241,0.47012,0.67557,7Networks_LH_Default_PFC_16,Default
+182,σ1intra^2,0.44016,0.04717,0.34772,0.53261,7Networks_LH_Default_PFC_17,Default
+182,σ2intra^2,0.44016,0.04717,0.34772,0.53261,7Networks_LH_Default_PFC_17,Default
+182,σinter^2,0.55776,0.05207,0.4557,0.65982,7Networks_LH_Default_PFC_17,Default
+183,σ1intra^2,0.46793,0.04891,0.37208,0.56379,7Networks_LH_Default_PFC_18,Default
+183,σ2intra^2,0.46793,0.04891,0.37208,0.56379,7Networks_LH_Default_PFC_18,Default
+183,σinter^2,0.52999,0.05147,0.42912,0.63086,7Networks_LH_Default_PFC_18,Default
+184,σ1intra^2,0.48631,0.05004,0.38823,0.58439,7Networks_LH_Default_PFC_19,Default
+184,σ2intra^2,0.48631,0.05004,0.38823,0.58439,7Networks_LH_Default_PFC_19,Default
+184,σinter^2,0.51162,0.05108,0.4115,0.61173,7Networks_LH_Default_PFC_19,Default
+185,σ1intra^2,0.44899,0.04772,0.35545,0.54252,7Networks_LH_Default_PFC_20,Default
+185,σ2intra^2,0.44899,0.04772,0.35545,0.54252,7Networks_LH_Default_PFC_20,Default
+185,σinter^2,0.54894,0.05188,0.44726,0.65062,7Networks_LH_Default_PFC_20,Default
+186,σ1intra^2,0.34196,0.04073,0.26214,0.42178,7Networks_LH_Default_PFC_21,Default
+186,σ2intra^2,0.34196,0.04073,0.26214,0.42178,7Networks_LH_Default_PFC_21,Default
+186,σinter^2,0.65597,0.05439,0.54936,0.76258,7Networks_LH_Default_PFC_21,Default
+187,σ1intra^2,0.44489,0.04746,0.35186,0.53792,7Networks_LH_Default_PFC_22,Default
+187,σ2intra^2,0.44489,0.04746,0.35186,0.53792,7Networks_LH_Default_PFC_22,Default
+187,σinter^2,0.55304,0.05197,0.45118,0.65489,7Networks_LH_Default_PFC_22,Default
+188,σ1intra^2,0.5291,0.05265,0.42591,0.63228,7Networks_LH_Default_PFC_23,Default
+188,σ2intra^2,0.5291,0.05265,0.42591,0.63228,7Networks_LH_Default_PFC_23,Default
+188,σinter^2,0.46883,0.05022,0.3704,0.56726,7Networks_LH_Default_PFC_23,Default
+189,σ1intra^2,0.50734,0.05133,0.40673,0.60794,7Networks_LH_Default_PFC_24,Default
+189,σ2intra^2,0.50734,0.05133,0.40673,0.60794,7Networks_LH_Default_PFC_24,Default
+189,σinter^2,0.49059,0.05065,0.39131,0.58986,7Networks_LH_Default_PFC_24,Default
+190,σ1intra^2,0.51725,0.05193,0.41547,0.61904,7Networks_LH_Default_pCunPCC_1,Default
+190,σ2intra^2,0.51725,0.05193,0.41547,0.61904,7Networks_LH_Default_pCunPCC_1,Default
+190,σinter^2,0.48067,0.05045,0.38179,0.57956,7Networks_LH_Default_pCunPCC_1,Default
+191,σ1intra^2,0.5076,0.05135,0.40696,0.60824,7Networks_LH_Default_pCunPCC_2,Default
+191,σ2intra^2,0.5076,0.05135,0.40696,0.60824,7Networks_LH_Default_pCunPCC_2,Default
+191,σinter^2,0.49032,0.05064,0.39106,0.58959,7Networks_LH_Default_pCunPCC_2,Default
+192,σ1intra^2,0.47699,0.04947,0.38003,0.57395,7Networks_LH_Default_pCunPCC_3,Default
+192,σ2intra^2,0.47699,0.04947,0.38003,0.57395,7Networks_LH_Default_pCunPCC_3,Default
+192,σinter^2,0.52094,0.05127,0.42044,0.62143,7Networks_LH_Default_pCunPCC_3,Default
+193,σ1intra^2,0.58338,0.05587,0.47387,0.69289,7Networks_LH_Default_pCunPCC_4,Default
+193,σ2intra^2,0.58338,0.05587,0.47387,0.69289,7Networks_LH_Default_pCunPCC_4,Default
+193,σinter^2,0.41454,0.04922,0.31807,0.51101,7Networks_LH_Default_pCunPCC_4,Default
+194,σ1intra^2,0.4067,0.04502,0.31846,0.49495,7Networks_LH_Default_pCunPCC_5,Default
+194,σ2intra^2,0.4067,0.04502,0.31846,0.49495,7Networks_LH_Default_pCunPCC_5,Default
+194,σinter^2,0.59122,0.05283,0.48767,0.69477,7Networks_LH_Default_pCunPCC_5,Default
+195,σ1intra^2,0.46451,0.04869,0.36907,0.55995,7Networks_LH_Default_pCunPCC_6,Default
+195,σ2intra^2,0.46451,0.04869,0.36907,0.55995,7Networks_LH_Default_pCunPCC_6,Default
+195,σinter^2,0.53342,0.05154,0.4324,0.63443,7Networks_LH_Default_pCunPCC_6,Default
+196,σ1intra^2,0.46955,0.04901,0.3735,0.5656,7Networks_LH_Default_pCunPCC_7,Default
+196,σ2intra^2,0.46955,0.04901,0.3735,0.5656,7Networks_LH_Default_pCunPCC_7,Default
+196,σinter^2,0.52838,0.05143,0.42757,0.62918,7Networks_LH_Default_pCunPCC_7,Default
+197,σ1intra^2,0.42695,0.04633,0.33615,0.51775,7Networks_LH_Default_pCunPCC_8,Default
+197,σ2intra^2,0.42695,0.04633,0.33615,0.51775,7Networks_LH_Default_pCunPCC_8,Default
+197,σinter^2,0.57098,0.05237,0.46833,0.67362,7Networks_LH_Default_pCunPCC_8,Default
+198,σ1intra^2,0.5258,0.05245,0.42301,0.6286,7Networks_LH_Default_pCunPCC_9,Default
+198,σ2intra^2,0.5258,0.05245,0.42301,0.6286,7Networks_LH_Default_pCunPCC_9,Default
+198,σinter^2,0.47212,0.05028,0.37357,0.57068,7Networks_LH_Default_pCunPCC_9,Default
+199,σ1intra^2,0.39742,0.04442,0.31035,0.48449,7Networks_LH_Default_pCunPCC_10,Default
+199,σ2intra^2,0.39742,0.04442,0.31035,0.48449,7Networks_LH_Default_pCunPCC_10,Default
+199,σinter^2,0.60051,0.05305,0.49653,0.70448,7Networks_LH_Default_pCunPCC_10,Default
+200,σ1intra^2,0.46053,0.04845,0.36558,0.55548,7Networks_LH_Default_pCunPCC_11,Default
+200,σ2intra^2,0.46053,0.04845,0.36558,0.55548,7Networks_LH_Default_pCunPCC_11,Default
+200,σinter^2,0.53739,0.05163,0.43621,0.63858,7Networks_LH_Default_pCunPCC_11,Default
+201,σ1intra^2,0.58027,0.05569,0.47112,0.68942,7Networks_RH_Vis_1,Visual
+201,σ2intra^2,0.58027,0.05569,0.47112,0.68942,7Networks_RH_Vis_1,Visual
+201,σinter^2,0.41766,0.04927,0.32108,0.51424,7Networks_RH_Vis_1,Visual
+202,σ1intra^2,0.45878,0.04834,0.36404,0.55351,7Networks_RH_Vis_2,Visual
+202,σ2intra^2,0.45878,0.04834,0.36404,0.55351,7Networks_RH_Vis_2,Visual
+202,σinter^2,0.53915,0.05166,0.43789,0.64041,7Networks_RH_Vis_2,Visual
+203,σ1intra^2,0.4846,0.04994,0.38672,0.58248,7Networks_RH_Vis_3,Visual
+203,σ2intra^2,0.4846,0.04994,0.38672,0.58248,7Networks_RH_Vis_3,Visual
+203,σinter^2,0.51332,0.05112,0.41314,0.61351,7Networks_RH_Vis_3,Visual
+204,σ1intra^2,0.47787,0.04952,0.3808,0.57493,7Networks_RH_Vis_4,Visual
+204,σ2intra^2,0.47787,0.04952,0.3808,0.57493,7Networks_RH_Vis_4,Visual
+204,σinter^2,0.52006,0.05126,0.4196,0.62052,7Networks_RH_Vis_4,Visual
+205,σ1intra^2,0.5592,0.05445,0.45249,0.66591,7Networks_RH_Vis_5,Visual
+205,σ2intra^2,0.5592,0.05445,0.45249,0.66591,7Networks_RH_Vis_5,Visual
+205,σinter^2,0.43872,0.04965,0.3414,0.53604,7Networks_RH_Vis_5,Visual
+206,σ1intra^2,0.51065,0.05153,0.40965,0.61165,7Networks_RH_Vis_6,Visual
+206,σ2intra^2,0.51065,0.05153,0.40965,0.61165,7Networks_RH_Vis_6,Visual
+206,σinter^2,0.48728,0.05058,0.38814,0.58642,7Networks_RH_Vis_6,Visual
+207,σ1intra^2,0.54616,0.05367,0.44097,0.65134,7Networks_RH_Vis_7,Visual
+207,σ2intra^2,0.54616,0.05367,0.44097,0.65134,7Networks_RH_Vis_7,Visual
+207,σinter^2,0.45177,0.0499,0.35398,0.54956,7Networks_RH_Vis_7,Visual
+208,σ1intra^2,0.52466,0.05238,0.422,0.62732,7Networks_RH_Vis_8,Visual
+208,σ2intra^2,0.52466,0.05238,0.422,0.62732,7Networks_RH_Vis_8,Visual
+208,σinter^2,0.47327,0.05031,0.37467,0.57187,7Networks_RH_Vis_8,Visual
+209,σ1intra^2,0.49059,0.05031,0.39199,0.58919,7Networks_RH_Vis_9,Visual
+209,σ2intra^2,0.49059,0.05031,0.39199,0.58919,7Networks_RH_Vis_9,Visual
+209,σinter^2,0.50733,0.05099,0.40739,0.60728,7Networks_RH_Vis_9,Visual
+210,σ1intra^2,0.45663,0.0482,0.36216,0.55111,7Networks_RH_Vis_10,Visual
+210,σ2intra^2,0.45663,0.0482,0.36216,0.55111,7Networks_RH_Vis_10,Visual
+210,σinter^2,0.54129,0.05171,0.43994,0.64264,7Networks_RH_Vis_10,Visual
+211,σ1intra^2,0.5406,0.05334,0.43606,0.64514,7Networks_RH_Vis_11,Visual
+211,σ2intra^2,0.5406,0.05334,0.43606,0.64514,7Networks_RH_Vis_11,Visual
+211,σinter^2,0.45732,0.05,0.35933,0.55532,7Networks_RH_Vis_11,Visual
+212,σ1intra^2,0.50653,0.05128,0.40602,0.60704,7Networks_RH_Vis_12,Visual
+212,σ2intra^2,0.50653,0.05128,0.40602,0.60704,7Networks_RH_Vis_12,Visual
+212,σinter^2,0.49139,0.05067,0.39209,0.5907,7Networks_RH_Vis_12,Visual
+213,σ1intra^2,0.46455,0.0487,0.36911,0.55999,7Networks_RH_Vis_13,Visual
+213,σ2intra^2,0.46455,0.0487,0.36911,0.55999,7Networks_RH_Vis_13,Visual
+213,σinter^2,0.53338,0.05154,0.43236,0.63439,7Networks_RH_Vis_13,Visual
+214,σ1intra^2,0.57124,0.05516,0.46314,0.67935,7Networks_RH_Vis_14,Visual
+214,σ2intra^2,0.57124,0.05516,0.46314,0.67935,7Networks_RH_Vis_14,Visual
+214,σinter^2,0.42668,0.04943,0.32979,0.52357,7Networks_RH_Vis_14,Visual
+215,σ1intra^2,0.48317,0.04985,0.38547,0.58088,7Networks_RH_Vis_15,Visual
+215,σ2intra^2,0.48317,0.04985,0.38547,0.58088,7Networks_RH_Vis_15,Visual
+215,σinter^2,0.51475,0.05115,0.41451,0.61499,7Networks_RH_Vis_15,Visual
+216,σ1intra^2,0.41916,0.04583,0.32934,0.50898,7Networks_RH_Vis_16,Visual
+216,σ2intra^2,0.41916,0.04583,0.32934,0.50898,7Networks_RH_Vis_16,Visual
+216,σinter^2,0.57876,0.05255,0.47577,0.68175,7Networks_RH_Vis_16,Visual
+217,σ1intra^2,0.43533,0.04686,0.34348,0.52717,7Networks_RH_Vis_17,Visual
+217,σ2intra^2,0.43533,0.04686,0.34348,0.52717,7Networks_RH_Vis_17,Visual
+217,σinter^2,0.5626,0.05218,0.46033,0.66487,7Networks_RH_Vis_17,Visual
+218,σ1intra^2,0.40365,0.04483,0.31579,0.49151,7Networks_RH_Vis_18,Visual
+218,σ2intra^2,0.40365,0.04483,0.31579,0.49151,7Networks_RH_Vis_18,Visual
+218,σinter^2,0.59428,0.0529,0.49059,0.69797,7Networks_RH_Vis_18,Visual
+219,σ1intra^2,0.50054,0.05092,0.40074,0.60033,7Networks_RH_Vis_19,Visual
+219,σ2intra^2,0.50054,0.05092,0.40074,0.60033,7Networks_RH_Vis_19,Visual
+219,σinter^2,0.49739,0.05079,0.39785,0.59693,7Networks_RH_Vis_19,Visual
+220,σ1intra^2,0.54523,0.05361,0.44015,0.65031,7Networks_RH_Vis_20,Visual
+220,σ2intra^2,0.54523,0.05361,0.44015,0.65031,7Networks_RH_Vis_20,Visual
+220,σinter^2,0.4527,0.04991,0.35487,0.55052,7Networks_RH_Vis_20,Visual
+221,σ1intra^2,0.46645,0.04881,0.37078,0.56213,7Networks_RH_Vis_21,Visual
+221,σ2intra^2,0.46645,0.04881,0.37078,0.56213,7Networks_RH_Vis_21,Visual
+221,σinter^2,0.53147,0.0515,0.43054,0.63241,7Networks_RH_Vis_21,Visual
+222,σ1intra^2,0.4895,0.05024,0.39103,0.58797,7Networks_RH_Vis_22,Visual
+222,σ2intra^2,0.4895,0.05024,0.39103,0.58797,7Networks_RH_Vis_22,Visual
+222,σinter^2,0.50843,0.05101,0.40844,0.60841,7Networks_RH_Vis_22,Visual
+223,σ1intra^2,0.51256,0.05165,0.41134,0.61379,7Networks_RH_Vis_23,Visual
+223,σ2intra^2,0.51256,0.05165,0.41134,0.61379,7Networks_RH_Vis_23,Visual
+223,σinter^2,0.48536,0.05055,0.38629,0.58443,7Networks_RH_Vis_23,Visual
+224,σ1intra^2,0.51314,0.05168,0.41184,0.61444,7Networks_RH_Vis_24,Visual
+224,σ2intra^2,0.51314,0.05168,0.41184,0.61444,7Networks_RH_Vis_24,Visual
+224,σinter^2,0.48479,0.05053,0.38574,0.58383,7Networks_RH_Vis_24,Visual
+225,σ1intra^2,0.56244,0.05464,0.45535,0.66952,7Networks_RH_Vis_25,Visual
+225,σ2intra^2,0.56244,0.05464,0.45535,0.66952,7Networks_RH_Vis_25,Visual
+225,σinter^2,0.43549,0.04959,0.33829,0.53269,7Networks_RH_Vis_25,Visual
+226,σ1intra^2,0.4818,0.04977,0.38426,0.57934,7Networks_RH_Vis_26,Visual
+226,σ2intra^2,0.4818,0.04977,0.38426,0.57934,7Networks_RH_Vis_26,Visual
+226,σinter^2,0.51612,0.05117,0.41582,0.61642,7Networks_RH_Vis_26,Visual
+227,σ1intra^2,0.50257,0.05104,0.40254,0.60261,7Networks_RH_Vis_27,Visual
+227,σ2intra^2,0.50257,0.05104,0.40254,0.60261,7Networks_RH_Vis_27,Visual
+227,σinter^2,0.49535,0.05075,0.39589,0.59481,7Networks_RH_Vis_27,Visual
+228,σ1intra^2,0.50629,0.05127,0.40581,0.60677,7Networks_RH_Vis_28,Visual
+228,σ2intra^2,0.50629,0.05127,0.40581,0.60677,7Networks_RH_Vis_28,Visual
+228,σinter^2,0.49164,0.05067,0.39232,0.59095,7Networks_RH_Vis_28,Visual
+229,σ1intra^2,0.50088,0.05094,0.40104,0.60071,7Networks_RH_Vis_29,Visual
+229,σ2intra^2,0.50088,0.05094,0.40104,0.60071,7Networks_RH_Vis_29,Visual
+229,σinter^2,0.49705,0.05078,0.39752,0.59658,7Networks_RH_Vis_29,Visual
+230,σ1intra^2,0.5065,0.05128,0.40599,0.607,7Networks_RH_Vis_30,Visual
+230,σ2intra^2,0.5065,0.05128,0.40599,0.607,7Networks_RH_Vis_30,Visual
+230,σinter^2,0.49143,0.05067,0.39212,0.59073,7Networks_RH_Vis_30,Visual
+231,σ1intra^2,0.62708,0.05842,0.51259,0.74158,7Networks_RH_SomMot_1,Somatomotor
+231,σ2intra^2,0.62708,0.05842,0.51259,0.74158,7Networks_RH_SomMot_1,Somatomotor
+231,σinter^2,0.37084,0.04849,0.2758,0.46588,7Networks_RH_SomMot_1,Somatomotor
+232,σ1intra^2,0.54697,0.05372,0.44168,0.65225,7Networks_RH_SomMot_2,Somatomotor
+232,σ2intra^2,0.54697,0.05372,0.44168,0.65225,7Networks_RH_SomMot_2,Somatomotor
+232,σinter^2,0.45096,0.04988,0.3532,0.54872,7Networks_RH_SomMot_2,Somatomotor
+233,σ1intra^2,0.54727,0.05374,0.44195,0.65259,7Networks_RH_SomMot_3,Somatomotor
+233,σ2intra^2,0.54727,0.05374,0.44195,0.65259,7Networks_RH_SomMot_3,Somatomotor
+233,σinter^2,0.45066,0.04987,0.35291,0.54841,7Networks_RH_SomMot_3,Somatomotor
+234,σ1intra^2,0.62549,0.05832,0.51118,0.7398,7Networks_RH_SomMot_4,Somatomotor
+234,σ2intra^2,0.62549,0.05832,0.51118,0.7398,7Networks_RH_SomMot_4,Somatomotor
+234,σinter^2,0.37244,0.04852,0.27734,0.46753,7Networks_RH_SomMot_4,Somatomotor
+235,σ1intra^2,0.55882,0.05442,0.45215,0.66549,7Networks_RH_SomMot_5,Somatomotor
+235,σ2intra^2,0.55882,0.05442,0.45215,0.66549,7Networks_RH_SomMot_5,Somatomotor
+235,σinter^2,0.43911,0.04966,0.34177,0.53644,7Networks_RH_SomMot_5,Somatomotor
+236,σ1intra^2,0.48061,0.04969,0.38321,0.578,7Networks_RH_SomMot_6,Somatomotor
+236,σ2intra^2,0.48061,0.04969,0.38321,0.578,7Networks_RH_SomMot_6,Somatomotor
+236,σinter^2,0.51732,0.0512,0.41697,0.61767,7Networks_RH_SomMot_6,Somatomotor
+237,σ1intra^2,0.52786,0.05257,0.42482,0.6309,7Networks_RH_SomMot_7,Somatomotor
+237,σ2intra^2,0.52786,0.05257,0.42482,0.6309,7Networks_RH_SomMot_7,Somatomotor
+237,σinter^2,0.47007,0.05024,0.37159,0.56855,7Networks_RH_SomMot_7,Somatomotor
+238,σ1intra^2,0.46958,0.04901,0.37352,0.56563,7Networks_RH_SomMot_8,Somatomotor
+238,σ2intra^2,0.46958,0.04901,0.37352,0.56563,7Networks_RH_SomMot_8,Somatomotor
+238,σinter^2,0.52835,0.05143,0.42754,0.62915,7Networks_RH_SomMot_8,Somatomotor
+239,σ1intra^2,0.56752,0.05494,0.45984,0.6752,7Networks_RH_SomMot_9,Somatomotor
+239,σ2intra^2,0.56752,0.05494,0.45984,0.6752,7Networks_RH_SomMot_9,Somatomotor
+239,σinter^2,0.4304,0.0495,0.33338,0.52743,7Networks_RH_SomMot_9,Somatomotor
+240,σ1intra^2,0.5597,0.05448,0.45293,0.66647,7Networks_RH_SomMot_10,Somatomotor
+240,σ2intra^2,0.5597,0.05448,0.45293,0.66647,7Networks_RH_SomMot_10,Somatomotor
+240,σinter^2,0.43822,0.04964,0.34092,0.53552,7Networks_RH_SomMot_10,Somatomotor
+241,σ1intra^2,0.6223,0.05814,0.50834,0.73625,7Networks_RH_SomMot_11,Somatomotor
+241,σ2intra^2,0.6223,0.05814,0.50834,0.73625,7Networks_RH_SomMot_11,Somatomotor
+241,σinter^2,0.37563,0.04857,0.28044,0.47082,7Networks_RH_SomMot_11,Somatomotor
+242,σ1intra^2,0.52126,0.05217,0.419,0.62352,7Networks_RH_SomMot_12,Somatomotor
+242,σ2intra^2,0.52126,0.05217,0.419,0.62352,7Networks_RH_SomMot_12,Somatomotor
+242,σinter^2,0.47666,0.05037,0.37793,0.57539,7Networks_RH_SomMot_12,Somatomotor
+243,σ1intra^2,0.65849,0.06022,0.54046,0.77651,7Networks_RH_SomMot_13,Somatomotor
+243,σ2intra^2,0.65849,0.06022,0.54046,0.77651,7Networks_RH_SomMot_13,Somatomotor
+243,σinter^2,0.33944,0.04801,0.24534,0.43354,7Networks_RH_SomMot_13,Somatomotor
+244,σ1intra^2,0.53016,0.05271,0.42685,0.63347,7Networks_RH_SomMot_14,Somatomotor
+244,σ2intra^2,0.53016,0.05271,0.42685,0.63347,7Networks_RH_SomMot_14,Somatomotor
+244,σinter^2,0.46776,0.0502,0.36937,0.56615,7Networks_RH_SomMot_14,Somatomotor
+245,σ1intra^2,0.48593,0.05002,0.38789,0.58397,7Networks_RH_SomMot_15,Somatomotor
+245,σ2intra^2,0.48593,0.05002,0.38789,0.58397,7Networks_RH_SomMot_15,Somatomotor
+245,σinter^2,0.512,0.051090000000000003,0.41187,0.61213,7Networks_RH_SomMot_15,Somatomotor
+246,σ1intra^2,0.64258,0.05931,0.52634,0.75882,7Networks_RH_SomMot_16,Somatomotor
+246,σ2intra^2,0.64258,0.05931,0.52634,0.75882,7Networks_RH_SomMot_16,Somatomotor
+246,σinter^2,0.35535,0.04825,0.26078,0.44992,7Networks_RH_SomMot_16,Somatomotor
+247,σ1intra^2,0.51312,0.05168,0.41182,0.61441,7Networks_RH_SomMot_17,Somatomotor
+247,σ2intra^2,0.51312,0.05168,0.41182,0.61441,7Networks_RH_SomMot_17,Somatomotor
+247,σinter^2,0.48481,0.05053,0.38576,0.58385,7Networks_RH_SomMot_17,Somatomotor
+248,σ1intra^2,0.59171,0.05636,0.48125,0.70218,7Networks_RH_SomMot_18,Somatomotor
+248,σ2intra^2,0.59171,0.05636,0.48125,0.70218,7Networks_RH_SomMot_18,Somatomotor
+248,σinter^2,0.40621,0.04908,0.31002,0.5024,7Networks_RH_SomMot_18,Somatomotor
+249,σ1intra^2,0.60179,0.05695,0.49017,0.71341,7Networks_RH_SomMot_19,Somatomotor
+249,σ2intra^2,0.60179,0.05695,0.49017,0.71341,7Networks_RH_SomMot_19,Somatomotor
+249,σinter^2,0.39614,0.0489,0.30029,0.49199,7Networks_RH_SomMot_19,Somatomotor
+250,σ1intra^2,0.46758,0.04888,0.37177,0.56339,7Networks_RH_SomMot_20,Somatomotor
+250,σ2intra^2,0.46758,0.04888,0.37177,0.56339,7Networks_RH_SomMot_20,Somatomotor
+250,σinter^2,0.53035,0.05147,0.42946,0.63123,7Networks_RH_SomMot_20,Somatomotor
+251,σ1intra^2,0.50565,0.05123,0.40525,0.60606,7Networks_RH_SomMot_21,Somatomotor
+251,σ2intra^2,0.50565,0.05123,0.40525,0.60606,7Networks_RH_SomMot_21,Somatomotor
+251,σinter^2,0.49227,0.05068,0.39293,0.59161,7Networks_RH_SomMot_21,Somatomotor
+252,σ1intra^2,0.45133,0.04787,0.35751,0.54515,7Networks_RH_SomMot_22,Somatomotor
+252,σ2intra^2,0.45133,0.04787,0.35751,0.54515,7Networks_RH_SomMot_22,Somatomotor
+252,σinter^2,0.54659,0.05183,0.44502,0.64817,7Networks_RH_SomMot_22,Somatomotor
+253,σ1intra^2,0.5388,0.05323,0.43447,0.64312,7Networks_RH_SomMot_23,Somatomotor
+253,σ2intra^2,0.5388,0.05323,0.43447,0.64312,7Networks_RH_SomMot_23,Somatomotor
+253,σinter^2,0.45913,0.05003,0.36106,0.55719,7Networks_RH_SomMot_23,Somatomotor
+254,σ1intra^2,0.60077,0.05689,0.48927,0.71227,7Networks_RH_SomMot_24,Somatomotor
+254,σ2intra^2,0.60077,0.05689,0.48927,0.71227,7Networks_RH_SomMot_24,Somatomotor
+254,σinter^2,0.39716,0.04892,0.30127,0.49304,7Networks_RH_SomMot_24,Somatomotor
+255,σ1intra^2,0.55573,0.05424,0.44942,0.66203,7Networks_RH_SomMot_25,Somatomotor
+255,σ2intra^2,0.55573,0.05424,0.44942,0.66203,7Networks_RH_SomMot_25,Somatomotor
+255,σinter^2,0.4422,0.04972,0.34476,0.53964,7Networks_RH_SomMot_25,Somatomotor
+256,σ1intra^2,0.55908,0.05444,0.45238,0.66577,7Networks_RH_SomMot_26,Somatomotor
+256,σ2intra^2,0.55908,0.05444,0.45238,0.66577,7Networks_RH_SomMot_26,Somatomotor
+256,σinter^2,0.43885,0.04966,0.34153,0.53617,7Networks_RH_SomMot_26,Somatomotor
+257,σ1intra^2,0.42675,0.04631,0.33598,0.51753,7Networks_RH_SomMot_27,Somatomotor
+257,σ2intra^2,0.42675,0.04631,0.33598,0.51753,7Networks_RH_SomMot_27,Somatomotor
+257,σinter^2,0.57117,0.05237,0.46852,0.67382,7Networks_RH_SomMot_27,Somatomotor
+258,σ1intra^2,0.46065,0.04845,0.36569,0.55562,7Networks_RH_SomMot_28,Somatomotor
+258,σ2intra^2,0.46065,0.04845,0.36569,0.55562,7Networks_RH_SomMot_28,Somatomotor
+258,σinter^2,0.53727,0.05162,0.43609,0.63845,7Networks_RH_SomMot_28,Somatomotor
+259,σ1intra^2,0.47754,0.0495,0.38052,0.57456,7Networks_RH_SomMot_29,Somatomotor
+259,σ2intra^2,0.47754,0.0495,0.38052,0.57456,7Networks_RH_SomMot_29,Somatomotor
+259,σinter^2,0.52038,0.05126,0.41991,0.62086,7Networks_RH_SomMot_29,Somatomotor
+260,σ1intra^2,0.52898,0.05264,0.42581,0.63215,7Networks_RH_SomMot_30,Somatomotor
+260,σ2intra^2,0.52898,0.05264,0.42581,0.63215,7Networks_RH_SomMot_30,Somatomotor
+260,σinter^2,0.46894,0.05022,0.37051,0.56738,7Networks_RH_SomMot_30,Somatomotor
+261,σ1intra^2,0.62343,0.05821,0.50935,0.73751,7Networks_RH_SomMot_31,Somatomotor
+261,σ2intra^2,0.62343,0.05821,0.50935,0.73751,7Networks_RH_SomMot_31,Somatomotor
+261,σinter^2,0.37449,0.04855,0.27934,0.46965,7Networks_RH_SomMot_31,Somatomotor
+262,σ1intra^2,0.52563,0.05244,0.42285,0.6284,7Networks_RH_SomMot_32,Somatomotor
+262,σ2intra^2,0.52563,0.05244,0.42285,0.6284,7Networks_RH_SomMot_32,Somatomotor
+262,σinter^2,0.4723,0.05029,0.37374,0.57086,7Networks_RH_SomMot_32,Somatomotor
+263,σ1intra^2,0.62573,0.05834,0.51139,0.74007,7Networks_RH_SomMot_33,Somatomotor
+263,σ2intra^2,0.62573,0.05834,0.51139,0.74007,7Networks_RH_SomMot_33,Somatomotor
+263,σinter^2,0.3722,0.04851,0.27712,0.46728,7Networks_RH_SomMot_33,Somatomotor
+264,σ1intra^2,0.60318,0.05703,0.49141,0.71496,7Networks_RH_SomMot_34,Somatomotor
+264,σ2intra^2,0.60318,0.05703,0.49141,0.71496,7Networks_RH_SomMot_34,Somatomotor
+264,σinter^2,0.39474,0.04888,0.29894,0.49055,7Networks_RH_SomMot_34,Somatomotor
+265,σ1intra^2,0.60696,0.05725,0.49475,0.71917,7Networks_RH_SomMot_35,Somatomotor
+265,σ2intra^2,0.60696,0.05725,0.49475,0.71917,7Networks_RH_SomMot_35,Somatomotor
+265,σinter^2,0.39096,0.04882,0.29528,0.48665,7Networks_RH_SomMot_35,Somatomotor
+266,σ1intra^2,0.66441,0.06056,0.54572,0.7831,7Networks_RH_SomMot_36,Somatomotor
+266,σ2intra^2,0.66441,0.06056,0.54572,0.7831,7Networks_RH_SomMot_36,Somatomotor
+266,σinter^2,0.33351,0.04793,0.23958,0.42745,7Networks_RH_SomMot_36,Somatomotor
+267,σ1intra^2,0.54074,0.05335,0.43618,0.64529,7Networks_RH_SomMot_37,Somatomotor
+267,σ2intra^2,0.54074,0.05335,0.43618,0.64529,7Networks_RH_SomMot_37,Somatomotor
+267,σinter^2,0.45719,0.05,0.35919,0.55518,7Networks_RH_SomMot_37,Somatomotor
+268,σ1intra^2,0.54483,0.05359,0.4398,0.64986,7Networks_RH_SomMot_38,Somatomotor
+268,σ2intra^2,0.54483,0.05359,0.4398,0.64986,7Networks_RH_SomMot_38,Somatomotor
+268,σinter^2,0.4531,0.04992,0.35525,0.55094,7Networks_RH_SomMot_38,Somatomotor
+269,σ1intra^2,0.57979,0.05566,0.47069,0.68888,7Networks_RH_SomMot_39,Somatomotor
+269,σ2intra^2,0.57979,0.05566,0.47069,0.68888,7Networks_RH_SomMot_39,Somatomotor
+269,σinter^2,0.41814,0.04928,0.32154,0.51473,7Networks_RH_SomMot_39,Somatomotor
+270,σ1intra^2,0.51535,0.05182,0.41379,0.6169,7Networks_RH_SomMot_40,Somatomotor
+270,σ2intra^2,0.51535,0.05182,0.41379,0.6169,7Networks_RH_SomMot_40,Somatomotor
+270,σinter^2,0.48258,0.05049,0.38362,0.58154,7Networks_RH_SomMot_40,Somatomotor
+271,σ1intra^2,0.53349,0.05291,0.42979,0.63719,7Networks_RH_DorsAttn_Post_1,Dorsal attention
+271,σ2intra^2,0.53349,0.05291,0.42979,0.63719,7Networks_RH_DorsAttn_Post_1,Dorsal attention
+271,σinter^2,0.46444,0.05014,0.36617,0.5627,7Networks_RH_DorsAttn_Post_1,Dorsal attention
+272,σ1intra^2,0.45872,0.04833,0.36399,0.55345,7Networks_RH_DorsAttn_Post_2,Dorsal attention
+272,σ2intra^2,0.45872,0.04833,0.36399,0.55345,7Networks_RH_DorsAttn_Post_2,Dorsal attention
+272,σinter^2,0.5392,0.05167,0.43794,0.64047,7Networks_RH_DorsAttn_Post_2,Dorsal attention
+273,σ1intra^2,0.36779,0.04247,0.28456,0.45103,7Networks_RH_DorsAttn_Post_3,Dorsal attention
+273,σ2intra^2,0.36779,0.04247,0.28456,0.45103,7Networks_RH_DorsAttn_Post_3,Dorsal attention
+273,σinter^2,0.63013,0.05376,0.52477,0.73549,7Networks_RH_DorsAttn_Post_3,Dorsal attention
+274,σ1intra^2,0.48748,0.05012,0.38925,0.5857,7Networks_RH_DorsAttn_Post_4,Dorsal attention
+274,σ2intra^2,0.48748,0.05012,0.38925,0.5857,7Networks_RH_DorsAttn_Post_4,Dorsal attention
+274,σinter^2,0.51045,0.05106,0.41038,0.61052,7Networks_RH_DorsAttn_Post_4,Dorsal attention
+275,σ1intra^2,0.43184,0.04664,0.34043,0.52325,7Networks_RH_DorsAttn_Post_5,Dorsal attention
+275,σ2intra^2,0.43184,0.04664,0.34043,0.52325,7Networks_RH_DorsAttn_Post_5,Dorsal attention
+275,σinter^2,0.56608,0.05226,0.46366,0.66851,7Networks_RH_DorsAttn_Post_5,Dorsal attention
+276,σ1intra^2,0.54848,0.05381,0.44302,0.65395,7Networks_RH_DorsAttn_Post_6,Dorsal attention
+276,σ2intra^2,0.54848,0.05381,0.44302,0.65395,7Networks_RH_DorsAttn_Post_6,Dorsal attention
+276,σinter^2,0.44944,0.04985,0.35173,0.54715,7Networks_RH_DorsAttn_Post_6,Dorsal attention
+277,σ1intra^2,0.41939,0.04584,0.32954,0.50924,7Networks_RH_DorsAttn_Post_7,Dorsal attention
+277,σ2intra^2,0.41939,0.04584,0.32954,0.50924,7Networks_RH_DorsAttn_Post_7,Dorsal attention
+277,σinter^2,0.57853,0.05254,0.47556,0.68151,7Networks_RH_DorsAttn_Post_7,Dorsal attention
+278,σ1intra^2,0.53812,0.05319,0.43387,0.64237,7Networks_RH_DorsAttn_Post_8,Dorsal attention
+278,σ2intra^2,0.53812,0.05319,0.43387,0.64237,7Networks_RH_DorsAttn_Post_8,Dorsal attention
+278,σinter^2,0.45981,0.05005,0.36172,0.5579,7Networks_RH_DorsAttn_Post_8,Dorsal attention
+279,σ1intra^2,0.53437,0.05296,0.43057,0.63818,7Networks_RH_DorsAttn_Post_9,Dorsal attention
+279,σ2intra^2,0.53437,0.05296,0.43057,0.63818,7Networks_RH_DorsAttn_Post_9,Dorsal attention
+279,σinter^2,0.46355,0.05012,0.36532,0.56178,7Networks_RH_DorsAttn_Post_9,Dorsal attention
+280,σ1intra^2,0.36132,0.04204,0.27893,0.44371,7Networks_RH_DorsAttn_Post_10,Dorsal attention
+280,σ2intra^2,0.36132,0.04204,0.27893,0.44371,7Networks_RH_DorsAttn_Post_10,Dorsal attention
+280,σinter^2,0.63661,0.05392,0.53093,0.74228,7Networks_RH_DorsAttn_Post_10,Dorsal attention
+281,σ1intra^2,0.37642,0.04304,0.29205,0.46078,7Networks_RH_DorsAttn_Post_11,Dorsal attention
+281,σ2intra^2,0.37642,0.04304,0.29205,0.46078,7Networks_RH_DorsAttn_Post_11,Dorsal attention
+281,σinter^2,0.62151,0.05355,0.51656,0.72646,7Networks_RH_DorsAttn_Post_11,Dorsal attention
+282,σ1intra^2,0.42189,0.046,0.33173,0.51206,7Networks_RH_DorsAttn_Post_12,Dorsal attention
+282,σ2intra^2,0.42189,0.046,0.33173,0.51206,7Networks_RH_DorsAttn_Post_12,Dorsal attention
+282,σinter^2,0.57603,0.05248,0.47317,0.6789,7Networks_RH_DorsAttn_Post_12,Dorsal attention
+283,σ1intra^2,0.55065,0.05394,0.44494,0.65636,7Networks_RH_DorsAttn_Post_13,Dorsal attention
+283,σ2intra^2,0.55065,0.05394,0.44494,0.65636,7Networks_RH_DorsAttn_Post_13,Dorsal attention
+283,σinter^2,0.44728,0.04981,0.34965,0.5449,7Networks_RH_DorsAttn_Post_13,Dorsal attention
+284,σ1intra^2,0.40061,0.04463,0.31314,0.48808,7Networks_RH_DorsAttn_Post_14,Dorsal attention
+284,σ2intra^2,0.40061,0.04463,0.31314,0.48808,7Networks_RH_DorsAttn_Post_14,Dorsal attention
+284,σinter^2,0.59732,0.05297,0.49349,0.70114,7Networks_RH_DorsAttn_Post_14,Dorsal attention
+285,σ1intra^2,0.42575,0.04625,0.3351,0.51639,7Networks_RH_DorsAttn_Post_15,Dorsal attention
+285,σ2intra^2,0.42575,0.04625,0.3351,0.51639,7Networks_RH_DorsAttn_Post_15,Dorsal attention
+285,σinter^2,0.57218,0.0524,0.46949,0.67487,7Networks_RH_DorsAttn_Post_15,Dorsal attention
+286,σ1intra^2,0.42559,0.04624,0.33497,0.51622,7Networks_RH_DorsAttn_Post_16,Dorsal attention
+286,σ2intra^2,0.42559,0.04624,0.33497,0.51622,7Networks_RH_DorsAttn_Post_16,Dorsal attention
+286,σinter^2,0.57233,0.0524,0.46963,0.67503,7Networks_RH_DorsAttn_Post_16,Dorsal attention
+287,σ1intra^2,0.55029,0.05392,0.44462,0.65596,7Networks_RH_DorsAttn_Post_17,Dorsal attention
+287,σ2intra^2,0.55029,0.05392,0.44462,0.65596,7Networks_RH_DorsAttn_Post_17,Dorsal attention
+287,σinter^2,0.44763,0.04982,0.34999,0.54527,7Networks_RH_DorsAttn_Post_17,Dorsal attention
+288,σ1intra^2,0.52904,0.05264,0.42587,0.63222,7Networks_RH_DorsAttn_Post_18,Dorsal attention
+288,σ2intra^2,0.52904,0.05264,0.42587,0.63222,7Networks_RH_DorsAttn_Post_18,Dorsal attention
+288,σinter^2,0.46888,0.05022,0.37045,0.56731,7Networks_RH_DorsAttn_Post_18,Dorsal attention
+289,σ1intra^2,0.50109,0.05095,0.40123,0.60095,7Networks_RH_DorsAttn_Post_19,Dorsal attention
+289,σ2intra^2,0.50109,0.05095,0.40123,0.60095,7Networks_RH_DorsAttn_Post_19,Dorsal attention
+289,σinter^2,0.49683,0.05078,0.39732,0.59635,7Networks_RH_DorsAttn_Post_19,Dorsal attention
+290,σ1intra^2,0.34955,0.04124,0.26872,0.43038,7Networks_RH_DorsAttn_FEF_1,Dorsal attention
+290,σ2intra^2,0.34955,0.04124,0.26872,0.43038,7Networks_RH_DorsAttn_FEF_1,Dorsal attention
+290,σinter^2,0.64838,0.05421,0.54214,0.75462,7Networks_RH_DorsAttn_FEF_1,Dorsal attention
+291,σ1intra^2,0.45314,0.04798,0.35909,0.54718,7Networks_RH_DorsAttn_FEF_2,Dorsal attention
+291,σ2intra^2,0.45314,0.04798,0.35909,0.54718,7Networks_RH_DorsAttn_FEF_2,Dorsal attention
+291,σinter^2,0.54479,0.05179,0.44329,0.64629,7Networks_RH_DorsAttn_FEF_2,Dorsal attention
+292,σ1intra^2,0.51885,0.05203,0.41687,0.62082,7Networks_RH_DorsAttn_FEF_3,Dorsal attention
+292,σ2intra^2,0.51885,0.05203,0.41687,0.62082,7Networks_RH_DorsAttn_FEF_3,Dorsal attention
+292,σinter^2,0.47908,0.05042,0.38025,0.5779,7Networks_RH_DorsAttn_FEF_3,Dorsal attention
+293,σ1intra^2,0.40272,0.04477,0.31498,0.49046,7Networks_RH_DorsAttn_PrCv_1,Dorsal attention
+293,σ2intra^2,0.40272,0.04477,0.31498,0.49046,7Networks_RH_DorsAttn_PrCv_1,Dorsal attention
+293,σinter^2,0.59521,0.05293,0.49147,0.69894,7Networks_RH_DorsAttn_PrCv_1,Dorsal attention
+294,σ1intra^2,0.1933,0.02963,0.13522,0.25137,7Networks_RH_SalVentAttn_TempOccPar_1,Ventral attention
+294,σ2intra^2,0.1933,0.02963,0.13522,0.25137,7Networks_RH_SalVentAttn_TempOccPar_1,Ventral attention
+294,σinter^2,0.80463,0.05839,0.69019,0.91907,7Networks_RH_SalVentAttn_TempOccPar_1,Ventral attention
+295,σ1intra^2,0.38866,0.04385,0.30271,0.4746,7Networks_RH_SalVentAttn_TempOccPar_2,Ventral attention
+295,σ2intra^2,0.38866,0.04385,0.30271,0.4746,7Networks_RH_SalVentAttn_TempOccPar_2,Ventral attention
+295,σinter^2,0.60927,0.05326,0.50489,0.71365,7Networks_RH_SalVentAttn_TempOccPar_2,Ventral attention
+296,σ1intra^2,0.35971,0.04193,0.27754,0.44189,7Networks_RH_SalVentAttn_TempOccPar_3,Ventral attention
+296,σ2intra^2,0.35971,0.04193,0.27754,0.44189,7Networks_RH_SalVentAttn_TempOccPar_3,Ventral attention
+296,σinter^2,0.63821,0.05395,0.53246,0.74396,7Networks_RH_SalVentAttn_TempOccPar_3,Ventral attention
+297,σ1intra^2,0.5308,0.05275,0.42741,0.63419,7Networks_RH_SalVentAttn_TempOccPar_4,Ventral attention
+297,σ2intra^2,0.5308,0.05275,0.42741,0.63419,7Networks_RH_SalVentAttn_TempOccPar_4,Ventral attention
+297,σinter^2,0.46712,0.05019,0.36876,0.56549,7Networks_RH_SalVentAttn_TempOccPar_4,Ventral attention
+298,σ1intra^2,0.49179,0.05038,0.39304,0.59053,7Networks_RH_SalVentAttn_TempOccPar_5,Ventral attention
+298,σ2intra^2,0.49179,0.05038,0.39304,0.59053,7Networks_RH_SalVentAttn_TempOccPar_5,Ventral attention
+298,σinter^2,0.50614,0.05097,0.40625,0.60603,7Networks_RH_SalVentAttn_TempOccPar_5,Ventral attention
+299,σ1intra^2,0.39459,0.04424,0.30789,0.48129,7Networks_RH_SalVentAttn_TempOccPar_6,Ventral attention
+299,σ2intra^2,0.39459,0.04424,0.30789,0.48129,7Networks_RH_SalVentAttn_TempOccPar_6,Ventral attention
+299,σinter^2,0.60334,0.05312,0.49923,0.70744,7Networks_RH_SalVentAttn_TempOccPar_6,Ventral attention
+300,σ1intra^2,0.30836,0.03839,0.23311,0.38362,7Networks_RH_SalVentAttn_TempOccPar_7,Ventral attention
+300,σ2intra^2,0.30836,0.03839,0.23311,0.38362,7Networks_RH_SalVentAttn_TempOccPar_7,Ventral attention
+300,σinter^2,0.68956,0.05525,0.58127,0.79785,7Networks_RH_SalVentAttn_TempOccPar_7,Ventral attention
+301,σ1intra^2,0.28445,0.03668,0.21256,0.35635,7Networks_RH_SalVentAttn_PrC_1,Ventral attention
+301,σ2intra^2,0.28445,0.03668,0.21256,0.35635,7Networks_RH_SalVentAttn_PrC_1,Ventral attention
+301,σinter^2,0.71347,0.05588,0.60395,0.82299,7Networks_RH_SalVentAttn_PrC_1,Ventral attention
+302,σ1intra^2,0.74721,0.06521,0.6194,0.87502,7Networks_RH_SalVentAttn_FrOperIns_1,Ventral attention
+302,σ2intra^2,0.74721,0.06521,0.6194,0.87502,7Networks_RH_SalVentAttn_FrOperIns_1,Ventral attention
+302,σinter^2,0.25071,0.04687,0.15886,0.34257,7Networks_RH_SalVentAttn_FrOperIns_1,Ventral attention
+303,σ1intra^2,0.55451,0.05417,0.44834,0.66067,7Networks_RH_SalVentAttn_FrOperIns_2,Ventral attention
+303,σ2intra^2,0.55451,0.05417,0.44834,0.66067,7Networks_RH_SalVentAttn_FrOperIns_2,Ventral attention
+303,σinter^2,0.44342,0.04974,0.34593,0.5409,7Networks_RH_SalVentAttn_FrOperIns_2,Ventral attention
+304,σ1intra^2,0.5762,0.05545,0.46752,0.68488,7Networks_RH_SalVentAttn_FrOperIns_3,Ventral attention
+304,σ2intra^2,0.5762,0.05545,0.46752,0.68488,7Networks_RH_SalVentAttn_FrOperIns_3,Ventral attention
+304,σinter^2,0.42173,0.04935,0.32501,0.51845,7Networks_RH_SalVentAttn_FrOperIns_3,Ventral attention
+305,σ1intra^2,0.60114,0.05691,0.48959,0.71268,7Networks_RH_SalVentAttn_FrOperIns_4,Ventral attention
+305,σ2intra^2,0.60114,0.05691,0.48959,0.71268,7Networks_RH_SalVentAttn_FrOperIns_4,Ventral attention
+305,σinter^2,0.39679,0.04892,0.30092,0.49266,7Networks_RH_SalVentAttn_FrOperIns_4,Ventral attention
+306,σ1intra^2,0.34417,0.04088,0.26405,0.42428,7Networks_RH_SalVentAttn_FrOperIns_5,Ventral attention
+306,σ2intra^2,0.34417,0.04088,0.26405,0.42428,7Networks_RH_SalVentAttn_FrOperIns_5,Ventral attention
+306,σinter^2,0.65376,0.05434,0.54726,0.76026,7Networks_RH_SalVentAttn_FrOperIns_5,Ventral attention
+307,σ1intra^2,0.47447,0.04931,0.37782,0.57112,7Networks_RH_SalVentAttn_FrOperIns_6,Ventral attention
+307,σ2intra^2,0.47447,0.04931,0.37782,0.57112,7Networks_RH_SalVentAttn_FrOperIns_6,Ventral attention
+307,σinter^2,0.52346,0.05133,0.42285,0.62406,7Networks_RH_SalVentAttn_FrOperIns_6,Ventral attention
+308,σ1intra^2,0.49165,0.05037,0.39292,0.59037,7Networks_RH_SalVentAttn_FrOperIns_7,Ventral attention
+308,σ2intra^2,0.49165,0.05037,0.39292,0.59037,7Networks_RH_SalVentAttn_FrOperIns_7,Ventral attention
+308,σinter^2,0.50628,0.05097,0.40638,0.60618,7Networks_RH_SalVentAttn_FrOperIns_7,Ventral attention
+309,σ1intra^2,0.39969,0.04457,0.31233,0.48704,7Networks_RH_SalVentAttn_FrOperIns_8,Ventral attention
+309,σ2intra^2,0.39969,0.04457,0.31233,0.48704,7Networks_RH_SalVentAttn_FrOperIns_8,Ventral attention
+309,σinter^2,0.59824,0.053,0.49437,0.70211,7Networks_RH_SalVentAttn_FrOperIns_8,Ventral attention
+310,σ1intra^2,0.38728,0.04376,0.30151,0.47304,7Networks_RH_SalVentAttn_PFCl_1,Ventral attention
+310,σ2intra^2,0.38728,0.04376,0.30151,0.47304,7Networks_RH_SalVentAttn_PFCl_1,Ventral attention
+310,σinter^2,0.61065,0.05329,0.50621,0.71509,7Networks_RH_SalVentAttn_PFCl_1,Ventral attention
+311,σ1intra^2,0.42543,0.04623,0.33482,0.51604,7Networks_RH_SalVentAttn_Med_1,Ventral attention
+311,σ2intra^2,0.42543,0.04623,0.33482,0.51604,7Networks_RH_SalVentAttn_Med_1,Ventral attention
+311,σinter^2,0.57249,0.0524,0.46979,0.6752,7Networks_RH_SalVentAttn_Med_1,Ventral attention
+312,σ1intra^2,0.63082,0.05863,0.51591,0.74574,7Networks_RH_SalVentAttn_Med_2,Ventral attention
+312,σ2intra^2,0.63082,0.05863,0.51591,0.74574,7Networks_RH_SalVentAttn_Med_2,Ventral attention
+312,σinter^2,0.3671,0.04843,0.27218,0.46203,7Networks_RH_SalVentAttn_Med_2,Ventral attention
+313,σ1intra^2,0.41253,0.0454,0.32355,0.50152,7Networks_RH_SalVentAttn_Med_3,Ventral attention
+313,σ2intra^2,0.41253,0.0454,0.32355,0.50152,7Networks_RH_SalVentAttn_Med_3,Ventral attention
+313,σinter^2,0.58539,0.0527,0.48211,0.68868,7Networks_RH_SalVentAttn_Med_3,Ventral attention
+314,σ1intra^2,0.4244,0.04616,0.33393,0.51488,7Networks_RH_SalVentAttn_Med_4,Ventral attention
+314,σ2intra^2,0.4244,0.04616,0.33393,0.51488,7Networks_RH_SalVentAttn_Med_4,Ventral attention
+314,σinter^2,0.57352,0.05243,0.47077,0.67628,7Networks_RH_SalVentAttn_Med_4,Ventral attention
+315,σ1intra^2,0.30613,0.03824,0.23119,0.38108,7Networks_RH_SalVentAttn_Med_5,Ventral attention
+315,σ2intra^2,0.30613,0.03824,0.23119,0.38108,7Networks_RH_SalVentAttn_Med_5,Ventral attention
+315,σinter^2,0.69179,0.05531,0.58339,0.80019,7Networks_RH_SalVentAttn_Med_5,Ventral attention
+316,σ1intra^2,0.43618,0.04691,0.34423,0.52813,7Networks_RH_SalVentAttn_Med_6,Ventral attention
+316,σ2intra^2,0.43618,0.04691,0.34423,0.52813,7Networks_RH_SalVentAttn_Med_6,Ventral attention
+316,σinter^2,0.56174,0.05216,0.45951,0.66398,7Networks_RH_SalVentAttn_Med_6,Ventral attention
+317,σ1intra^2,0.51733,0.05194,0.41553,0.61912,7Networks_RH_SalVentAttn_Med_7,Ventral attention
+317,σ2intra^2,0.51733,0.05194,0.41553,0.61912,7Networks_RH_SalVentAttn_Med_7,Ventral attention
+317,σinter^2,0.4806,0.05045,0.38172,0.57948,7Networks_RH_SalVentAttn_Med_7,Ventral attention
+318,σ1intra^2,0.46271,0.04858,0.36749,0.55792,7Networks_RH_SalVentAttn_Med_8,Ventral attention
+318,σ2intra^2,0.46271,0.04858,0.36749,0.55792,7Networks_RH_SalVentAttn_Med_8,Ventral attention
+318,σinter^2,0.53522,0.05158,0.43413,0.63631,7Networks_RH_SalVentAttn_Med_8,Ventral attention
+319,σ1intra^2,0.73184,0.06436,0.60571,0.85798,7Networks_RH_Limbic_OFC_1,Limbic
+319,σ2intra^2,0.73184,0.06436,0.60571,0.85798,7Networks_RH_Limbic_OFC_1,Limbic
+319,σinter^2,0.26608,0.04704,0.17388,0.35828,7Networks_RH_Limbic_OFC_1,Limbic
+320,σ1intra^2,0.62826,0.05848,0.51363,0.74288,7Networks_RH_Limbic_OFC_2,Limbic
+320,σ2intra^2,0.62826,0.05848,0.51363,0.74288,7Networks_RH_Limbic_OFC_2,Limbic
+320,σinter^2,0.36967,0.04847,0.27466,0.46467,7Networks_RH_Limbic_OFC_2,Limbic
+321,σ1intra^2,0.68829,0.06191,0.56695,0.80964,7Networks_RH_Limbic_OFC_3,Limbic
+321,σ2intra^2,0.68829,0.06191,0.56695,0.80964,7Networks_RH_Limbic_OFC_3,Limbic
+321,σinter^2,0.30963,0.04759,0.21635,0.40291,7Networks_RH_Limbic_OFC_3,Limbic
+322,σ1intra^2,0.54542,0.05362,0.44032,0.65052,7Networks_RH_Limbic_OFC_4,Limbic
+322,σ2intra^2,0.54542,0.05362,0.44032,0.65052,7Networks_RH_Limbic_OFC_4,Limbic
+322,σinter^2,0.45251,0.04991,0.35469,0.55033,7Networks_RH_Limbic_OFC_4,Limbic
+323,σ1intra^2,0.65044,0.05976,0.53332,0.76757,7Networks_RH_Limbic_OFC_5,Limbic
+323,σ2intra^2,0.65044,0.05976,0.53332,0.76757,7Networks_RH_Limbic_OFC_5,Limbic
+323,σinter^2,0.34748,0.04813,0.25315,0.44182,7Networks_RH_Limbic_OFC_5,Limbic
+324,σ1intra^2,0.60056,0.05688,0.48909,0.71204,7Networks_RH_Limbic_OFC_6,Limbic
+324,σ2intra^2,0.60056,0.05688,0.48909,0.71204,7Networks_RH_Limbic_OFC_6,Limbic
+324,σinter^2,0.39736,0.04893,0.30147,0.49325,7Networks_RH_Limbic_OFC_6,Limbic
+325,σ1intra^2,0.69589,0.06234,0.57371,0.81808,7Networks_RH_Limbic_TempPole_1,Limbic
+325,σ2intra^2,0.69589,0.06234,0.57371,0.81808,7Networks_RH_Limbic_TempPole_1,Limbic
+325,σinter^2,0.30203,0.04749,0.20895,0.39511,7Networks_RH_Limbic_TempPole_1,Limbic
+326,σ1intra^2,0.60586,0.05719,0.49378,0.71794,7Networks_RH_Limbic_TempPole_2,Limbic
+326,σ2intra^2,0.60586,0.05719,0.49378,0.71794,7Networks_RH_Limbic_TempPole_2,Limbic
+326,σinter^2,0.39206,0.04884,0.29635,0.48778,7Networks_RH_Limbic_TempPole_2,Limbic
+327,σ1intra^2,0.56141,0.05458,0.45444,0.66837,7Networks_RH_Limbic_TempPole_3,Limbic
+327,σ2intra^2,0.56141,0.05458,0.45444,0.66837,7Networks_RH_Limbic_TempPole_3,Limbic
+327,σinter^2,0.43652,0.04961,0.33928,0.53376,7Networks_RH_Limbic_TempPole_3,Limbic
+328,σ1intra^2,0.48033,0.04968,0.38297,0.5777,7Networks_RH_Limbic_TempPole_4,Limbic
+328,σ2intra^2,0.48033,0.04968,0.38297,0.5777,7Networks_RH_Limbic_TempPole_4,Limbic
+328,σinter^2,0.51759,0.0512,0.41723,0.61795,7Networks_RH_Limbic_TempPole_4,Limbic
+329,σ1intra^2,0.63403,0.05882,0.51875,0.74931,7Networks_RH_Limbic_TempPole_5,Limbic
+329,σ2intra^2,0.63403,0.05882,0.51875,0.74931,7Networks_RH_Limbic_TempPole_5,Limbic
+329,σinter^2,0.36389,0.04838,0.26907,0.45872,7Networks_RH_Limbic_TempPole_5,Limbic
+330,σ1intra^2,0.62882,0.05852,0.51413,0.74351,7Networks_RH_Limbic_TempPole_6,Limbic
+330,σ2intra^2,0.62882,0.05852,0.51413,0.74351,7Networks_RH_Limbic_TempPole_6,Limbic
+330,σinter^2,0.36911,0.04846,0.27412,0.46409,7Networks_RH_Limbic_TempPole_6,Limbic
+331,σ1intra^2,0.58678,0.05607,0.47688,0.69668,7Networks_RH_Limbic_TempPole_7,Limbic
+331,σ2intra^2,0.58678,0.05607,0.47688,0.69668,7Networks_RH_Limbic_TempPole_7,Limbic
+331,σinter^2,0.41115,0.04916,0.31479,0.5075,7Networks_RH_Limbic_TempPole_7,Limbic
+332,σ1intra^2,0.46464,0.0487,0.36918,0.56009,7Networks_RH_Cont_Par_1,Frontoparietal
+332,σ2intra^2,0.46464,0.0487,0.36918,0.56009,7Networks_RH_Cont_Par_1,Frontoparietal
+332,σinter^2,0.53329,0.05154,0.43228,0.6343,7Networks_RH_Cont_Par_1,Frontoparietal
+333,σ1intra^2,0.40828,0.04513,0.31983,0.49673,7Networks_RH_Cont_Par_2,Frontoparietal
+333,σ2intra^2,0.40828,0.04513,0.31983,0.49673,7Networks_RH_Cont_Par_2,Frontoparietal
+333,σinter^2,0.58965,0.0528,0.48617,0.69312,7Networks_RH_Cont_Par_2,Frontoparietal
+334,σ1intra^2,0.42201,0.04601,0.33183,0.51219,7Networks_RH_Cont_Par_3,Frontoparietal
+334,σ2intra^2,0.42201,0.04601,0.33183,0.51219,7Networks_RH_Cont_Par_3,Frontoparietal
+334,σinter^2,0.57591,0.05248,0.47305,0.67877,7Networks_RH_Cont_Par_3,Frontoparietal
+335,σ1intra^2,0.46113,0.04848,0.3661,0.55615,7Networks_RH_Cont_Par_4,Frontoparietal
+335,σ2intra^2,0.46113,0.04848,0.3661,0.55615,7Networks_RH_Cont_Par_4,Frontoparietal
+335,σinter^2,0.5368,0.05161,0.43564,0.63796,7Networks_RH_Cont_Par_4,Frontoparietal
+336,σ1intra^2,0.39329,0.04415,0.30676,0.47983,7Networks_RH_Cont_Par_5,Frontoparietal
+336,σ2intra^2,0.39329,0.04415,0.30676,0.47983,7Networks_RH_Cont_Par_5,Frontoparietal
+336,σinter^2,0.60463,0.05315,0.50047,0.7088,7Networks_RH_Cont_Par_5,Frontoparietal
+337,σ1intra^2,0.43089,0.04658,0.3396,0.52218,7Networks_RH_Cont_Par_6,Frontoparietal
+337,σ2intra^2,0.43089,0.04658,0.3396,0.52218,7Networks_RH_Cont_Par_6,Frontoparietal
+337,σinter^2,0.56704,0.05228,0.46457,0.6695,7Networks_RH_Cont_Par_6,Frontoparietal
+338,σ1intra^2,0.48178,0.04976,0.38425,0.57932,7Networks_RH_Cont_Temp_1,Frontoparietal
+338,σ2intra^2,0.48178,0.04976,0.38425,0.57932,7Networks_RH_Cont_Temp_1,Frontoparietal
+338,σinter^2,0.51614,0.05117,0.41584,0.61644,7Networks_RH_Cont_Temp_1,Frontoparietal
+339,σ1intra^2,0.4392,0.0471,0.34688,0.53152,7Networks_RH_Cont_Temp_2,Frontoparietal
+339,σ2intra^2,0.4392,0.0471,0.34688,0.53152,7Networks_RH_Cont_Temp_2,Frontoparietal
+339,σinter^2,0.55873,0.05209,0.45663,0.66083,7Networks_RH_Cont_Temp_2,Frontoparietal
+340,σ1intra^2,0.49679,0.05069,0.39745,0.59613,7Networks_RH_Cont_PFCv_1,Frontoparietal
+340,σ2intra^2,0.49679,0.05069,0.39745,0.59613,7Networks_RH_Cont_PFCv_1,Frontoparietal
+340,σinter^2,0.50114,0.05086,0.40144,0.60083,7Networks_RH_Cont_PFCv_1,Frontoparietal
+341,σ1intra^2,0.5229,0.05227,0.42045,0.62536,7Networks_RH_Cont_PFCl_1,Frontoparietal
+341,σ2intra^2,0.5229,0.05227,0.42045,0.62536,7Networks_RH_Cont_PFCl_1,Frontoparietal
+341,σinter^2,0.47502,0.05034,0.37636,0.57369,7Networks_RH_Cont_PFCl_1,Frontoparietal
+342,σ1intra^2,0.38536,0.04363,0.29985,0.47088,7Networks_RH_Cont_PFCl_2,Frontoparietal
+342,σ2intra^2,0.38536,0.04363,0.29985,0.47088,7Networks_RH_Cont_PFCl_2,Frontoparietal
+342,σinter^2,0.61256,0.05333,0.50803,0.71709,7Networks_RH_Cont_PFCl_2,Frontoparietal
+343,σ1intra^2,0.34402,0.04087,0.26393,0.42412,7Networks_RH_Cont_PFCl_3,Frontoparietal
+343,σ2intra^2,0.34402,0.04087,0.26393,0.42412,7Networks_RH_Cont_PFCl_3,Frontoparietal
+343,σinter^2,0.6539,0.05434,0.54739,0.76041,7Networks_RH_Cont_PFCl_3,Frontoparietal
+344,σ1intra^2,0.36621,0.04236,0.28318,0.44924,7Networks_RH_Cont_PFCl_4,Frontoparietal
+344,σ2intra^2,0.36621,0.04236,0.28318,0.44924,7Networks_RH_Cont_PFCl_4,Frontoparietal
+344,σinter^2,0.63171,0.0538,0.52628,0.73715,7Networks_RH_Cont_PFCl_4,Frontoparietal
+345,σ1intra^2,0.33286,0.0401,0.25426,0.41146,7Networks_RH_Cont_PFCl_5,Frontoparietal
+345,σ2intra^2,0.33286,0.0401,0.25426,0.41146,7Networks_RH_Cont_PFCl_5,Frontoparietal
+345,σinter^2,0.66507,0.05462,0.55801,0.77213,7Networks_RH_Cont_PFCl_5,Frontoparietal
+346,σ1intra^2,0.2519,0.03427,0.18473,0.31908,7Networks_RH_Cont_PFCl_6,Frontoparietal
+346,σ2intra^2,0.2519,0.03427,0.18473,0.31908,7Networks_RH_Cont_PFCl_6,Frontoparietal
+346,σinter^2,0.74602,0.05675,0.63479,0.85726,7Networks_RH_Cont_PFCl_6,Frontoparietal
+347,σ1intra^2,0.2437,0.03365,0.17774,0.30965,7Networks_RH_Cont_PFCl_7,Frontoparietal
+347,σ2intra^2,0.2437,0.03365,0.17774,0.30965,7Networks_RH_Cont_PFCl_7,Frontoparietal
+347,σinter^2,0.75423,0.05698,0.64256,0.8659,7Networks_RH_Cont_PFCl_7,Frontoparietal
+348,σ1intra^2,0.38097,0.04334,0.29602,0.46592,7Networks_RH_Cont_PFCl_8,Frontoparietal
+348,σ2intra^2,0.38097,0.04334,0.29602,0.46592,7Networks_RH_Cont_PFCl_8,Frontoparietal
+348,σinter^2,0.61695,0.05344,0.51221,0.72169,7Networks_RH_Cont_PFCl_8,Frontoparietal
+349,σ1intra^2,0.34603,0.041,0.26567,0.4264,7Networks_RH_Cont_PFCl_9,Frontoparietal
+349,σ2intra^2,0.34603,0.041,0.26567,0.4264,7Networks_RH_Cont_PFCl_9,Frontoparietal
+349,σinter^2,0.65189,0.05429,0.54548,0.75831,7Networks_RH_Cont_PFCl_9,Frontoparietal
+350,σ1intra^2,0.24168,0.03349,0.17603,0.30733,7Networks_RH_Cont_PFCl_10,Frontoparietal
+350,σ2intra^2,0.24168,0.03349,0.17603,0.30733,7Networks_RH_Cont_PFCl_10,Frontoparietal
+350,σinter^2,0.75625,0.05703,0.64447,0.86803,7Networks_RH_Cont_PFCl_10,Frontoparietal
+351,σ1intra^2,0.3865,0.04371,0.30083,0.47216,7Networks_RH_Cont_PFCl_11,Frontoparietal
+351,σ2intra^2,0.3865,0.04371,0.30083,0.47216,7Networks_RH_Cont_PFCl_11,Frontoparietal
+351,σinter^2,0.61143,0.05331,0.50695,0.71591,7Networks_RH_Cont_PFCl_11,Frontoparietal
+352,σ1intra^2,0.38251,0.04344,0.29736,0.46766,7Networks_RH_Cont_PFCl_12,Frontoparietal
+352,σ2intra^2,0.38251,0.04344,0.29736,0.46766,7Networks_RH_Cont_PFCl_12,Frontoparietal
+352,σinter^2,0.61542,0.0534,0.51075,0.72008,7Networks_RH_Cont_PFCl_12,Frontoparietal
+353,σ1intra^2,0.35056,0.04131,0.26959,0.43153,7Networks_RH_Cont_PFCl_13,Frontoparietal
+353,σ2intra^2,0.35056,0.04131,0.26959,0.43153,7Networks_RH_Cont_PFCl_13,Frontoparietal
+353,σinter^2,0.64737,0.05418,0.54117,0.75356,7Networks_RH_Cont_PFCl_13,Frontoparietal
+354,σ1intra^2,0.39376,0.04418,0.30716,0.48036,7Networks_RH_Cont_PFCl_14,Frontoparietal
+354,σ2intra^2,0.39376,0.04418,0.30716,0.48036,7Networks_RH_Cont_PFCl_14,Frontoparietal
+354,σinter^2,0.60417,0.05314,0.50002,0.70831,7Networks_RH_Cont_PFCl_14,Frontoparietal
+355,σ1intra^2,0.43208,0.04665,0.34064,0.52352,7Networks_RH_Cont_PFCl_15,Frontoparietal
+355,σ2intra^2,0.43208,0.04665,0.34064,0.52352,7Networks_RH_Cont_PFCl_15,Frontoparietal
+355,σinter^2,0.56585,0.05225,0.46343,0.66826,7Networks_RH_Cont_PFCl_15,Frontoparietal
+356,σ1intra^2,0.4155,0.04559,0.32614,0.50486,7Networks_RH_Cont_pCun_1,Frontoparietal
+356,σ2intra^2,0.4155,0.04559,0.32614,0.50486,7Networks_RH_Cont_pCun_1,Frontoparietal
+356,σinter^2,0.58243,0.05263,0.47928,0.68558,7Networks_RH_Cont_pCun_1,Frontoparietal
+357,σ1intra^2,0.33119,0.03999,0.25282,0.40957,7Networks_RH_Cont_pCun_2,Frontoparietal
+357,σ2intra^2,0.33119,0.03999,0.25282,0.40957,7Networks_RH_Cont_pCun_2,Frontoparietal
+357,σinter^2,0.66673,0.05467,0.55959,0.77388,7Networks_RH_Cont_pCun_2,Frontoparietal
+358,σ1intra^2,0.53782,0.05317,0.43361,0.64203,7Networks_RH_Cont_Cing_1,Frontoparietal
+358,σ2intra^2,0.53782,0.05317,0.43361,0.64203,7Networks_RH_Cont_Cing_1,Frontoparietal
+358,σinter^2,0.4601,0.05005,0.362,0.55821,7Networks_RH_Cont_Cing_1,Frontoparietal
+359,σ1intra^2,0.68493,0.06172,0.56396,0.8059,7Networks_RH_Cont_Cing_2,Frontoparietal
+359,σ2intra^2,0.68493,0.06172,0.56396,0.8059,7Networks_RH_Cont_Cing_2,Frontoparietal
+359,σinter^2,0.31299,0.04764,0.21963,0.40636,7Networks_RH_Cont_Cing_2,Frontoparietal
+360,σ1intra^2,0.56313,0.05468,0.45596,0.6703,7Networks_RH_Cont_PFCmp_1,Frontoparietal
+360,σ2intra^2,0.56313,0.05468,0.45596,0.6703,7Networks_RH_Cont_PFCmp_1,Frontoparietal
+360,σinter^2,0.43479,0.04958,0.33762,0.53197,7Networks_RH_Cont_PFCmp_1,Frontoparietal
+361,σ1intra^2,0.47665,0.04945,0.37973,0.57356,7Networks_RH_Cont_PFCmp_2,Frontoparietal
+361,σ2intra^2,0.47665,0.04945,0.37973,0.57356,7Networks_RH_Cont_PFCmp_2,Frontoparietal
+361,σinter^2,0.52128,0.05128,0.42077,0.62179,7Networks_RH_Cont_PFCmp_2,Frontoparietal
+362,σ1intra^2,0.34547,0.04096,0.26518,0.42576,7Networks_RH_Default_Par_1,Default
+362,σ2intra^2,0.34547,0.04096,0.26518,0.42576,7Networks_RH_Default_Par_1,Default
+362,σinter^2,0.65246,0.05431,0.54602,0.7589,7Networks_RH_Default_Par_1,Default
+363,σ1intra^2,0.38523,0.04362,0.29972,0.47073,7Networks_RH_Default_Par_2,Default
+363,σ2intra^2,0.38523,0.04362,0.29972,0.47073,7Networks_RH_Default_Par_2,Default
+363,σinter^2,0.6127,0.05334,0.50816,0.71724,7Networks_RH_Default_Par_2,Default
+364,σ1intra^2,0.45431,0.04806,0.36012,0.5485,7Networks_RH_Default_Par_3,Default
+364,σ2intra^2,0.45431,0.04806,0.36012,0.5485,7Networks_RH_Default_Par_3,Default
+364,σinter^2,0.54362,0.05176,0.44217,0.64507,7Networks_RH_Default_Par_3,Default
+365,σ1intra^2,0.33056,0.03994,0.25227,0.40885,7Networks_RH_Default_Par_4,Default
+365,σ2intra^2,0.33056,0.03994,0.25227,0.40885,7Networks_RH_Default_Par_4,Default
+365,σinter^2,0.66737,0.05468,0.56019,0.77454,7Networks_RH_Default_Par_4,Default
+366,σ1intra^2,0.42157,0.04598,0.33145,0.51169,7Networks_RH_Default_Par_5,Default
+366,σ2intra^2,0.42157,0.04598,0.33145,0.51169,7Networks_RH_Default_Par_5,Default
+366,σinter^2,0.57636,0.05249,0.47348,0.67924,7Networks_RH_Default_Par_5,Default
+367,σ1intra^2,0.46191,0.04853,0.36679,0.55703,7Networks_RH_Default_Temp_1,Default
+367,σ2intra^2,0.46191,0.04853,0.36679,0.55703,7Networks_RH_Default_Temp_1,Default
+367,σinter^2,0.53601,0.0516,0.43489,0.63714,7Networks_RH_Default_Temp_1,Default
+368,σ1intra^2,0.47384,0.04927,0.37727,0.57041,7Networks_RH_Default_Temp_2,Default
+368,σ2intra^2,0.47384,0.04927,0.37727,0.57041,7Networks_RH_Default_Temp_2,Default
+368,σinter^2,0.52409,0.05134,0.42346,0.62471,7Networks_RH_Default_Temp_2,Default
+369,σ1intra^2,0.46367,0.04864,0.36833,0.55901,7Networks_RH_Default_Temp_3,Default
+369,σ2intra^2,0.46367,0.04864,0.36833,0.55901,7Networks_RH_Default_Temp_3,Default
+369,σinter^2,0.53426,0.05156,0.4332,0.63531,7Networks_RH_Default_Temp_3,Default
+370,σ1intra^2,0.51246,0.05164,0.41124,0.61367,7Networks_RH_Default_Temp_4,Default
+370,σ2intra^2,0.51246,0.05164,0.41124,0.61367,7Networks_RH_Default_Temp_4,Default
+370,σinter^2,0.48547,0.05055,0.3864,0.58454,7Networks_RH_Default_Temp_4,Default
+371,σ1intra^2,0.38907,0.04388,0.30308,0.47507,7Networks_RH_Default_Temp_5,Default
+371,σ2intra^2,0.38907,0.04388,0.30308,0.47507,7Networks_RH_Default_Temp_5,Default
+371,σinter^2,0.60885,0.05325,0.50449,0.71322,7Networks_RH_Default_Temp_5,Default
+372,σ1intra^2,0.40589,0.04497,0.31775,0.49404,7Networks_RH_Default_Temp_6,Default
+372,σ2intra^2,0.40589,0.04497,0.31775,0.49404,7Networks_RH_Default_Temp_6,Default
+372,σinter^2,0.59203,0.05285,0.48844,0.69562,7Networks_RH_Default_Temp_6,Default
+373,σ1intra^2,0.31418,0.0388,0.23813,0.39024,7Networks_RH_Default_Temp_7,Default
+373,σ2intra^2,0.31418,0.0388,0.23813,0.39024,7Networks_RH_Default_Temp_7,Default
+373,σinter^2,0.68374,0.0551,0.57575,0.79173,7Networks_RH_Default_Temp_7,Default
+374,σ1intra^2,0.39772,0.04444,0.31062,0.48483,7Networks_RH_Default_Temp_8,Default
+374,σ2intra^2,0.39772,0.04444,0.31062,0.48483,7Networks_RH_Default_Temp_8,Default
+374,σinter^2,0.6002,0.05304,0.49624,0.70417,7Networks_RH_Default_Temp_8,Default
+375,σ1intra^2,0.50429,0.05114,0.40405,0.60453,7Networks_RH_Default_PFCv_1,Default
+375,σ2intra^2,0.50429,0.05114,0.40405,0.60453,7Networks_RH_Default_PFCv_1,Default
+375,σinter^2,0.49364,0.05071,0.39425,0.59303,7Networks_RH_Default_PFCv_1,Default
+376,σ1intra^2,0.40754,0.04508,0.31918,0.49589,7Networks_RH_Default_PFCv_2,Default
+376,σ2intra^2,0.40754,0.04508,0.31918,0.49589,7Networks_RH_Default_PFCv_2,Default
+376,σinter^2,0.59039,0.05281,0.48688,0.6939,7Networks_RH_Default_PFCv_2,Default
+377,σ1intra^2,0.40099,0.04465,0.31347,0.48851,7Networks_RH_Default_PFCv_3,Default
+377,σ2intra^2,0.40099,0.04465,0.31347,0.48851,7Networks_RH_Default_PFCv_3,Default
+377,σinter^2,0.59693,0.05297,0.49312,0.70074,7Networks_RH_Default_PFCv_3,Default
+378,σ1intra^2,0.27536,0.03602,0.20476,0.34596,7Networks_RH_Default_PFCv_4,Default
+378,σ2intra^2,0.27536,0.03602,0.20476,0.34596,7Networks_RH_Default_PFCv_4,Default
+378,σinter^2,0.72257,0.05612,0.61258,0.83256,7Networks_RH_Default_PFCv_4,Default
+379,σ1intra^2,0.48241,0.0498,0.38479,0.58002,7Networks_RH_Default_PFCdPFCm_1,Default
+379,σ2intra^2,0.48241,0.0498,0.38479,0.58002,7Networks_RH_Default_PFCdPFCm_1,Default
+379,σinter^2,0.51552,0.05116,0.41525,0.61579,7Networks_RH_Default_PFCdPFCm_1,Default
+380,σ1intra^2,0.48945,0.05024,0.39099,0.58791,7Networks_RH_Default_PFCdPFCm_2,Default
+380,σ2intra^2,0.48945,0.05024,0.39099,0.58791,7Networks_RH_Default_PFCdPFCm_2,Default
+380,σinter^2,0.50848,0.05101,0.40849,0.60846,7Networks_RH_Default_PFCdPFCm_2,Default
+381,σ1intra^2,0.48923,0.05022,0.3908,0.58767,7Networks_RH_Default_PFCdPFCm_3,Default
+381,σ2intra^2,0.48923,0.05022,0.3908,0.58767,7Networks_RH_Default_PFCdPFCm_3,Default
+381,σinter^2,0.50869,0.05102,0.4087,0.60869,7Networks_RH_Default_PFCdPFCm_3,Default
+382,σ1intra^2,0.44,0.04716,0.34758,0.53243,7Networks_RH_Default_PFCdPFCm_4,Default
+382,σ2intra^2,0.44,0.04716,0.34758,0.53243,7Networks_RH_Default_PFCdPFCm_4,Default
+382,σinter^2,0.55792,0.05208,0.45586,0.65999,7Networks_RH_Default_PFCdPFCm_4,Default
+383,σ1intra^2,0.41759,0.04573,0.32797,0.50722,7Networks_RH_Default_PFCdPFCm_5,Default
+383,σ2intra^2,0.41759,0.04573,0.32797,0.50722,7Networks_RH_Default_PFCdPFCm_5,Default
+383,σinter^2,0.58033,0.05258,0.47728,0.68339,7Networks_RH_Default_PFCdPFCm_5,Default
+384,σ1intra^2,0.67443,0.06113,0.55462,0.79423,7Networks_RH_Default_PFCdPFCm_6,Default
+384,σ2intra^2,0.67443,0.06113,0.55462,0.79423,7Networks_RH_Default_PFCdPFCm_6,Default
+384,σinter^2,0.3235,0.04778,0.22984,0.41715,7Networks_RH_Default_PFCdPFCm_6,Default
+385,σ1intra^2,0.39122,0.04402,0.30495,0.47749,7Networks_RH_Default_PFCdPFCm_7,Default
+385,σ2intra^2,0.39122,0.04402,0.30495,0.47749,7Networks_RH_Default_PFCdPFCm_7,Default
+385,σinter^2,0.60671,0.0532,0.50245,0.71097,7Networks_RH_Default_PFCdPFCm_7,Default
+386,σ1intra^2,0.41942,0.04584,0.32957,0.50927,7Networks_RH_Default_PFCdPFCm_8,Default
+386,σ2intra^2,0.41942,0.04584,0.32957,0.50927,7Networks_RH_Default_PFCdPFCm_8,Default
+386,σinter^2,0.5785,0.05254,0.47553,0.68148,7Networks_RH_Default_PFCdPFCm_8,Default
+387,σ1intra^2,0.40734,0.04507,0.31901,0.49567,7Networks_RH_Default_PFCdPFCm_9,Default
+387,σ2intra^2,0.40734,0.04507,0.31901,0.49567,7Networks_RH_Default_PFCdPFCm_9,Default
+387,σinter^2,0.59059,0.05282,0.48707,0.69411,7Networks_RH_Default_PFCdPFCm_9,Default
+388,σ1intra^2,0.42966,0.0465,0.33852,0.52079,7Networks_RH_Default_PFCdPFCm_10,Default
+388,σ2intra^2,0.42966,0.0465,0.33852,0.52079,7Networks_RH_Default_PFCdPFCm_10,Default
+388,σinter^2,0.56827,0.05231,0.46575,0.67079,7Networks_RH_Default_PFCdPFCm_10,Default
+389,σ1intra^2,0.39494,0.04426,0.30819,0.48169,7Networks_RH_Default_PFCdPFCm_11,Default
+389,σ2intra^2,0.39494,0.04426,0.30819,0.48169,7Networks_RH_Default_PFCdPFCm_11,Default
+389,σinter^2,0.60298,0.05311,0.49889,0.70707,7Networks_RH_Default_PFCdPFCm_11,Default
+390,σ1intra^2,0.41801,0.04575,0.32834,0.50769,7Networks_RH_Default_PFCdPFCm_12,Default
+390,σ2intra^2,0.41801,0.04575,0.32834,0.50769,7Networks_RH_Default_PFCdPFCm_12,Default
+390,σinter^2,0.57991,0.05257,0.47687,0.68295,7Networks_RH_Default_PFCdPFCm_12,Default
+391,σ1intra^2,0.41656,0.04566,0.32707,0.50606,7Networks_RH_Default_PFCdPFCm_13,Default
+391,σ2intra^2,0.41656,0.04566,0.32707,0.50606,7Networks_RH_Default_PFCdPFCm_13,Default
+391,σinter^2,0.58136,0.05261,0.47826,0.68447,7Networks_RH_Default_PFCdPFCm_13,Default
+392,σ1intra^2,0.46952,0.04901,0.37347,0.56556,7Networks_RH_Default_pCunPCC_1,Default
+392,σ2intra^2,0.46952,0.04901,0.37347,0.56556,7Networks_RH_Default_pCunPCC_1,Default
+392,σinter^2,0.52841,0.05143,0.4276,0.62922,7Networks_RH_Default_pCunPCC_1,Default
+393,σ1intra^2,0.53118,0.05277,0.42775,0.63461,7Networks_RH_Default_pCunPCC_2,Default
+393,σ2intra^2,0.53118,0.05277,0.42775,0.63461,7Networks_RH_Default_pCunPCC_2,Default
+393,σinter^2,0.46675,0.05018,0.3684,0.5651,7Networks_RH_Default_pCunPCC_2,Default
+394,σ1intra^2,0.47108,0.0491,0.37484,0.56732,7Networks_RH_Default_pCunPCC_3,Default
+394,σ2intra^2,0.47108,0.0491,0.37484,0.56732,7Networks_RH_Default_pCunPCC_3,Default
+394,σinter^2,0.52684,0.0514,0.4261,0.62758,7Networks_RH_Default_pCunPCC_3,Default
+395,σ1intra^2,0.47847,0.04956,0.38133,0.5756,7Networks_RH_Default_pCunPCC_4,Default
+395,σ2intra^2,0.47847,0.04956,0.38133,0.5756,7Networks_RH_Default_pCunPCC_4,Default
+395,σinter^2,0.51946,0.05124,0.41902,0.61989,7Networks_RH_Default_pCunPCC_4,Default
+396,σ1intra^2,0.41227,0.04538,0.32332,0.50122,7Networks_RH_Default_pCunPCC_5,Default
+396,σ2intra^2,0.41227,0.04538,0.32332,0.50122,7Networks_RH_Default_pCunPCC_5,Default
+396,σinter^2,0.58566,0.0527,0.48236,0.68896,7Networks_RH_Default_pCunPCC_5,Default
+397,σ1intra^2,0.39696,0.04439,0.30995,0.48397,7Networks_RH_Default_pCunPCC_6,Default
+397,σ2intra^2,0.39696,0.04439,0.30995,0.48397,7Networks_RH_Default_pCunPCC_6,Default
+397,σinter^2,0.60097,0.05306,0.49697,0.70496,7Networks_RH_Default_pCunPCC_6,Default
+398,σ1intra^2,0.53755,0.05315,0.43337,0.64173,7Networks_RH_Default_pCunPCC_7,Default
+398,σ2intra^2,0.53755,0.05315,0.43337,0.64173,7Networks_RH_Default_pCunPCC_7,Default
+398,σinter^2,0.46038,0.05006,0.36226,0.55849,7Networks_RH_Default_pCunPCC_7,Default
+399,σ1intra^2,0.4094,0.0452,0.32081,0.49799,7Networks_RH_Default_pCunPCC_8,Default
+399,σ2intra^2,0.4094,0.0452,0.32081,0.49799,7Networks_RH_Default_pCunPCC_8,Default
+399,σinter^2,0.58852,0.05277,0.4851,0.69195,7Networks_RH_Default_pCunPCC_8,Default
+400,σ1intra^2,0.38254,0.04345,0.29739,0.4677,7Networks_RH_Default_pCunPCC_9,Default
+400,σ2intra^2,0.38254,0.04345,0.29739,0.4677,7Networks_RH_Default_pCunPCC_9,Default
+400,σinter^2,0.61538,0.0534,0.51072,0.72005,7Networks_RH_Default_pCunPCC_9,Default
