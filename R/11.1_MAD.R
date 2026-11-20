@@ -1,8 +1,6 @@
 #Author: Giacomo Bignardi
 #Program: Median Absolute Deviation (MAD) analysis------------------------------------------------------------------------------------------------------------------------------
 #for simplicity we copy previous scripts and minimal adapt them to run MAD-based analyses
-#clean working environment 
-rm(list = ls())
 library(tidyverse)
 library(reshape2)
 library(patchwork)
@@ -10,6 +8,8 @@ library(lavaan)
 
 # clear workspace
 rm(list = ls())
+g1_tag = ""   # "" = Procrustes-aligned (main); "_signmatched" / "_ordermatched" = supplement
+run_profile_ci = FALSE   # set TRUE to compute profile-likelihood CIs (slow)
 
 # set Open Access working directories
 wd_oa = getwd()
@@ -38,8 +38,8 @@ MPmi_i  =  read_csv(sprintf("%s/HCP_S1200_MPC_400.csv",wd_noa_data)) %>% rename(
 GD_i  =   read_csv(sprintf("%s/01_GD.csv",wd_noa_output))
 
 # Functional gradient
-FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
-FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
+FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1%s.csv",wd_noa_output, g1_tag))
+FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2%s.csv",wd_noa_output, g1_tag))
 
 # inclusion index 
 Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
@@ -96,10 +96,10 @@ SF_twin_i_final = SFB_i_list %>% reduce(full_join, by=c('Sub'))
 # compute variances for within level analysis
 SF_twin_i_final_within = SF_twin_i_final %>% 
   group_by(Sub,Family_ID,Gender,Age_in_Yrs,ZygosityGT,Sib_ID,FS_IntraCranial_Vol) %>% 
-  reframe(MP = mad(MP),
-          GD = mad(GD),
-          G1_d1 = mad(G1_d1),
-          G1_d2 = mad(G1_d2)) 
+  reframe(MP = mad(MP, na.rm = TRUE),
+          GD = mad(GD, na.rm = TRUE),
+          G1_d1 = mad(G1_d1, na.rm = TRUE),
+          G1_d2 = mad(G1_d2, na.rm = TRUE))
 
 # create a list of parcel to run models on later
 parcel_list = unique(FC_gradients%>%select(Parcel))
@@ -228,3 +228,19 @@ stand_AE_res %>% filter(grepl("=~",op) & grepl("E",lhs) ) %>% distinct(lhs,.keep
 # mem
 stand_AE_res %>% filter(grepl("f1",label))
 stand_AE_res %>% filter(grepl("var_intra", label))
+
+# REVISION: profile-likelihood CIs for the global genetic correlations -- main gradients only ####
+# Note, this may take few minutes
+if (if (g1_tag == "" && run_profile_ci) {
+  source(sprintf("%s/R/functions/lavaantwda/profile_ci.R", wd_oa))
+  ci_mad = bind_rows(
+    profile_ci(cfm_cpmem_AE_model, SFB_i_final, "covA_P13", "varA_P1", "varA_P3", "rA_P13"),
+    profile_ci(cfm_cpmem_AE_model, SFB_i_final, "covA_P12", "varA_P1", "varA_P2", "rA_P12"))
+  write_csv(ci_mad, sprintf("%s/11.1_MAD_profile_ci.csv", wd_noa_output))
+  print(ci_mad)
+}
+
+# summary of some outputs
+ci_mad                        # profile-likelihood CIs (end of the script)
+fitmeasures; fitmeasures_res  # CFI and RMSEA, main and ICV models
+colSums(is.na(SF_twin_i_final_within[, c("MP", "GD", "G1_d1", "G1_d2")]))   # effect of na.rm = TRUE
