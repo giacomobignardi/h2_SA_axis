@@ -231,7 +231,7 @@ stand_AE_res %>% filter(grepl("var_intra", label))
 
 # REVISION: profile-likelihood CIs for the global genetic correlations -- main gradients only ####
 # Note, this may take few minutes
-if (if (g1_tag == "" && run_profile_ci) {
+if (g1_tag == "" && run_profile_ci) {
   source(sprintf("%s/R/functions/lavaantwda/profile_ci.R", wd_oa))
   ci_mad = bind_rows(
     profile_ci(cfm_cpmem_AE_model, SFB_i_final, "covA_P13", "varA_P1", "varA_P3", "rA_P13"),
