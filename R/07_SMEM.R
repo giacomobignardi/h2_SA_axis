@@ -1,8 +1,6 @@
 #Author: Giacomo Bignardi
 #Description: estimate association between structure and function between-individuals correcting for measurement error
 #Program: Strucutral Measurement Error Equation Modeling------------------------------------------------------------------------------------------------------------------------------
-#clean working environment 
-rm(list = ls())
 library(tidyverse)
 library(reshape2)
 library(patchwork)
@@ -13,6 +11,7 @@ library(lavaan)
 
 # clear workspace
 rm(list = ls())
+g1_tag = "_signmatched"   # "" = Procrustes-aligned (main); "_signmatched" / "_ordermatched" = supplement (R2.2)
 
 # set Open Access working directories
 wd_oa = getwd()
@@ -42,8 +41,8 @@ MPmi_i = read_csv(sprintf("%s/HCP_S1200_MPC_400.csv",wd_noa_data)) %>% rename(Su
 GD_i = read_csv(sprintf("%s/01_GD.csv",wd_noa_output))
 
 # Functional gradient
-FC_g1_i_d1 = read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
-FC_g1_i_d2 = read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
+FC_g1_i_d1 = read_csv(sprintf("%s/03_GFC_i_d1%s.csv",wd_noa_output, g1_tag))
+FC_g1_i_d2 = read_csv(sprintf("%s/03_GFC_i_d2%s.csv",wd_noa_output, g1_tag))
 
 # inclusion index 
 notTwin_sub = read_csv(sprintf("%s/00_nottwin_ids.csv",wd_noa_output))
@@ -182,7 +181,7 @@ SF3A_annot = merge(SF3A, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_sh
   select(-c(lhs, op, rhs))
 
 # SF2: parameters in the structural measurement error model
-write_csv(SF3A_annot, sprintf("%s/SI/SFILE2.csv",wd_oa))
+if (g1_tag == "") write_csv(SF3A_annot, sprintf("%s/SI/SFILE2.csv",wd_oa))
 
 # merge with annotation to stratify across cortical networks
 est_smem_annot = merge(est_smem %>%  filter(grepl("rP",label)) %>%  group_by(Parcel) %>% 
@@ -265,7 +264,7 @@ cort_r = ggplot() +
 # SUPPLEMENTARY ####
 # estimate correlations without partitioning intra-individual variability out to check for overall improvement
 # Load average Functional gradient
-FC_g1_i =  read_csv(sprintf("%s/03_GFC_i.csv",wd_noa_output))
+FC_g1_i =  read_csv(sprintf("%s/03_GFC_i%s.csv",wd_noa_output, g1_tag))
 
 #get individual values for the functional gradient
 FC_g1_i = FC_g1_i%>%
@@ -344,7 +343,7 @@ est_r_annot = est_r_annot %>%
 est_r_annot %>% group_by(label) %>% summarise(n_bonf = sum(p_adjust < .05), median_r = median(est))
 
 ## save####
-write_csv(est_smem, sprintf("%s/07_SMEM_output.csv",wd_noa_output))
+write_csv(est_smem, sprintf("%s/07_SMEM_output%s.csv",wd_noa_output, g1_tag))
 
 # plot overall improvement
 est = merge(est_smem %>% rename(est_smem = est.std), est_r %>% rename(est_r = est), by = c("Parcel","label"))
@@ -373,7 +372,7 @@ scatter_plot = est_annot %>%
 
 
 ## save FIG. 3####
-pdf(sprintf("%s/Figures/07_Fig_3.pdf",wd_oa), 
+pdf(sprintf("%s/07_Fig_3%s.pdf", if (g1_tag == "") paste0(wd_oa, "/Figures") else wd_noa_output, g1_tag),
     width=9.5, 
     height=2.75)
 (cort_r|scatter_plot) +plot_layout(widths = c(2.5,1)) + plot_annotation(tag_levels = "A")
@@ -381,3 +380,5 @@ dev.off()
 
 # range of improvement
 range(est_annot$est_smem-est_annot$est_r)
+
+

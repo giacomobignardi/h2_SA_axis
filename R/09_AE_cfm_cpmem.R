@@ -1,8 +1,6 @@
 #Author: Giacomo Bignardi
 #Description: estimate heritability of and genetic association between structure and function
 #Program: Multivariate h2 twin measurement model------------------------------------------------------------------------------------------------------------------------------
-#clean working environment 
-rm(list = ls())
 library(tidyverse)
 library(reshape2)
 library(patchwork)
@@ -13,6 +11,7 @@ library(lavaan)
 
 # clear workspace
 rm(list = ls())
+g1_tag = ""   # "" = Procrustes-aligned (main); "_signmatched" / "_ordermatched" = supplement (R2.2)
 
 # set Open Access working directories
 wd_oa = getwd()
@@ -38,8 +37,8 @@ MPmi_i  =  read_csv(sprintf("%s/HCP_S1200_MPC_400.csv",wd_noa_data)) %>% rename(
 GD_i  =   read_csv(sprintf("%s/01_GD.csv",wd_noa_output))
 
 # Functional gradient
-FC_g1_i_d1 =  read_csv(sprintf("%s/03_GFC_i_d1.csv",wd_noa_output))
-FC_g1_i_d2 =  read_csv(sprintf("%s/03_GFC_i_d2.csv",wd_noa_output))
+FC_g1_i_d1 = read_csv(sprintf("%s/03_GFC_i_d1%s.csv",wd_noa_output, g1_tag))
+FC_g1_i_d2 = read_csv(sprintf("%s/03_GFC_i_d2%s.csv",wd_noa_output, g1_tag))
 
 # inclusion index 
 Twin_sub =  read_csv(sprintf("%s/00_twin_ids.csv",wd_noa_output))
@@ -289,9 +288,11 @@ SF4C_annot = merge(SF4C, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_sh
   select(-c(lhs,op,rhs,block,group))
 
 ## save####
-write_csv(SF4A_annot, sprintf("%s/SI/SFILE3.csv",wd_oa))
-write_csv(SF4B_annot, sprintf("%s/SI/SFILE4.csv",wd_oa))
-write_csv(SF4C_annot, sprintf("%s/SI/SFILE5.csv",wd_oa))
+if (g1_tag == "") {
+  write_csv(SF4A_annot, sprintf("%s/SI/SFILE3.csv",wd_oa))
+  write_csv(SF4B_annot, sprintf("%s/SI/SFILE4.csv",wd_oa))
+  write_csv(SF4C_annot, sprintf("%s/SI/SFILE5.csv",wd_oa))
+}
 
 #plot h2 - microstructure
 mi_h2 = cfm_cpmem_AE_sumy %>% 
@@ -372,7 +373,7 @@ est_AE_annot = est_AE_annot %>% mutate(admissible = !(grepl("^r[AE]_", label) & 
 est_AE_annot %>% filter(!admissible) %>% select(Parcel, label, est, pvalue)
 
 ## save####
-write_csv(est_AE_annot, sprintf("%s/09_CPMEM_output.csv",wd_noa_output))
+write_csv(est_AE_annot, sprintf("%s/09_CPMEM_output%s.csv",wd_noa_output, g1_tag))
 
 # average heritability
 est_AE_annot %>% 
@@ -501,7 +502,7 @@ cort_rE = ggplot() +
   labs(fill = expression(italic(r)[E])) + fig5_theme
 
 # Figure 5####
-pdf(sprintf("%s/Figures/09_Fig_5.pdf",wd_oa),
+pdf(sprintf("%s/09_Fig_5%s.pdf", if (g1_tag == "") paste0(wd_oa, "/Figures") else wd_noa_output, g1_tag),
     width=9, 
     height=5)
 (((mi_h2/gd_h2) + plot_layout(axes = "collect"))|(cort_rA/cort_rE) + plot_layout(axes = "collect")) +plot_layout(widths = c(1,2.5), heights = c(1,1)) + plot_annotation(tag_levels = "A")
