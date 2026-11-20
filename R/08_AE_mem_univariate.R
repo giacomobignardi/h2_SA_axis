@@ -128,6 +128,7 @@ SFB_i_final = SF_twin_i_final %>%
 source(sprintf("%s/R/functions/lavaantwda/ADE_2g1p.R", wd_oa))
 
 # estimate h2 across parcels
+twin_r = c()
 AE_sumy = c()
 for(i in parcel_list$Parcel){
   # reinitialize at the beginning of each loop
@@ -143,6 +144,9 @@ for(i in parcel_list$Parcel){
                                        cov = c("age","sex"), 
                                        suffixes=c("_T1","_T2"),
                                        data = SFB_i_final %>% filter(Parcel== i))
+  
+  twin_r = rbind(twin_r, SFB_i_final_i %>% group_by(zyg) %>%
+                   summarise(r = cor(P_T1, P_T2, use = "complete.obs")) %>% mutate(Parcel = i))
   
   # correlated factor solution (multivariate via Direct Symmetric Approach)
   AE_fit_i = sem(AE_model,
@@ -169,10 +173,16 @@ for(i in parcel_list$Parcel){
 
 # retain only good fitting model (following Teeuw et al., 2021 Neuroimage)
 AE_fltr = AE_sumy %>% filter(rmsea < 0.08, cfi > .90)
+
+# twin correlations of session-averaged loadings ("1" = MZ, "2" = DZ)
+twin_r = twin_r %>% pivot_wider(names_from = zyg, values_from = r, names_prefix = "r_")
+twin_r %>% summarise(median_rMZ = median(r_1), median_rDZ = median(r_2),
+                     pct_rMZ_gt_2rDZ = 100 * mean(r_1 > 2 * r_2))
+
 # note that 398 parcel meet goodness of fit criteria
 nrow(AE_fltr)
 # add information for which parcel the model did not fit well
-AE_sumy %>% filter(rmsea >= 0.08, cfi <= .90) %>% pull(Parcel)
+AE_sumy %>% filter(rmsea >= 0.08 | cfi <= .90) %>% pull(Parcel)
 #[1]  61 251
 
 # merge with annotation to stratify across cortical networks
@@ -322,3 +332,13 @@ pdf(sprintf("%s/Figures/08_Fig_4.pdf",wd_oa),
     height=3)
 (box_plot_AE|box_plot_cpmem_AE|scatter_plot) + plot_layout(guides = "collect") + plot_annotation(tag_levels = "A")
 dev.off()
+
+
+# recap of main output for simplicity 
+nrow(AE_fltr); AE_sumy %>% filter(rmsea >= 0.08 | cfi <= .90) %>% pull(Parcel)
+nrow(cpmem_AE_sumy %>% filter(rmsea < 0.08, cfi > .90)); cpmem_AE_sumy %>% filter(rmsea >= 0.08 | cfi <= .90) %>% pull(Parcel)
+cpmem_AE_sumy %>% filter(est >= 1 | est <= -1) %>% pull(Parcel)
+c(mean_h2_classic = mean(AE_fltr_annot$est), sd_classic = sd(AE_fltr_annot$est),
+  mean_h2_mem = mean(cpmem_AE_fltr_annot$est), sd_mem = sd(cpmem_AE_fltr_annot$est))
+((mean(cpmem_AE_fltr_annot$est) - mean(AE_fltr_annot$est)) / mean(AE_fltr_annot$est)) * 100
+twin_r %>% summarise(median_rMZ = median(r_1), median_rDZ = median(r_2), pct_rMZ_gt_2rDZ = 100 * mean(r_1 > 2 * r_2))
