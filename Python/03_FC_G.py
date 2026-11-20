@@ -7,7 +7,8 @@
 #     as the individual matrices (previously 400 cortical rows x all 419 columns);
 #   - standard BrainSpace instead of a locally modified copy;
 #   - template sign fixed by convention (G1: default mode > somatomotor; G2: visual > somatomotor);
-#   - additionally writes sign-matched, unrotated G1 (sensitivity analysis) and per-subject
+#   - additionally writes unrotated gradients for sensitivity analyses (first component,
+#     sign-matched; best-matching component, order- and sign-matched) and per-subject
 #     alignment diagnostics.
 # To run reticulate::source_python("Python/03_FC_G.py")
 import os
@@ -50,36 +51,41 @@ pd.DataFrame(T).to_csv(os.path.join(wd_out, "03_FC_m_G.csv"), index=False)
 ids = set(pd.read_csv(ids_file, header=None)[0].astype(int))
 
 def individual(fc):
-    """Gradients of one connectome: aligned to the template, sign-matched G1, diagnostics."""
+    """Gradients of one connectome: aligned to the template, unrotated G1 variants, diagnostics."""
     gm = GradientMaps(**GM_KW)
     gm.fit(fc)
     U, lam = gm.gradients_, gm.lambdas_
     A = procrustes(U, T)                                         # rotation onto the fixed template
     r_raw = np.array([np.corrcoef(U[:, k], T[:, 0])[0, 1] for k in range(U.shape[1])])
-    S = U[:, :1] * np.sign(r_raw[0])                             # first component, sign-matched only
+    k = int(np.argmax(np.abs(r_raw)))                            # most S-A-like raw component
+    S = U[:, :1] * np.sign(r_raw[0])                             # first component, sign-matched
+    O = U[:, [k]] * np.sign(r_raw[k])                            # best-matching component, sign-matched
     diag = dict(expl_g1=lam[0] / lam.sum(),                      # explanatory ratio of G1
                 r_raw_g1=abs(r_raw[0]),                          # raw comp 1 vs template G1
-                best_raw_comp=int(np.argmax(np.abs(r_raw))) + 1, # 1 = raw comp 1 is the S-A gradient
+                best_raw_comp=k + 1,                             # 1 = raw comp 1 is the S-A gradient
+                r_raw_best=abs(r_raw[k]),                        # best-matching raw comp vs template G1
                 r_aligned_g1=np.corrcoef(A[:, 0], T[:, 0])[0, 1],
-                resid=np.linalg.norm(A - T) / np.linalg.norm(T)) # normalised Procrustes residual
-    return A, S, diag
+                resid=np.linalg.norm(A - T) / np.linalg.norm(T)) # normalised Procrustes residual (10 comps)
+    return A, S, O, diag
 
 def run(day_dir, session, suffix):
     files = glob.glob(os.path.join(wd_fc, day_dir, "*.csv"))
     subs = sorted(s for s in (int(os.path.basename(f).rsplit(".", 1)[0]) for f in files) if s in ids)
-    out_a, out_s, out_d = [], [], []
+    out_a, out_s, out_o, out_d = [], [], [], []
     for s in subs:
         fc = pd.read_csv(os.path.join(wd_fc, day_dir, f"{s}.csv"), header=None).values[:N, :N]
         if np.isnan(fc).any():
-            A, S, d = np.full((N, 3), np.nan), np.full((N, 1), np.nan), {}
+            A, S, O, d = np.full((N, 3), np.nan), np.full((N, 1), np.nan), np.full((N, 1), np.nan), {}
         else:
-            A, S, d = individual(fc)
+            A, S, O, d = individual(fc)
         meta = pd.DataFrame({"Sub": s, "Session": session, "Parcel": np.arange(1, N + 1)})
         out_a.append(pd.concat([meta, pd.DataFrame(A[:, :3])], axis=1))
         out_s.append(pd.concat([meta, pd.DataFrame(S)], axis=1))
+        out_o.append(pd.concat([meta, pd.DataFrame(O)], axis=1))
         out_d.append({"Sub": s, "Session": session, **d})
     pd.concat(out_a).to_csv(os.path.join(wd_out, f"03_GFC_i{suffix}.csv"), index=False)
     pd.concat(out_s).to_csv(os.path.join(wd_out, f"03_GFC_i{suffix}_signmatched.csv"), index=False)
+    pd.concat(out_o).to_csv(os.path.join(wd_out, f"03_GFC_i{suffix}_ordermatched.csv"), index=False)
     pd.DataFrame(out_d).to_csv(os.path.join(wd_out, f"03_GFC_i{suffix}_diag.csv"), index=False)
     print(f"{day_dir}: {len(subs)} subjects written")
 
