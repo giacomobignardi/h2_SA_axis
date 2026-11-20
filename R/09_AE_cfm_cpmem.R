@@ -280,7 +280,7 @@ SF4C = cfm_cpmem_AE_sumy %>%
   filter(grepl("rA_P13",label)) %>% 
   group_by(Parcel) %>% 
   distinct(label, .keep_all = T) %>% 
-  mutate(label = recode(label,rA_P12 = "rA_mig1" ))
+  mutate(label = recode(label, rA_P13 = "rA_gdg1"))
 
 SF4C_annot = merge(SF4C, annotations %>% select(Parcel,label_Yeo_7,label_Yeo7_short), by = "Parcel")%>% 
   mutate(p_adjust = p.adjust(pvalue, method ="bonferroni"),
@@ -489,14 +489,14 @@ fig5_theme = theme_classic(base_size = 10) +
 
 cort_rA = ggplot() +
   geom_brain(atlas = schaefer7_400(), data = fig5_data("rA"), mapping = aes(fill = est),
-             position = position_brain(hemi ~ view), color = "#414a4c", linewidth = .5) +
+             position = position_brain(hemi ~ view), view = c("lateral", "medial"), color = "#414a4c", linewidth = .5) +
   facet_grid(cols = vars(cor)) +
   scale_fill_distiller(palette = "Reds", direction = 1) +
   labs(fill = expression(italic(r)[A])) + fig5_theme
 
 cort_rE = ggplot() +
   geom_brain(atlas = schaefer7_400(), data = fig5_data("rE"), mapping = aes(fill = est),
-             position = position_brain(hemi ~ view), color = "#414a4c", linewidth = .5) +
+             position = position_brain(hemi ~ view),   view = c("lateral", "medial"), color = "#414a4c", linewidth = .5) +
   facet_grid(cols = vars(cor)) +
   scale_fill_distiller(palette = "Blues", direction = 1) +
   labs(fill = expression(italic(r)[E])) + fig5_theme

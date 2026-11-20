@@ -11,7 +11,7 @@ library(lavaan)
 
 # clear workspace
 rm(list = ls())
-g1_tag = "_signmatched"   # "" = Procrustes-aligned (main); "_signmatched" / "_ordermatched" = supplement (R2.2)
+g1_tag = ""   # "" = Procrustes-aligned (main); "_signmatched" / "_ordermatched" = supplement (R2.2)
 
 # set Open Access working directories
 wd_oa = getwd()
@@ -250,6 +250,7 @@ cort_r = ggplot() +
              data = cort_r_data,
              mapping = aes(fill = est.std),
              position = position_brain(hemi ~ view), #to stack them
+             view = c("lateral", "medial"),
              color = "#414a4c",
              linewidth = .5) +
   facet_grid(~cor) +

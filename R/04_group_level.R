@@ -171,7 +171,8 @@ t1wt2w_left = ggplot() +
                mutate(t1wt2w_mi = as.numeric(t1wt2w_mi)),
              mapping = aes(fill = t1wt2w_mi),
              hemi = "left",
-             position = position_brain(view + hemi ~ .), #to stack them
+             view = c("lateral", "medial"),
+             position = position_brain(view + hemi ~ .),
              color = "#414a4c",
              linewidth = .5) +
   scale_fill_viridis_c(option = "plasma")+
@@ -232,6 +233,7 @@ GD_left = ggplot() +
                mutate(GD = as.numeric(GD)),
              mapping = aes(fill = GD),
              hemi = "left",
+             view = c("lateral", "medial"),
              position = position_brain(view + hemi ~ .),
              color = "#414a4c",
              linewidth = .5) +
@@ -261,6 +263,7 @@ G1_left = ggplot() +
                mutate(G1 = as.numeric(G1)),
              mapping = aes(fill = G1),
              hemi = "left",
+             view = c("lateral", "medial"),
              position = position_brain(view + hemi ~ .),
              color = "#414a4c",
              linewidth = .5) +
@@ -290,6 +293,7 @@ ggplot() +
   geom_brain(atlas = schaefer7_400(),
              mapping = aes(fill = label),
              hemi = "left",
+             view = c("lateral", "medial"),
              position = position_brain(view + hemi ~ .),
              colour = "gray",
              linewidth = .5,
